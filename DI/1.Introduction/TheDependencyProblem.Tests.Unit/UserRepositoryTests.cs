@@ -20,7 +20,7 @@ public class UserRepositoryTests
     public async Task GetByIdAsync_ShouldReturnUser_WhenUserExists()
     {
         // Arrange
-        _mockUserRepository.GetAllAsync().Returns(Enumerable.Empty<User>())
+        _mockUserRepository.GetAllAsync().Returns(Enumerable.Empty<User>());
 
         // Act
 
