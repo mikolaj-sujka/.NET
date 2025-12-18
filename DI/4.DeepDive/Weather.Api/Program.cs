@@ -10,6 +10,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddHttpClient();
 
+// InMemoryWeatherService was registered over OpenWeatherService to demonstrate DI; 
+// Then to get OpenWeatherService, change the order of registration or use IEnumerable<IWeatherService> in the constructor.
 builder.Services.AddTransient<IWeatherService, OpenWeatherService>();
 builder.Services.AddTransient<IWeatherService, InMemoryWeatherService>();
 
