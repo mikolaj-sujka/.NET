@@ -3,16 +3,8 @@
   "WorkspaceRootPath": "C:\\Repos-nauka\\.NET\\DI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DA08FEE2-3664-4425-86DE-812D4FBBA87A}|2.Fundamentals\\Weather.Api\\Weather.Api.csproj|c:\\repos-nauka\\.net\\di\\2.fundamentals\\weather.api\\controllers\\lifetimecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA08FEE2-3664-4425-86DE-812D4FBBA87A}|2.Fundamentals\\Weather.Api\\Weather.Api.csproj|solutionrelative:2.fundamentals\\weather.api\\controllers\\lifetimecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA08FEE2-3664-4425-86DE-812D4FBBA87A}|2.Fundamentals\\Weather.Api\\Weather.Api.csproj|c:\\repos-nauka\\.net\\di\\2.fundamentals\\weather.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA08FEE2-3664-4425-86DE-812D4FBBA87A}|2.Fundamentals\\Weather.Api\\Weather.Api.csproj|solutionrelative:2.fundamentals\\weather.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA08FEE2-3664-4425-86DE-812D4FBBA87A}|2.Fundamentals\\Weather.Api\\Weather.Api.csproj|c:\\repos-nauka\\.net\\di\\2.fundamentals\\weather.api\\filter\\lifetimeindicatorfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA08FEE2-3664-4425-86DE-812D4FBBA87A}|2.Fundamentals\\Weather.Api\\Weather.Api.csproj|solutionrelative:2.fundamentals\\weather.api\\filter\\lifetimeindicatorfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9EE7B1BD-6FF1-4608-947E-D80B1574292B}|3.ResolvingDeps\\ResolvingDeps.WebApi\\ResolvingDeps.WebApi.csproj|c:\\repos-nauka\\.net\\di\\3.resolvingdeps\\resolvingdeps.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9EE7B1BD-6FF1-4608-947E-D80B1574292B}|3.ResolvingDeps\\ResolvingDeps.WebApi\\ResolvingDeps.WebApi.csproj|solutionrelative:3.resolvingdeps\\resolvingdeps.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 285,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,39 +34,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\2.Fundamentals\\Weather.Api\\Program.cs",
-              "RelativeDocumentMoniker": "2.Fundamentals\\Weather.Api\\Program.cs",
-              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\2.Fundamentals\\Weather.Api\\Program.cs",
-              "RelativeToolTip": "2.Fundamentals\\Weather.Api\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-17T18:02:47.918Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "LifetimeIndicatorFilter.cs",
-              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\2.Fundamentals\\Weather.Api\\Filter\\LifetimeIndicatorFilter.cs",
-              "RelativeDocumentMoniker": "2.Fundamentals\\Weather.Api\\Filter\\LifetimeIndicatorFilter.cs",
-              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\2.Fundamentals\\Weather.Api\\Filter\\LifetimeIndicatorFilter.cs",
-              "RelativeToolTip": "2.Fundamentals\\Weather.Api\\Filter\\LifetimeIndicatorFilter.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAABLAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-17T18:00:08.424Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "LifeTimeController.cs",
-              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\2.Fundamentals\\Weather.Api\\Controllers\\LifeTimeController.cs",
-              "RelativeDocumentMoniker": "2.Fundamentals\\Weather.Api\\Controllers\\LifeTimeController.cs",
-              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\2.Fundamentals\\Weather.Api\\Controllers\\LifeTimeController.cs",
-              "RelativeToolTip": "2.Fundamentals\\Weather.Api\\Controllers\\LifeTimeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAABAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\3.ResolvingDeps\\ResolvingDeps.WebApi\\Program.cs",
+              "RelativeDocumentMoniker": "3.ResolvingDeps\\ResolvingDeps.WebApi\\Program.cs",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\3.ResolvingDeps\\ResolvingDeps.WebApi\\Program.cs",
+              "RelativeToolTip": "3.ResolvingDeps\\ResolvingDeps.WebApi\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-17T17:58:23.418Z",
+              "WhenOpened": "2025-12-18T13:53:07.219Z",
               "EditorCaption": ""
             }
           ]
