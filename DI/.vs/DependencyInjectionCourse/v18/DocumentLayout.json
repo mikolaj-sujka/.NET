@@ -3,8 +3,36 @@
   "WorkspaceRootPath": "C:\\Repos-nauka\\.NET\\DI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{584F9C3D-7BD2-4D46-826E-A06FC55D5980}|4.DeepDive\\Weather.Api\\Weather.Api.csproj|c:\\repos-nauka\\.net\\di\\4.deepdive\\weather.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{584F9C3D-7BD2-4D46-826E-A06FC55D5980}|4.DeepDive\\Weather.Api\\Weather.Api.csproj|solutionrelative:4.deepdive\\weather.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D6C700D4-C875-4702-8BFD-EE5980EFA25C}|5.Advanced\\MultiFunction.ConsoleApp\\MultiFunction.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\5.advanced\\multifunction.consoleapp\\handlers\\handlerorchestrator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6C700D4-C875-4702-8BFD-EE5980EFA25C}|5.Advanced\\MultiFunction.ConsoleApp\\MultiFunction.ConsoleApp.csproj|solutionrelative:5.advanced\\multifunction.consoleapp\\handlers\\handlerorchestrator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D6C700D4-C875-4702-8BFD-EE5980EFA25C}|5.Advanced\\MultiFunction.ConsoleApp\\MultiFunction.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\5.advanced\\multifunction.consoleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6C700D4-C875-4702-8BFD-EE5980EFA25C}|5.Advanced\\MultiFunction.ConsoleApp\\MultiFunction.ConsoleApp.csproj|solutionrelative:5.advanced\\multifunction.consoleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D6C700D4-C875-4702-8BFD-EE5980EFA25C}|5.Advanced\\MultiFunction.ConsoleApp\\MultiFunction.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\5.advanced\\multifunction.consoleapp\\handlers\\handlerextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6C700D4-C875-4702-8BFD-EE5980EFA25C}|5.Advanced\\MultiFunction.ConsoleApp\\MultiFunction.ConsoleApp.csproj|solutionrelative:5.advanced\\multifunction.consoleapp\\handlers\\handlerextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D6C700D4-C875-4702-8BFD-EE5980EFA25C}|5.Advanced\\MultiFunction.ConsoleApp\\MultiFunction.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\5.advanced\\multifunction.consoleapp\\handlers\\ihandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6C700D4-C875-4702-8BFD-EE5980EFA25C}|5.Advanced\\MultiFunction.ConsoleApp\\MultiFunction.ConsoleApp.csproj|solutionrelative:5.advanced\\multifunction.consoleapp\\handlers\\ihandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D6C700D4-C875-4702-8BFD-EE5980EFA25C}|5.Advanced\\MultiFunction.ConsoleApp\\MultiFunction.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\5.advanced\\multifunction.consoleapp\\handlers\\getcurrentlondonweatherhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6C700D4-C875-4702-8BFD-EE5980EFA25C}|5.Advanced\\MultiFunction.ConsoleApp\\MultiFunction.ConsoleApp.csproj|solutionrelative:5.advanced\\multifunction.consoleapp\\handlers\\getcurrentlondonweatherhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D6C700D4-C875-4702-8BFD-EE5980EFA25C}|5.Advanced\\MultiFunction.ConsoleApp\\MultiFunction.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\5.advanced\\multifunction.consoleapp\\handlers\\getcurrenttimehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6C700D4-C875-4702-8BFD-EE5980EFA25C}|5.Advanced\\MultiFunction.ConsoleApp\\MultiFunction.ConsoleApp.csproj|solutionrelative:5.advanced\\multifunction.consoleapp\\handlers\\getcurrenttimehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D6C700D4-C875-4702-8BFD-EE5980EFA25C}|5.Advanced\\MultiFunction.ConsoleApp\\MultiFunction.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\5.advanced\\multifunction.consoleapp\\handlers\\commandnameattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6C700D4-C875-4702-8BFD-EE5980EFA25C}|5.Advanced\\MultiFunction.ConsoleApp\\MultiFunction.ConsoleApp.csproj|solutionrelative:5.advanced\\multifunction.consoleapp\\handlers\\commandnameattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D6C700D4-C875-4702-8BFD-EE5980EFA25C}|5.Advanced\\MultiFunction.ConsoleApp\\MultiFunction.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\5.advanced\\multifunction.consoleapp\\application.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6C700D4-C875-4702-8BFD-EE5980EFA25C}|5.Advanced\\MultiFunction.ConsoleApp\\MultiFunction.ConsoleApp.csproj|solutionrelative:5.advanced\\multifunction.consoleapp\\application.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 285,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,15 +62,106 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\4.DeepDive\\Weather.Api\\Program.cs",
-              "RelativeDocumentMoniker": "4.DeepDive\\Weather.Api\\Program.cs",
-              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\4.DeepDive\\Weather.Api\\Program.cs",
-              "RelativeToolTip": "4.DeepDive\\Weather.Api\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAABEAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "HandlerExtensions.cs",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\HandlerExtensions.cs",
+              "RelativeDocumentMoniker": "5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\HandlerExtensions.cs",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\HandlerExtensions.cs",
+              "RelativeToolTip": "5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\HandlerExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T15:53:50.083Z",
+              "WhenOpened": "2025-12-19T18:24:34.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\MultiFunction.ConsoleApp\\Program.cs",
+              "RelativeDocumentMoniker": "5.Advanced\\MultiFunction.ConsoleApp\\Program.cs",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\MultiFunction.ConsoleApp\\Program.cs",
+              "RelativeToolTip": "5.Advanced\\MultiFunction.ConsoleApp\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T18:04:55.844Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CommandNameAttribute.cs",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\CommandNameAttribute.cs",
+              "RelativeDocumentMoniker": "5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\CommandNameAttribute.cs",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\CommandNameAttribute.cs",
+              "RelativeToolTip": "5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\CommandNameAttribute.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T18:16:26.947Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HandlerOrchestrator.cs",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\HandlerOrchestrator.cs",
+              "RelativeDocumentMoniker": "5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\HandlerOrchestrator.cs",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\HandlerOrchestrator.cs",
+              "RelativeToolTip": "5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\HandlerOrchestrator.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAqwCwAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T18:12:59.144Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GetCurrentTimeHandler.cs",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\GetCurrentTimeHandler.cs",
+              "RelativeDocumentMoniker": "5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\GetCurrentTimeHandler.cs",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\GetCurrentTimeHandler.cs",
+              "RelativeToolTip": "5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\GetCurrentTimeHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T18:09:15.687Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GetCurrentLondonWeatherHandler.cs",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\GetCurrentLondonWeatherHandler.cs",
+              "RelativeDocumentMoniker": "5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\GetCurrentLondonWeatherHandler.cs",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\GetCurrentLondonWeatherHandler.cs",
+              "RelativeToolTip": "5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\GetCurrentLondonWeatherHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T18:08:40.068Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IHandler.cs",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\IHandler.cs",
+              "RelativeDocumentMoniker": "5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\IHandler.cs",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\IHandler.cs",
+              "RelativeToolTip": "5.Advanced\\MultiFunction.ConsoleApp\\Handlers\\IHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T18:07:50.976Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Application.cs",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\MultiFunction.ConsoleApp\\Application.cs",
+              "RelativeDocumentMoniker": "5.Advanced\\MultiFunction.ConsoleApp\\Application.cs",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\MultiFunction.ConsoleApp\\Application.cs",
+              "RelativeToolTip": "5.Advanced\\MultiFunction.ConsoleApp\\Application.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAABkAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T18:05:40.778Z",
               "EditorCaption": ""
             }
           ]
