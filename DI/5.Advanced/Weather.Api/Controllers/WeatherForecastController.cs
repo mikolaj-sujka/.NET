@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Weather.Api.Filters;
 using Weather.Api.Weather;
 
 namespace Weather.Api.Controllers;
@@ -13,6 +14,7 @@ public class WeatherForecastController : ControllerBase
         _weatherService = weatherService;
     }
 
+    [DurationLogger]
     [HttpGet("weather/{city}")]
     public async Task<IActionResult> GetCurrentWeather([FromRoute] string city)
     {

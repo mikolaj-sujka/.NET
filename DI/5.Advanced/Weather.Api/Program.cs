@@ -8,7 +8,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddTransient<IWeatherService, OpenWeatherService>();
+builder.Services.AddTransient<OpenWeatherService>();
+
+builder.Services.AddTransient<IWeatherService>(sp =>
+    new LoggedWeatherService(sp.GetRequiredService<OpenWeatherService>(),
+        sp.GetRequiredService<ILogger<IWeatherService>>()));
 
 var app = builder.Build();
 

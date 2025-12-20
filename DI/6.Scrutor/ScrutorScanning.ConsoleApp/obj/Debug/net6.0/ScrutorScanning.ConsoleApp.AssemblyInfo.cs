@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ScrutorScanning.ConsoleApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e26b1db8eda4532615cc868f3958a60dbea6ec2c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57bc6823eca92344570119829aeb8f73600c0874")]
 [assembly: System.Reflection.AssemblyProductAttribute("ScrutorScanning.ConsoleApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ScrutorScanning.ConsoleApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,11 +1,36 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "Jab/0.12.0": {
+        "type": "package",
+        "build": {
+          "build/Jab.targets": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Jab/0.12.0": {
+      "sha512": "neRxZ9hZ7W/af2mDWboHmuPfauIuhicNcsJWaBro9MgvyMH3z13oLcWcDUkgCxsoqH3bQxO+XO8iBHY2H75vbQ==",
+      "type": "package",
+      "path": "jab/0.12.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "analyzers/dotnet/roslyn3.11/Jab.Roslyn3.dll",
+        "analyzers/dotnet/roslyn4.0/Jab.dll",
+        "build/Jab.targets",
+        "jab.0.12.0.nupkg.sha512",
+        "jab.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "Jab >= 0.12.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\mikol\\.nuget\\packages\\": {},
@@ -57,6 +82,12 @@
     "frameworks": {
       "net6.0": {
         "targetAlias": "net6.0",
+        "dependencies": {
+          "Jab": {
+            "target": "Package",
+            "version": "[0.12.0, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
@@ -73,7 +104,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

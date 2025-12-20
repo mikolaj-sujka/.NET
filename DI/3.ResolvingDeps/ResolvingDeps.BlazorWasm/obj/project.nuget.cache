@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "pVbsxGw2jUc=",
+  "dgSpecHash": "CeGiEJUHB5w=",
   "success": true,
   "projectFilePath": "C:\\Repos-nauka\\.NET\\DI\\3.ResolvingDeps\\ResolvingDeps.BlazorWasm\\ResolvingDeps.BlazorWasm.csproj",
   "expectedPackageFiles": [
@@ -30,7 +30,7 @@
     "C:\\Users\\mikol\\.nuget\\packages\\microsoft.jsinterop.webassembly\\6.0.0\\microsoft.jsinterop.webassembly.6.0.0.nupkg.sha512",
     "C:\\Users\\mikol\\.nuget\\packages\\microsoft.net.illink.analyzers\\7.0.100-1.23211.1\\microsoft.net.illink.analyzers.7.0.100-1.23211.1.nupkg.sha512",
     "C:\\Users\\mikol\\.nuget\\packages\\microsoft.net.illink.tasks\\7.0.100-1.23211.1\\microsoft.net.illink.tasks.7.0.100-1.23211.1.nupkg.sha512",
-    "C:\\Users\\mikol\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\10.0.0\\microsoft.net.sdk.webassembly.pack.10.0.0.nupkg.sha512",
+    "C:\\Users\\mikol\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\10.0.1\\microsoft.net.sdk.webassembly.pack.10.0.1.nupkg.sha512",
     "C:\\Users\\mikol\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
     "C:\\Users\\mikol\\.nuget\\packages\\system.io.pipelines\\6.0.0\\system.io.pipelines.6.0.0.nupkg.sha512",
     "C:\\Users\\mikol\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",

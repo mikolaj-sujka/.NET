@@ -4,7 +4,7 @@ namespace Weather.Api.Weather;
 
 public class OpenWeatherService : IWeatherService
 {
-    private const string OpenWeatherApiKey = "f539ebbe9ad5228403f6c267b7b7743c";
+    private const string OpenWeatherApiKey = "0219c736db6323354dbe33cae96e4867";
     private readonly IHttpClientFactory _httpClientFactory;
 
     public OpenWeatherService(IHttpClientFactory httpClientFactory)
@@ -15,7 +15,7 @@ public class OpenWeatherService : IWeatherService
     public async Task<WeatherResponse?> GetCurrentWeatherAsync(string city)
     {
         var url =
-            $"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={OpenWeatherApiKey}&units=metric";
+            $"https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid={OpenWeatherApiKey}";
         var httpClient = _httpClientFactory.CreateClient();
 
         var weatherResponse = await httpClient.GetAsync(url);

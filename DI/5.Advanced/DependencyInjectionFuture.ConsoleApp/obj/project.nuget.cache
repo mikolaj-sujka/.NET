@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "l6i0p4rXEvw=",
+  "dgSpecHash": "AMUOqwDuc9Q=",
   "success": true,
   "projectFilePath": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\DependencyInjectionFuture.ConsoleApp\\DependencyInjectionFuture.ConsoleApp.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\mikol\\.nuget\\packages\\jab\\0.12.0\\jab.0.12.0.nupkg.sha512"
+  ],
   "logs": []
 }
