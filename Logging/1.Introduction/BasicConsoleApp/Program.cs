@@ -6,14 +6,17 @@ using var loggerFactory = LoggerFactory.Create(builder =>
 {
 #pragma warning disable CA1416
     builder
-        .AddConsole();
+        .AddConsole()
+        .AddEventLog();
 #pragma warning restore CA1416
 });
 
-ILogger CreateLogger()
+ILogger<Program> CreateLogger()
 {
-    return loggerFactory.CreateLogger("Course");
+    return loggerFactory.CreateLogger<Program>();
 }
 #endregion
 
-ILogger logger = CreateLogger();
+ILogger<Program> logger = CreateLogger();
+
+logger.LogInformation("Hello world!");
