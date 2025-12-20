@@ -3,20 +3,32 @@
   "WorkspaceRootPath": "C:\\Repos-nauka\\.NET\\DI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FE397381-410F-46E3-923A-F8997AA7E297}|7.NewDiFramework\\Vax\\Vax.csproj|c:\\repos-nauka\\.net\\di\\7.newdiframework\\vax\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE397381-410F-46E3-923A-F8997AA7E297}|7.NewDiFramework\\Vax\\Vax.csproj|solutionrelative:7.newdiframework\\vax\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{30A0694D-4388-470B-8E2A-1680ED96345A}|7.NewDiFramework\\Consumer.ConsoleApp\\Consumer.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\7.newdiframework\\consumer.consoleapp\\consumer.consoleapp.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{30A0694D-4388-470B-8E2A-1680ED96345A}|7.NewDiFramework\\Consumer.ConsoleApp\\Consumer.ConsoleApp.csproj|solutionrelative:7.newdiframework\\consumer.consoleapp\\consumer.consoleapp.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{30A0694D-4388-470B-8E2A-1680ED96345A}|7.NewDiFramework\\Consumer.ConsoleApp\\Consumer.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\7.newdiframework\\consumer.consoleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{30A0694D-4388-470B-8E2A-1680ED96345A}|7.NewDiFramework\\Consumer.ConsoleApp\\Consumer.ConsoleApp.csproj|solutionrelative:7.newdiframework\\consumer.consoleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{FE397381-410F-46E3-923A-F8997AA7E297}|7.NewDiFramework\\Vax\\Vax.csproj|c:\\repos-nauka\\.net\\di\\7.newdiframework\\vax\\serviceprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE397381-410F-46E3-923A-F8997AA7E297}|7.NewDiFramework\\Vax\\Vax.csproj|solutionrelative:7.newdiframework\\vax\\serviceprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE397381-410F-46E3-923A-F8997AA7E297}|7.NewDiFramework\\Vax\\Vax.csproj|c:\\repos-nauka\\.net\\di\\7.newdiframework\\vax\\servicecollection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE397381-410F-46E3-923A-F8997AA7E297}|7.NewDiFramework\\Vax\\Vax.csproj|solutionrelative:7.newdiframework\\vax\\servicecollection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{30A0694D-4388-470B-8E2A-1680ED96345A}|7.NewDiFramework\\Consumer.ConsoleApp\\Consumer.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\7.newdiframework\\consumer.consoleapp\\iconsolewriter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{30A0694D-4388-470B-8E2A-1680ED96345A}|7.NewDiFramework\\Consumer.ConsoleApp\\Consumer.ConsoleApp.csproj|solutionrelative:7.newdiframework\\consumer.consoleapp\\iconsolewriter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{30A0694D-4388-470B-8E2A-1680ED96345A}|7.NewDiFramework\\Consumer.ConsoleApp\\Consumer.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\7.newdiframework\\consumer.consoleapp\\consumer.consoleapp.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{30A0694D-4388-470B-8E2A-1680ED96345A}|7.NewDiFramework\\Consumer.ConsoleApp\\Consumer.ConsoleApp.csproj|solutionrelative:7.newdiframework\\consumer.consoleapp\\consumer.consoleapp.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{FE397381-410F-46E3-923A-F8997AA7E297}|7.NewDiFramework\\Vax\\Vax.csproj|c:\\repos-nauka\\.net\\di\\7.newdiframework\\vax\\servicedescriptor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE397381-410F-46E3-923A-F8997AA7E297}|7.NewDiFramework\\Vax\\Vax.csproj|solutionrelative:7.newdiframework\\vax\\servicedescriptor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE397381-410F-46E3-923A-F8997AA7E297}|7.NewDiFramework\\Vax\\Vax.csproj|c:\\repos-nauka\\.net\\di\\7.newdiframework\\vax\\vax.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{FE397381-410F-46E3-923A-F8997AA7E297}|7.NewDiFramework\\Vax\\Vax.csproj|solutionrelative:7.newdiframework\\vax\\vax.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 285,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,33 +58,72 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\7.NewDiFramework\\Vax\\Class1.cs",
-              "RelativeDocumentMoniker": "7.NewDiFramework\\Vax\\Class1.cs",
-              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\7.NewDiFramework\\Vax\\Class1.cs",
-              "RelativeToolTip": "7.NewDiFramework\\Vax\\Class1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-20T10:51:35.249Z",
+              "DocumentIndex": 6,
+              "Title": "Vax",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\7.NewDiFramework\\Vax\\Vax.csproj",
+              "RelativeDocumentMoniker": "7.NewDiFramework\\Vax\\Vax.csproj",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\7.NewDiFramework\\Vax\\Vax.csproj",
+              "RelativeToolTip": "7.NewDiFramework\\Vax\\Vax.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-20T10:55:37.187Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "ServiceProvider.cs",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\7.NewDiFramework\\Vax\\ServiceProvider.cs",
+              "RelativeDocumentMoniker": "7.NewDiFramework\\Vax\\ServiceProvider.cs",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\7.NewDiFramework\\Vax\\ServiceProvider.cs",
+              "RelativeToolTip": "7.NewDiFramework\\Vax\\ServiceProvider.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-20T10:53:58.57Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ServiceDescriptor.cs",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\7.NewDiFramework\\Vax\\ServiceDescriptor.cs",
+              "RelativeDocumentMoniker": "7.NewDiFramework\\Vax\\ServiceDescriptor.cs",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\7.NewDiFramework\\Vax\\ServiceDescriptor.cs",
+              "RelativeToolTip": "7.NewDiFramework\\Vax\\ServiceDescriptor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-20T10:52:55.501Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ServiceCollection.cs",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\7.NewDiFramework\\Vax\\ServiceCollection.cs",
+              "RelativeDocumentMoniker": "7.NewDiFramework\\Vax\\ServiceCollection.cs",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\7.NewDiFramework\\Vax\\ServiceCollection.cs",
+              "RelativeToolTip": "7.NewDiFramework\\Vax\\ServiceCollection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-20T10:52:22.256Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "IConsoleWriter.cs",
               "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\7.NewDiFramework\\Consumer.ConsoleApp\\IConsoleWriter.cs",
               "RelativeDocumentMoniker": "7.NewDiFramework\\Consumer.ConsoleApp\\IConsoleWriter.cs",
               "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\7.NewDiFramework\\Consumer.ConsoleApp\\IConsoleWriter.cs",
               "RelativeToolTip": "7.NewDiFramework\\Consumer.ConsoleApp\\IConsoleWriter.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-20T10:49:50.064Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Consumer.ConsoleApp",
               "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\7.NewDiFramework\\Consumer.ConsoleApp\\Consumer.ConsoleApp.csproj",
               "RelativeDocumentMoniker": "7.NewDiFramework\\Consumer.ConsoleApp\\Consumer.ConsoleApp.csproj",
@@ -91,7 +142,7 @@
               "RelativeDocumentMoniker": "7.NewDiFramework\\Consumer.ConsoleApp\\Program.cs",
               "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\7.NewDiFramework\\Consumer.ConsoleApp\\Program.cs",
               "RelativeToolTip": "7.NewDiFramework\\Consumer.ConsoleApp\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-20T10:45:51.35Z",
               "EditorCaption": ""
