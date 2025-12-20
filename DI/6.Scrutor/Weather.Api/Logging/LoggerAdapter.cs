@@ -18,4 +18,9 @@ public class LoggerAdapter<TType> : ILoggerAdapter<TType>
     {
         Log(LogLevel.Information, template, args);
     }
+
+    public IDisposable TimedOperation(string template, params object[] args)
+    {
+        return new TimedLogOperation<TType>(this, LogLevel.Information, template, args);
+    }
 }

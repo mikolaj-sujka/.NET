@@ -1,5 +1,8 @@
-﻿namespace ScrutorScanning.ConsoleApp.Services;
+﻿using ScrutorScanning.ConsoleApp.Attributes;
 
+namespace ScrutorScanning.ConsoleApp.Services;
+
+[Scoped]
 public class ExampleAService : IExampleAService
 {
 

@@ -10,6 +10,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddHttpClient();
 builder.Services.AddTransient<IWeatherService, OpenWeatherService>();
+builder.Services.Decorate<IWeatherService, LoggedWeatherService>();
 
 builder.Services.AddSingleton(typeof(ILoggerAdapter<>), typeof(LoggerAdapter<>));
 builder.Services.AddSingleton<IDateTimeProvider, DateTimeProvider>();

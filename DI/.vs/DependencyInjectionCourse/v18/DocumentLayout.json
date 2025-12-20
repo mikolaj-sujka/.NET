@@ -3,16 +3,32 @@
   "WorkspaceRootPath": "C:\\Repos-nauka\\.NET\\DI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0CAD876D-D233-4F0C-AE89-93A495CFCA29}|5.Advanced\\DependencyInjectionFuture.ConsoleApp\\DependencyInjectionFuture.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\5.advanced\\dependencyinjectionfuture.consoleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0CAD876D-D233-4F0C-AE89-93A495CFCA29}|5.Advanced\\DependencyInjectionFuture.ConsoleApp\\DependencyInjectionFuture.ConsoleApp.csproj|solutionrelative:5.advanced\\dependencyinjectionfuture.consoleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FEAC352B-B398-439C-95F6-0D90C88835A4}|6.Scrutor\\ScrutorScanning.ConsoleApp\\ScrutorScanning.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\6.scrutor\\scrutorscanning.consoleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEAC352B-B398-439C-95F6-0D90C88835A4}|6.Scrutor\\ScrutorScanning.ConsoleApp\\ScrutorScanning.ConsoleApp.csproj|solutionrelative:6.scrutor\\scrutorscanning.consoleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0CAD876D-D233-4F0C-AE89-93A495CFCA29}|5.Advanced\\DependencyInjectionFuture.ConsoleApp\\DependencyInjectionFuture.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\5.advanced\\dependencyinjectionfuture.consoleapp\\myserviceprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0CAD876D-D233-4F0C-AE89-93A495CFCA29}|5.Advanced\\DependencyInjectionFuture.ConsoleApp\\DependencyInjectionFuture.ConsoleApp.csproj|solutionrelative:5.advanced\\dependencyinjectionfuture.consoleapp\\myserviceprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FEAC352B-B398-439C-95F6-0D90C88835A4}|6.Scrutor\\ScrutorScanning.ConsoleApp\\ScrutorScanning.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\6.scrutor\\scrutorscanning.consoleapp\\services\\examplecservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEAC352B-B398-439C-95F6-0D90C88835A4}|6.Scrutor\\ScrutorScanning.ConsoleApp\\ScrutorScanning.ConsoleApp.csproj|solutionrelative:6.scrutor\\scrutorscanning.consoleapp\\services\\examplecservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0CAD876D-D233-4F0C-AE89-93A495CFCA29}|5.Advanced\\DependencyInjectionFuture.ConsoleApp\\DependencyInjectionFuture.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\5.advanced\\dependencyinjectionfuture.consoleapp\\consolewriter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0CAD876D-D233-4F0C-AE89-93A495CFCA29}|5.Advanced\\DependencyInjectionFuture.ConsoleApp\\DependencyInjectionFuture.ConsoleApp.csproj|solutionrelative:5.advanced\\dependencyinjectionfuture.consoleapp\\consolewriter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FEAC352B-B398-439C-95F6-0D90C88835A4}|6.Scrutor\\ScrutorScanning.ConsoleApp\\ScrutorScanning.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\6.scrutor\\scrutorscanning.consoleapp\\services\\examplebservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEAC352B-B398-439C-95F6-0D90C88835A4}|6.Scrutor\\ScrutorScanning.ConsoleApp\\ScrutorScanning.ConsoleApp.csproj|solutionrelative:6.scrutor\\scrutorscanning.consoleapp\\services\\examplebservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEAC352B-B398-439C-95F6-0D90C88835A4}|6.Scrutor\\ScrutorScanning.ConsoleApp\\ScrutorScanning.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\6.scrutor\\scrutorscanning.consoleapp\\services\\exampleaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEAC352B-B398-439C-95F6-0D90C88835A4}|6.Scrutor\\ScrutorScanning.ConsoleApp\\ScrutorScanning.ConsoleApp.csproj|solutionrelative:6.scrutor\\scrutorscanning.consoleapp\\services\\exampleaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEAC352B-B398-439C-95F6-0D90C88835A4}|6.Scrutor\\ScrutorScanning.ConsoleApp\\ScrutorScanning.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\6.scrutor\\scrutorscanning.consoleapp\\services\\iscopedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEAC352B-B398-439C-95F6-0D90C88835A4}|6.Scrutor\\ScrutorScanning.ConsoleApp\\ScrutorScanning.ConsoleApp.csproj|solutionrelative:6.scrutor\\scrutorscanning.consoleapp\\services\\iscopedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEAC352B-B398-439C-95F6-0D90C88835A4}|6.Scrutor\\ScrutorScanning.ConsoleApp\\ScrutorScanning.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\6.scrutor\\scrutorscanning.consoleapp\\services\\isingletonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEAC352B-B398-439C-95F6-0D90C88835A4}|6.Scrutor\\ScrutorScanning.ConsoleApp\\ScrutorScanning.ConsoleApp.csproj|solutionrelative:6.scrutor\\scrutorscanning.consoleapp\\services\\isingletonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEAC352B-B398-439C-95F6-0D90C88835A4}|6.Scrutor\\ScrutorScanning.ConsoleApp\\ScrutorScanning.ConsoleApp.csproj|c:\\repos-nauka\\.net\\di\\6.scrutor\\scrutorscanning.consoleapp\\services\\itransientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEAC352B-B398-439C-95F6-0D90C88835A4}|6.Scrutor\\ScrutorScanning.ConsoleApp\\ScrutorScanning.ConsoleApp.csproj|solutionrelative:6.scrutor\\scrutorscanning.consoleapp\\services\\itransientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -24,6 +40,97 @@
           "DockedWidth": 285,
           "SelectedChildIndex": 6,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ExampleCService.cs",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ExampleCService.cs",
+              "RelativeDocumentMoniker": "6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ExampleCService.cs",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ExampleCService.cs",
+              "RelativeToolTip": "6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ExampleCService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-20T10:28:05.568Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IScopedService.cs",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\IScopedService.cs",
+              "RelativeDocumentMoniker": "6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\IScopedService.cs",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\IScopedService.cs",
+              "RelativeToolTip": "6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\IScopedService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-20T10:27:42.885Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ISingletonService.cs",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ISingletonService.cs",
+              "RelativeDocumentMoniker": "6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ISingletonService.cs",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ISingletonService.cs",
+              "RelativeToolTip": "6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ISingletonService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-20T10:27:26.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ITransientService.cs",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ITransientService.cs",
+              "RelativeDocumentMoniker": "6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ITransientService.cs",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ITransientService.cs",
+              "RelativeToolTip": "6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ITransientService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-20T10:26:53.831Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ExampleAService.cs",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ExampleAService.cs",
+              "RelativeDocumentMoniker": "6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ExampleAService.cs",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ExampleAService.cs",
+              "RelativeToolTip": "6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ExampleAService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-20T10:26:37.826Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ExampleBService.cs",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ExampleBService.cs",
+              "RelativeDocumentMoniker": "6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ExampleBService.cs",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ExampleBService.cs",
+              "RelativeToolTip": "6.Scrutor\\ScrutorScanning.ConsoleApp\\Services\\ExampleBService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-20T10:04:40.304Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\6.Scrutor\\ScrutorScanning.ConsoleApp\\Program.cs",
+              "RelativeDocumentMoniker": "6.Scrutor\\ScrutorScanning.ConsoleApp\\Program.cs",
+              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\6.Scrutor\\ScrutorScanning.ConsoleApp\\Program.cs",
+              "RelativeToolTip": "6.Scrutor\\ScrutorScanning.ConsoleApp\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-20T10:00:15.105Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
@@ -39,45 +146,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MyServiceProvider.cs",
-              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\DependencyInjectionFuture.ConsoleApp\\MyServiceProvider.cs",
-              "RelativeDocumentMoniker": "5.Advanced\\DependencyInjectionFuture.ConsoleApp\\MyServiceProvider.cs",
-              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\DependencyInjectionFuture.ConsoleApp\\MyServiceProvider.cs",
-              "RelativeToolTip": "5.Advanced\\DependencyInjectionFuture.ConsoleApp\\MyServiceProvider.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-20T09:34:21.143Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ConsoleWriter.cs",
-              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\DependencyInjectionFuture.ConsoleApp\\ConsoleWriter.cs",
-              "RelativeDocumentMoniker": "5.Advanced\\DependencyInjectionFuture.ConsoleApp\\ConsoleWriter.cs",
-              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\DependencyInjectionFuture.ConsoleApp\\ConsoleWriter.cs",
-              "RelativeToolTip": "5.Advanced\\DependencyInjectionFuture.ConsoleApp\\ConsoleWriter.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-20T09:32:29.311Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\DependencyInjectionFuture.ConsoleApp\\Program.cs",
-              "RelativeDocumentMoniker": "5.Advanced\\DependencyInjectionFuture.ConsoleApp\\Program.cs",
-              "ToolTip": "C:\\Repos-nauka\\.NET\\DI\\5.Advanced\\DependencyInjectionFuture.ConsoleApp\\Program.cs",
-              "RelativeToolTip": "5.Advanced\\DependencyInjectionFuture.ConsoleApp\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABDAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-20T09:32:27.437Z",
-              "EditorCaption": ""
             }
           ]
         },

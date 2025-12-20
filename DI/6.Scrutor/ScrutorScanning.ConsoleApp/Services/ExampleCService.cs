@@ -1,5 +1,8 @@
-﻿namespace ScrutorScanning.ConsoleApp.Services;
+﻿using ScrutorScanning.ConsoleApp.Attributes;
 
+namespace ScrutorScanning.ConsoleApp.Services;
+
+[Singleton]
 public class ExampleCService : IExampleCService
 {
 

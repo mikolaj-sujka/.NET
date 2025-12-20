@@ -1,5 +1,9 @@
-﻿namespace ScrutorScanning.ConsoleApp.Services;
+﻿using ScrutorScanning.ConsoleApp.Attributes;
+using ScrutorScanning.ConsoleApp.ServiceMakers;
 
+namespace ScrutorScanning.ConsoleApp.Services;
+
+[Transient]
 public class ExampleBService : IExampleBService
 {
 

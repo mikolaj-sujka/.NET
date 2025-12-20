@@ -22,6 +22,8 @@ public class WeatherForecastController : ControllerBase
     {
         var weather = await _weatherService.GetCurrentWeatherAsync(city);
 
+        using var _ = _logger.TimedOperation("Weather retrieval for city: {0},", city);
+
         if (weather == null)
         {
             return NotFound();
