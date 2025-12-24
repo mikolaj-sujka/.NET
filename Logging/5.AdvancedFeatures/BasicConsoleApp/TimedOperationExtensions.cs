@@ -9,8 +9,8 @@ public static class TimedOperationExtensions
     {
         return BeginTimedOperation(logger, LogLevel.Information, messageTemplate, args);
     }
-    
-    public static IDisposable BeginTimedOperation(
+
+    private static IDisposable BeginTimedOperation(
         this ILogger logger, LogLevel logLevel, string messageTemplate, params object[] args)
     {
         return new TimedOperation(logger, logLevel, messageTemplate, args);

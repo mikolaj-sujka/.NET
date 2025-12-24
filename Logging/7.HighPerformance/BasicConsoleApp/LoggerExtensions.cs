@@ -2,6 +2,8 @@
 
 namespace BasicConsoleApp;
 
+// Define the source-generated logging extension methods
+// for better performance and reduced allocations
 public static partial class LoggerExtensions
 {
     [LoggerMessage(Level = LogLevel.Information,

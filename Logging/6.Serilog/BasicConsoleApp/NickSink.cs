@@ -9,7 +9,7 @@ public class NickSink : ILogEventSink
 {
     private readonly IFormatProvider? _formatProvider;
 
-    public NickSink(IFormatProvider? formatProvider)
+    private NickSink(IFormatProvider? formatProvider)
     {
         _formatProvider = formatProvider;
     }
