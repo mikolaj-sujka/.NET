@@ -12,7 +12,9 @@ namespace UnderstandingDependencies.Api.Tests.Unit;
 public class UserServiceTests
 {
     private readonly UserService _sut;
-    private readonly IUserRepository _userRepository = Substitute.For<IUserRepository>();
+    // Create a substitute for the IUserRepository interface, return objectProxy pattern 
+    private readonly IUserRepository _userRepository = Substitute.For<IUserRepository>(); 
+    
     //private readonly Mock<IUserRepository> _userRepositoryMock = new();
 
     public UserServiceTests()

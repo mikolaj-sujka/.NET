@@ -18,6 +18,7 @@ public class CalculatorTests
         var result = _sut.Add(a, b);
 
         // Assert
+        Assert.Equal(expected, result);
         result.Should().Be(expected);
     }
 
