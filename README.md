@@ -4,5 +4,6 @@ Repozytorium Github, w którym zawarte wszystkie najważniejsze fundamenty nauki
 - Logging
 - Unit Testing
 - Integration Testing
+- Rest APIs
 - Azure DevOps etc.
 
