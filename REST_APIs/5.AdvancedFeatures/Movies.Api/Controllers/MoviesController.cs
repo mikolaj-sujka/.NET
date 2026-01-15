@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Movies.Api.Auth;
 using Movies.Api.Mapping;
 using Movies.Application.Services;
 using Movies.Contracts.Requests;
+using Movies.Contracts.Responses;
 
 namespace Movies.Api.Controllers;
 
 [ApiController]
+[ApiVersion(1.0)]
 public class MoviesController : ControllerBase
 {
     private readonly IMovieService _movieService;
@@ -18,6 +21,7 @@ public class MoviesController : ControllerBase
     }
 
     [Authorize(AuthConstants.TrustedMemberPolicyName)]
+    [ServiceFilter(typeof(ApiKeyAuthFilter))]
     [HttpPost(ApiEndpoints.Movies.Create)]
     public async Task<IActionResult> Create([FromBody]CreateMovieRequest request,
         CancellationToken token)
@@ -27,7 +31,7 @@ public class MoviesController : ControllerBase
         var movieResponse = movie.MapToResponse();
         return CreatedAtAction(nameof(Get), new { idOrSlug = movie.Id }, movieResponse);
     }
-    
+
     [HttpGet(ApiEndpoints.Movies.Get)]
     public async Task<IActionResult> Get([FromRoute] string idOrSlug,
         CancellationToken token)
@@ -45,8 +49,10 @@ public class MoviesController : ControllerBase
         var response = movie.MapToResponse();
         return Ok(response);
     }
-    
+
     [HttpGet(ApiEndpoints.Movies.GetAll)]
+    [ProducesResponseType(typeof(MoviesResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ValidationFailureResponse), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetAll(
         [FromQuery] GetAllMoviesRequest request, CancellationToken token)
     {
@@ -54,8 +60,9 @@ public class MoviesController : ControllerBase
         var options = request.MapToOptions()
             .WithUserId(userId);
         var movies = await _movieService.GetAllAsync(options, token);
+        var movieCount = await _movieService.GetCountAsync(options.Title, options.YearOfRelease, token);
+        var moviesResponse = movies.MapToResponse(request.PageNumber, request.PageSize, movieCount);
 
-        var moviesResponse = movies.MapToResponse();
         return Ok(moviesResponse);
     }
 

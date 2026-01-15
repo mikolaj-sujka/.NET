@@ -19,5 +19,9 @@ public class GetAllMoviesOptionsValidator : AbstractValidator<GetAllMoviesOption
             .Must(sortField => string.IsNullOrWhiteSpace(sortField) ||
                                AllowedSortByValues.Contains(sortField.ToLower()))
             .WithMessage($"SortBy must be one of the following values: {string.Join(", ", AllowedSortByValues)}");
+
+        RuleFor(x => x.PageNumber)
+            .InclusiveBetween(1, 25)
+            .WithMessage("PageNumber must be between 1 and 25.");
     }
 }
