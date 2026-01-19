@@ -6,4 +6,5 @@ Repozytorium Github, w którym zawarte wszystkie najważniejsze fundamenty nauki
 - Integration Testing
 - Rest APIs
 - Azure DevOps etc.
+- Auth with OpenID Connect and OAuth2
 
