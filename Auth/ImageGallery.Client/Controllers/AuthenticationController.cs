@@ -8,8 +8,8 @@ namespace ImageGallery.Client.Controllers
 {
     public class AuthenticationController : Controller
     {
-        [Authorize]
-        public async Task Logout()
+        [AllowAnonymous]
+        public async Task<IActionResult> Logout()
         {
             // Clears the local cookie
             await HttpContext.SignOutAsync(
@@ -20,7 +20,11 @@ namespace ImageGallery.Client.Controllers
             // so we can use the constant OpenIdConnectDefaults.AuthenticationScheme
             // to clear the OIDC cookie and trigger the logout at the IDP
 
-            await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
+            // Redirect back to the client after the IDP logout completes.
+            return SignOut(
+                new AuthenticationProperties { RedirectUri = Url.Action("Index", "Gallery") },
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                OpenIdConnectDefaults.AuthenticationScheme);
         }
 
         public IActionResult AccessDenied()

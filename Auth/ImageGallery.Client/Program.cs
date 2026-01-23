@@ -42,7 +42,7 @@ builder.Services.AddAuthentication(opt =>
 
         //opt.Scope.Add("profile");
         opt.CallbackPath = "/signin-odc";
-        //opt.SignedOutCallbackPath = "/signout-callback-odc";
+        opt.SignedOutCallbackPath = "/signout-callback-odc";
         opt.SaveTokens = true;
         opt.GetClaimsFromUserInfoEndpoint = true;
 
