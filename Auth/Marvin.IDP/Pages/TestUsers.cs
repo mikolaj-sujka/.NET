@@ -27,14 +27,14 @@ public static class TestUsers
             {
                 new TestUser
                 {
-                    SubjectId = "123309e9-03aa-4b63-b367-59f1e03520a4",
-                    Username = "Alice",
+                    SubjectId = "b7539694-97e7-4dfe-84da-b4256e1ff5c7",
+                    Username = "Emma",
                     Password = "password",
                     Claims =
                     {
                         new Claim("role", "FreeUser"),
 
-                        new Claim(JwtClaimTypes.GivenName, "Alice"),
+                        new Claim(JwtClaimTypes.GivenName, "Emma"),
                         new Claim(JwtClaimTypes.FamilyName, "Smith"),
                     }
                 },
