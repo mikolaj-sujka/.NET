@@ -178,6 +178,8 @@ public class GalleryController(IHttpClientFactory httpClientFactory,
         // get the saved identity token
         var identityToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.IdToken);
 
+        var accessToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
+
         var userClaimsStringBuilder = new StringBuilder();
         foreach (var claim in User.Claims)
         {
@@ -187,6 +189,7 @@ public class GalleryController(IHttpClientFactory httpClientFactory,
 
         // log token and claims
         _logger.LogInformation("Identity token: {identityToken}", identityToken);
+        _logger.LogInformation("\nAccess token: {accessToken}", accessToken);
         _logger.LogInformation("\nUser claims: {userClaims}", userClaimsStringBuilder);
     }
 }

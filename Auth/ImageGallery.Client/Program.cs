@@ -16,13 +16,16 @@ var apiRoot = builder.Configuration["ImageGalleryAPIRoot"];
 
 JsonWebTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
+// enables AddUserAccessTokenHandler() for outgoing HttpClient calls
+builder.Services.AddAccessTokenManagement();
+
 // create an HttpClient used for accessing the API
 builder.Services.AddHttpClient("APIClient", client =>
 {
     client.BaseAddress = apiRoot == null ? null : new Uri(apiRoot);
     client.DefaultRequestHeaders.Clear();
     client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
-});
+}).AddUserAccessTokenHandler();
 
 builder.Services.AddAuthentication(opt =>
     {
@@ -49,6 +52,8 @@ builder.Services.AddAuthentication(opt =>
         opt.ClaimActions.Remove("aud"); // remove audience claim
         opt.ClaimActions.DeleteClaim("sid"); // remove sid claim, extension method
         opt.ClaimActions.DeleteClaim("idp"); // remove idp claim, extension method
+
+        opt.Scope.Add("imagegalleryapi.fullaccess");
 
         opt.Scope.Add("roles");
         opt.ClaimActions.MapJsonKey("role", "role");
