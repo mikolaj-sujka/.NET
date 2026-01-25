@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ImageGallery.API.Authorization;
 using ImageGallery.API.Services;
 using ImageGallery.Model;
 using Microsoft.AspNetCore.Authorization;
@@ -43,6 +44,8 @@ public class ImagesController(
     }
 
     [HttpGet("{id}", Name = "GetImage")]
+    [Authorize(Policy = "MustOwnImage")]
+
     public async Task<ActionResult<Image>> GetImage(Guid id)
     {          
         var imageFromRepo = await _galleryRepository.GetImageAsync(id);
@@ -58,6 +61,8 @@ public class ImagesController(
     }
 
     [HttpPost()]
+    //[Authorize(Policy = "MustOwnImage")]
+    [MustOwnImage]
     public async Task<ActionResult<Image>> CreateImage([FromBody] ImageForCreation imageForCreation)
     {
         // Automapper maps only the Title in our configuration
@@ -107,6 +112,7 @@ public class ImagesController(
             imageToReturn);
     }
 
+    [Authorize(Policy = "MustOwnImage")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteImage(Guid id)
     {            
@@ -124,6 +130,7 @@ public class ImagesController(
         return NoContent();
     }
 
+    [Authorize(Policy = "MustOwnImage")]
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateImage(Guid id, 
         [FromBody] ImageForUpdate imageForUpdate)

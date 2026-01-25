@@ -66,6 +66,7 @@ public class GalleryController(IHttpClientFactory httpClientFactory,
         }
     }
 
+    [Authorize(Policy = "CanAddImage")]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> EditImage(EditImageViewModel editImageViewModel)
@@ -125,7 +126,8 @@ public class GalleryController(IHttpClientFactory httpClientFactory,
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    [Authorize(Roles = "PayingUser")]
+    //[Authorize(Roles = "PayingUser")]
+    [Authorize(Policy = "CanAddImage")]
     public async Task<IActionResult> AddImage(AddImageViewModel addImageViewModel)
     {
         if (!ModelState.IsValid)
