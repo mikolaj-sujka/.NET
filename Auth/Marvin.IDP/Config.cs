@@ -42,6 +42,12 @@ public static class Config
             ClientName = "Image Gallery",
             ClientId = "imagegalleryclient",
             AllowedGrantTypes = GrantTypes.Code,
+            //AuthorizationCodeLifetime = 
+            //IdentityTokenLifetime = 
+            AllowOfflineAccess = true,
+            //RefreshTokenExpiration = 
+            UpdateAccessTokenClaimsOnRefresh = true,
+            AccessTokenLifetime = TimeSpan.FromMinutes(2).Minutes,
             RedirectUris =
             {
                 "https://localhost:7184/signin-odc"

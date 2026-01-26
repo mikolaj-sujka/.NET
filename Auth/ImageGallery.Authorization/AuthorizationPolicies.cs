@@ -6,11 +6,13 @@ namespace ImageGallery.Authorization
     {
         public static AuthorizationPolicy CanAddImage()
         {
-            return new AuthorizationPolicyBuilder()
+            var policyBuilder =  new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
                 .RequireClaim("country", "be") // you can add allowedValues as additional parameters
                 .RequireRole("PayingUser")
                 .Build();
+
+            return policyBuilder;
         }
     }
 }

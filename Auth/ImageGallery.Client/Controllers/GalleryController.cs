@@ -66,7 +66,7 @@ public class GalleryController(IHttpClientFactory httpClientFactory,
         }
     }
 
-    [Authorize(Policy = "CanAddImage")]
+    [Authorize(Policy = "UserCanAddImage")]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> EditImage(EditImageViewModel editImageViewModel)
@@ -127,7 +127,7 @@ public class GalleryController(IHttpClientFactory httpClientFactory,
     [HttpPost]
     [ValidateAntiForgeryToken]
     //[Authorize(Roles = "PayingUser")]
-    [Authorize(Policy = "CanAddImage")]
+    [Authorize(Policy = "UserCanAddImage")]
     public async Task<IActionResult> AddImage(AddImageViewModel addImageViewModel)
     {
         if (!ModelState.IsValid)
@@ -182,6 +182,8 @@ public class GalleryController(IHttpClientFactory httpClientFactory,
 
         var accessToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
 
+        var refreshToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
+
         var userClaimsStringBuilder = new StringBuilder();
         foreach (var claim in User.Claims)
         {
@@ -193,5 +195,6 @@ public class GalleryController(IHttpClientFactory httpClientFactory,
         _logger.LogInformation("Identity token: {identityToken}", identityToken);
         _logger.LogInformation("\nAccess token: {accessToken}", accessToken);
         _logger.LogInformation("\nUser claims: {userClaims}", userClaimsStringBuilder);
+        _logger.LogInformation("\nRefresh token: {refreshToken}", refreshToken);
     }
 }

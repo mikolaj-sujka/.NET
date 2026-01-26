@@ -27,7 +27,9 @@ builder.Services.AddScoped<IGalleryRepository, GalleryRepository>();
 builder.Services.AddHttpContextAccessor();
 
 // register the authorization handler
-builder.Services.AddSingleton<IAuthorizationHandler, MustOwnImageHandler>();
+builder.Services.AddScoped<IAuthorizationHandler, MustOwnImageHandler>();
+
+builder.Services.AddScoped<IAuthorizationRequirementData, MustOwnImageAttribute>();
 
 // register AutoMapper-related services
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

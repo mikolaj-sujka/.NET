@@ -64,6 +64,8 @@ builder.Services.AddAuthentication(opt =>
         opt.ClaimActions.MapJsonKey("role", "role");
         opt.ClaimActions.MapUniqueJsonKey("country", "country");
 
+        opt.Scope.Add("offline_access");
+
         opt.TokenValidationParameters = new()
         {
             NameClaimType = "given_name",
