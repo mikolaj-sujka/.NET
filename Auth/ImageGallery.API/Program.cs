@@ -37,7 +37,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 JsonWebTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
+    // jest tez opcja uzycia Oauth2Introspection
+    /*.AddJwtBearer(options =>
     {
         options.Authority = "https://localhost:5001/";
         options.Audience = "imagegalleryapi";
@@ -46,7 +47,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidTypes = ["at+jwt"],
             RoleClaimType = "role",
             NameClaimType = "given_name"
-        };
+        };*/
+
+    .AddOAuth2Introspection(opt =>
+    {
+        opt.Authority = "https://localhost:5001/";
+        opt.ClientId = "imagegalleryapi";
+        opt.ClientSecret = "apisecret";
+        opt.NameClaimType = "given_name";
+        opt.RoleClaimType = "role";
     });
 
 builder.Services.AddAuthorization(authOptions =>

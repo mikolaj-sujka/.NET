@@ -31,7 +31,8 @@ public static class Config
         {
             Scopes = { "imagegalleryapi.fullaccess", 
                 "imagegalleryapi.write", 
-                "imagegalleryapi.read" }
+                "imagegalleryapi.read" },
+            ApiSecrets = { new Secret("apisecret".Sha256()) }
         }
     ];
 
@@ -45,6 +46,7 @@ public static class Config
             //AuthorizationCodeLifetime = 
             //IdentityTokenLifetime = 
             AllowOfflineAccess = true,
+            AccessTokenType = AccessTokenType.Reference,
             //RefreshTokenExpiration = 
             UpdateAccessTokenClaimsOnRefresh = true,
             AccessTokenLifetime = TimeSpan.FromMinutes(2).Minutes,

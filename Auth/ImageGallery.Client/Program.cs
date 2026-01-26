@@ -28,6 +28,11 @@ builder.Services.AddHttpClient("APIClient", client =>
     client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
 }).AddUserAccessTokenHandler();
 
+builder.Services.AddHttpClient("IDPClient", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:5001/");
+});
+
 builder.Services.AddAuthentication(opt =>
     {
         opt.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
