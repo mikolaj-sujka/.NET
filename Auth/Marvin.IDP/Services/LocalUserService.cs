@@ -4,16 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Marvin.IDP.Services
 {
-    public class LocalUserService : ILocalUserService
+    public class LocalUserService(IdentityDbContext context) : ILocalUserService
     {
-        private readonly IdentityDbContext _context;
-
-        public LocalUserService(
-            IdentityDbContext context)
-        {
-            _context = context ??
-                throw new ArgumentNullException(nameof(context));
-        }
+        private readonly IdentityDbContext _context = context ??
+                                                      throw new ArgumentNullException(nameof(context));
 
         public async Task<bool> IsUserActive(string subject)
         {

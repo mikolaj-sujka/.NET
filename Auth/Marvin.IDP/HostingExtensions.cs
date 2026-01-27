@@ -1,4 +1,5 @@
 using Marvin.IDP.DbContexts;
+using Marvin.IDP.Services;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -26,7 +27,10 @@ internal static class HostingExtensions
             .AddInMemoryApiScopes(Config.ApiScopes)
             .AddInMemoryApiResources(Config.ApiResources)
             .AddInMemoryClients(Config.Clients)
-            .AddTestUsers(TestUsers.Users);
+            .AddProfileService<LocalUserProfileService>();
+            //.AddTestUsers(TestUsers.Users);
+
+        builder.Services.AddScoped<ILocalUserService, LocalUserService>();
 
         return builder.Build();
     }
