@@ -8,6 +8,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="Duende.IdentityServer" Version="7.4.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.12" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.12">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 
 		<PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
 	</ItemGroup>

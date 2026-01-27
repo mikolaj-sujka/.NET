@@ -22,6 +22,10 @@ try
     
     app.Run();
 }
+catch (HostAbortedException ex)
+{
+    Log.Warning(ex, "Host aborted");
+}
 catch (Exception ex)
 {
     Log.Fatal(ex, "Unhandled exception");
