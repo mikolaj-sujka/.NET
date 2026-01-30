@@ -1,10 +1,12 @@
 ﻿using Marvin.IDP.DbContexts;
 using Marvin.IDP.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Marvin.IDP.Services
 {
-    public class LocalUserService(IdentityDbContext context) : ILocalUserService
+    public class LocalUserService(IdentityDbContext context, IPasswordHasher<User> passwordHasher) 
+        : ILocalUserService
     {
         private readonly IdentityDbContext _context = context ??
                                                       throw new ArgumentNullException(nameof(context));
@@ -48,7 +50,10 @@ namespace Marvin.IDP.Services
             }
 
             // Validate credentials
-            return (user.Password == password);
+            //return (user.Password == password);
+            var verificationResult = passwordHasher.VerifyHashedPassword(user, user.Password, password);
+            return verificationResult == PasswordVerificationResult.Success;
+
         } 
 
         public async Task<User> GetUserByUserNameAsync(string userName)
@@ -82,7 +87,7 @@ namespace Marvin.IDP.Services
             return await _context.Users.FirstOrDefaultAsync(u => u.Subject == subject);
         }
 
-        public void AddUser(User userToAdd)
+        public void AddUser(User userToAdd, string password)
         {
             if (userToAdd == null)
             {
@@ -95,6 +100,9 @@ namespace Marvin.IDP.Services
                 // return this as a validation issue
                 throw new Exception("Username must be unique");
             }
+
+            // hash & salt the password here
+            userToAdd.Password = passwordHasher.HashPassword(userToAdd, password);
 
             _context.Users.Add(userToAdd);
         }
