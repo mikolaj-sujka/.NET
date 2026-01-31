@@ -31,6 +31,12 @@ namespace Marvin.IDP.Pages.User.Registration
         [Display(Name = "Country")]
         public string Country { get; set; }
 
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email address")]
+        [MaxLength(200)]
+        public string Email { get; set; }
+
         public SelectList CountryCodes { get; set; } =
             new(new[]
                 {

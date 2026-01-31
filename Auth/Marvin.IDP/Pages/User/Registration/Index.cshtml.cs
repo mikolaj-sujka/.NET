@@ -1,5 +1,4 @@
 using Duende.IdentityModel;
-using Duende.IdentityServer;
 using Duende.IdentityServer.Services;
 using Marvin.IDP.Entities;
 using Marvin.IDP.Services;
@@ -41,8 +40,9 @@ namespace Marvin.IDP.Pages.User.Registration
             var user = new Entities.User()
             {
                 UserName = Input.Username,
-                Active = true,
-                Subject = Guid.NewGuid().ToString()
+                Active = false,
+                Subject = Guid.NewGuid().ToString(),
+                Email = Input.Email
             };
 
             user.Claims.Add(new UserClaim()
@@ -67,8 +67,14 @@ namespace Marvin.IDP.Pages.User.Registration
             localUserService.AddUser(user, Input.Password);
             await localUserService.SaveChangesAsync();
 
+            // create an activation link - we need an absolute URL for that
+            var activationLink = Url.PageLink("/User/Activation/Index",
+                values: new { securityCode = user.SecurityCode }); 
+
+            Console.WriteLine(activationLink);
+
             // Issue authentication cookie
-            var isUser = new IdentityServerUser(user.Subject)
+            /*var isUser = new IdentityServerUser(user.Subject)
             {
                 DisplayName = user.UserName
             };
@@ -81,7 +87,9 @@ namespace Marvin.IDP.Pages.User.Registration
                 return Redirect(Input.ReturnUrl);
             }
 
-            return Redirect("~/");
+            return Redirect("~/");*/
+
+            return Redirect("~/User/ActivationCodeSent");
         }
     }
 }
