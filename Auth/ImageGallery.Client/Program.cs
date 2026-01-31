@@ -30,7 +30,7 @@ builder.Services.AddHttpClient("APIClient", client =>
 
 builder.Services.AddHttpClient("IDPClient", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:5001/");
+    client.BaseAddress = new Uri("https://localhost:44301");
 });
 
 builder.Services.AddAuthentication(opt =>
@@ -44,7 +44,7 @@ builder.Services.AddAuthentication(opt =>
     .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, opt =>
     {
         opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-        opt.Authority = "https://localhost:5001/";
+        opt.Authority = "https://localhost:44301";
         opt.ClientId = "imagegalleryclient";
         opt.ClientSecret = "secret";
         opt.ResponseType = "code";

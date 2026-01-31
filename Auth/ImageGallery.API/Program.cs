@@ -51,7 +51,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
     .AddOAuth2Introspection(opt =>
     {
-        opt.Authority = "https://localhost:5001/";
+        opt.Authority = "https://localhost:44301";
         opt.ClientId = "imagegalleryapi";
         opt.ClientSecret = "apisecret";
         opt.NameClaimType = "given_name";
