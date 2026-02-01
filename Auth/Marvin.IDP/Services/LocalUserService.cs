@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System.Security.Claims;
+using System.Security.Cryptography;
 using Marvin.IDP.DbContexts;
 using Marvin.IDP.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -117,6 +118,67 @@ namespace Marvin.IDP.Services
             _context.Users.Add(userToAdd);
         }
 
+        public async Task<User> FindUserByExternalProviderAsync(string provider, string providerIdentityKey)
+        {
+            if (string.IsNullOrWhiteSpace(provider))
+            {
+                throw new ArgumentNullException(nameof(provider));
+            }
+
+            if (string.IsNullOrWhiteSpace(providerIdentityKey))
+            {
+                throw new ArgumentNullException(nameof(providerIdentityKey));
+            }
+            var userLogin = await _context.UserLogins
+                .Include(ul => ul.User)
+                .FirstOrDefaultAsync(ul => ul.Provider == provider &&
+                                           ul.ProviderIdentityKey == providerIdentityKey);
+            return userLogin?.User;
+        }
+
+        public User AutoProvisionUser(string provider, string providerIdentityKey, IEnumerable<Claim> claims)
+        {
+            if (string.IsNullOrWhiteSpace(provider))
+            {
+                throw new ArgumentNullException(nameof(provider));
+            }
+
+            if (string.IsNullOrWhiteSpace(providerIdentityKey))
+            {
+                throw new ArgumentNullException(nameof(providerIdentityKey));
+            }
+
+            if (claims == null)
+            {
+                throw new ArgumentNullException(nameof(claims));
+            }
+
+            // create a new user
+            var user = new User
+            {
+                Subject = Guid.NewGuid().ToString(),
+                Active = true
+            };
+
+            // add claims
+            foreach (var claim in claims)
+            {
+                user.Claims.Add(new UserClaim()
+                {
+                    Type = claim.Type,
+                    Value = claim.Value,
+                });
+            }
+
+            user.Logins.Add(new UserLogin()
+            {
+                Provider = provider,
+                ProviderIdentityKey = providerIdentityKey
+            });
+
+            _context.Users.Add(user);
+            return user;
+        }
   
         public async Task<bool> SaveChangesAsync()
         {

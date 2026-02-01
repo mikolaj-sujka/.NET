@@ -6,6 +6,7 @@ using Duende.IdentityModel;
 using Duende.IdentityServer;
 using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Services;
+using Marvin.IDP.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,23 +16,13 @@ namespace Marvin.IDP.Pages.ExternalLogin;
 
 [AllowAnonymous]
 [SecurityHeaders]
-public class Callback : PageModel
+public class Callback(
+    IIdentityServerInteractionService interaction,
+    IEventService events,
+    ILogger<Callback> logger,
+    ILocalUserService localUserService)
+    : PageModel
 {
-    private readonly IIdentityServerInteractionService _interaction;
-    private readonly ILogger<Callback> _logger;
-    private readonly IEventService _events;
-
-    public Callback(
-        IIdentityServerInteractionService interaction,
-        IEventService events,
-        ILogger<Callback> logger)
-    {
-
-        _interaction = interaction;
-        _logger = logger;
-        _events = events;
-    }
-        
     public async Task<IActionResult> OnGet()
     {
         // read external identity from the temporary cookie
@@ -44,10 +35,10 @@ public class Callback : PageModel
         var externalUser = result.Principal ?? 
             throw new InvalidOperationException("External authentication produced a null Principal");
 		
-        if (_logger.IsEnabled(LogLevel.Debug))
+        if (logger.IsEnabled(LogLevel.Debug))
         {
             var externalClaims = externalUser.Claims.Select(c => $"{c.Type}: {c.Value}");
-            _logger.ExternalClaims(externalClaims);
+            logger.ExternalClaims(externalClaims);
         }
 
         // lookup our user and external provider info
@@ -62,18 +53,17 @@ public class Callback : PageModel
         var providerUserId = userIdClaim.Value;
 
         // find external user
-        /*var user = _users.FindByExternalProvider(provider, providerUserId);
+        var user = await localUserService.FindUserByExternalProviderAsync(provider, providerUserId);
+
         if (user == null)
         {
-            // this might be where you might initiate a custom workflow for user registration
-            // in this sample we don't show how that would be done, as our sample implementation
-            // simply auto-provisions new external user
-            //
-            // remove the user id claim so we don't include it as an extra claim if/when we provision the user
             var claims = externalUser.Claims.ToList();
             claims.Remove(userIdClaim);
-            user = _users.AutoProvisionUser(provider, providerUserId, claims.ToList());
-        }*/
+
+            // auto-provision new user
+            user = localUserService.AutoProvisionUser(provider, providerUserId, claims);
+            await localUserService.SaveChangesAsync();
+        }
 
         // this allows us to collect any additional claims or properties
         // for the specific protocols used and store them in the local auth cookie.
@@ -83,9 +73,9 @@ public class Callback : PageModel
         CaptureExternalLoginContext(result, additionalLocalClaims, localSignInProps);
             
         // issue authentication cookie for user
-        var isuser = new IdentityServerUser(providerUserId)
+        var isuser = new IdentityServerUser(user.Subject)
         {
-            DisplayName = providerUserId,
+            DisplayName = user.UserName,
             IdentityProvider = provider,
             AdditionalClaims = additionalLocalClaims
         };
@@ -99,8 +89,8 @@ public class Callback : PageModel
         var returnUrl = result.Properties.Items["returnUrl"] ?? "~/";
 
         // check if external login is in the context of an OIDC request
-        var context = await _interaction.GetAuthorizationContextAsync(returnUrl);
-        await _events.RaiseAsync(new UserLoginSuccessEvent(provider, providerUserId, isuser.SubjectId, isuser.DisplayName, true, context?.Client.ClientId));
+        var context = await interaction.GetAuthorizationContextAsync(returnUrl);
+        await events.RaiseAsync(new UserLoginSuccessEvent(provider, providerUserId, user.Subject, user.UserName, true, context?.Client.ClientId));
         Telemetry.Metrics.UserLogin(context?.Client.ClientId, provider!);
 
         if (context != null)

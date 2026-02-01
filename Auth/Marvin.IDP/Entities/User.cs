@@ -21,7 +21,7 @@ namespace Marvin.IDP.Entities
         public bool Active { get; set; }
 
         [MaxLength(200)]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [MaxLength(200)]
         public string? SecurityCode { get; set; }
@@ -31,6 +31,7 @@ namespace Marvin.IDP.Entities
         public string ConcurrencyStamp { get; set; } = Guid.NewGuid().ToString();
 
         public ICollection<UserClaim> Claims { get; set; } = new List<UserClaim>();
+        public ICollection<UserLogin> Logins { get; set; } = new List<UserLogin>();
 
     }
 

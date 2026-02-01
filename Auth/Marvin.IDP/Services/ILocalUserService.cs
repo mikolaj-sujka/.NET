@@ -1,4 +1,5 @@
 ﻿using Marvin.IDP.Entities;
+using System.Security.Claims;
 
 namespace Marvin.IDP.Services
 {
@@ -25,5 +26,8 @@ namespace Marvin.IDP.Services
 
         Task<bool> SaveChangesAsync();
         Task<bool> ActivateUserAsync(string securityCode);
+
+        Task<User> FindUserByExternalProviderAsync(string provider, string providerIdentityKey);
+        User AutoProvisionUser(string provider, string providerIdentityKey, IEnumerable<Claim> claims);
     }
 }
