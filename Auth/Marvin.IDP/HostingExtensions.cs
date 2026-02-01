@@ -53,7 +53,6 @@ internal static class HostingExtensions
                 {
                     opt.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
                     opt.ClientId = "8aba8fb0-e22c-48a5-b816-0aa8365f7b44";
-                    opt.ClientSecret = "";
                     opt.Authority = "https://login.microsoftonline.com/74cb19b5-dca1-4491-9474-db9e65ab538d/v2.0";
 
                     opt.ResponseType = "code";
