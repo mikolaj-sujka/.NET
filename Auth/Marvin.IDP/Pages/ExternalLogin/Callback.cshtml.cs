@@ -60,6 +60,33 @@ public class Callback(
             var claims = externalUser.Claims.ToList();
             claims.Remove(userIdClaim);
 
+            if (provider == "AAD")
+            {
+                // get email claim value
+                var emailFromAzureAD = externalUser.Claims
+                    .FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")?.Value;
+
+                if (!string.IsNullOrEmpty(emailFromAzureAD))
+                {
+                    // try to find a user with matching email
+                    user = await localUserService
+                        .GetUserByEmailAsync(emailFromAzureAD);
+
+                    // if it exists, add AAD as a provider
+                    if (user != null)
+                    {
+                        await localUserService.AddExternalProviderToUser(
+                            user.Subject, provider, providerUserId);
+                        await localUserService.SaveChangesAsync();
+                    }
+
+                    // note: creating a new user if no match is found is
+                    // a common practice - we won't do that, we already
+                    // did that in our Facebook integration sample
+
+                }
+            }
+
             // auto-provision new user
             user = localUserService.AutoProvisionUser(provider, providerUserId, claims);
             await localUserService.SaveChangesAsync();

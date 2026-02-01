@@ -179,7 +179,35 @@ namespace Marvin.IDP.Services
             _context.Users.Add(user);
             return user;
         }
-  
+
+        public async Task AddExternalProviderToUser(
+            string subject,
+            string provider,
+            string providerIdentityKey)
+        {
+            if (string.IsNullOrWhiteSpace(subject))
+            {
+                throw new ArgumentNullException(nameof(subject));
+            }
+
+            if (string.IsNullOrWhiteSpace(provider))
+            {
+                throw new ArgumentNullException(nameof(provider));
+            }
+
+            if (string.IsNullOrWhiteSpace(providerIdentityKey))
+            {
+                throw new ArgumentNullException(nameof(providerIdentityKey));
+            }
+
+            var user = await GetUserBySubjectAsync(subject);
+            user.Logins.Add(new UserLogin()
+            {
+                Provider = provider,
+                ProviderIdentityKey = providerIdentityKey
+            });
+        }
+
         public async Task<bool> SaveChangesAsync()
         {
             return (await _context.SaveChangesAsync() > 0);
@@ -205,6 +233,47 @@ namespace Marvin.IDP.Services
             user.Active = true;
             user.SecurityCode = null;
             return true;
+        }
+
+        public async Task<bool> AddUserSecret(string subject,
+            string name, string secret)
+        {
+            if (string.IsNullOrWhiteSpace(subject))
+            {
+                throw new ArgumentNullException(nameof(subject));
+            }
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            if (string.IsNullOrWhiteSpace(secret))
+            {
+                throw new ArgumentNullException(nameof(secret));
+            }
+
+            var user = await GetUserBySubjectAsync(subject);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            //user.Secrets.Add(new UserSecret()
+              //  { Name = name, Secret = secret });
+            return true;
+        }
+
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            if (email is null)
+            {
+                throw new ArgumentNullException(nameof(email));
+            }
+
+            return await _context.Users
+                .FirstOrDefaultAsync(u => u.Email == email);
         }
     }
 }
