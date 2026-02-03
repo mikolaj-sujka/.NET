@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Marvin.IDP.Pages.Diagnostics;
+namespace IdentityServerHost.Pages.Diagnostics;
 
 [SecurityHeaders]
 [Authorize]
@@ -16,16 +16,9 @@ public class Index : PageModel
 
     public async Task<IActionResult> OnGet()
     {
-        var localAddresses = new List<string?> { "127.0.0.1", "::1" };
-        if(HttpContext.Connection.LocalIpAddress != null)
-        {
-            localAddresses.Add(HttpContext.Connection.LocalIpAddress.ToString());
-        }
-
-        if (!localAddresses.Contains(HttpContext.Connection.RemoteIpAddress?.ToString()))
-        {
+        //Replace with an authorization policy check
+        if (HttpContext.Connection.IsRemote())
             return NotFound();
-        }
 
         View = new ViewModel(await HttpContext.AuthenticateAsync());
             

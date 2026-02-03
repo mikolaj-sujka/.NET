@@ -2,10 +2,12 @@
 // See LICENSE in the project root for license information.
 
 using System.Security.Claims;
+using System.Text.Json;
 using Duende.IdentityModel;
+using Duende.IdentityServer;
 using Duende.IdentityServer.Test;
 
-namespace Marvin.IDP;
+namespace IdentityServerHost;
 
 public static class TestUsers
 {
@@ -25,30 +27,34 @@ public static class TestUsers
             {
                 new TestUser
                 {
-                    SubjectId = "b7539694-97e7-4dfe-84da-b4256e1ff5c7",
-                    Username = "Emma",
-                    Password = "password",
+                    SubjectId = "1",
+                    Username = "alice",
+                    Password = "alice",
                     Claims =
                     {
-                        new Claim("role", "FreeUser"),
-
-                        new Claim(JwtClaimTypes.GivenName, "Emma"),
+                        new Claim(JwtClaimTypes.Name, "Alice Smith"),
+                        new Claim(JwtClaimTypes.GivenName, "Alice"),
                         new Claim(JwtClaimTypes.FamilyName, "Smith"),
-                        new Claim("country", "nl"),
+                        new Claim(JwtClaimTypes.Email, "AliceSmith@email.com"),
+                        new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
+                        new Claim(JwtClaimTypes.WebSite, "http://alice.com"),
+                        new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address), IdentityServerConstants.ClaimValueTypes.Json)
                     }
                 },
                 new TestUser
                 {
-                    SubjectId = "41ecc841-2005-4cda-bd20-6c51b761042d",
-                    Username = "Bob",
-                    Password = "password",
+                    SubjectId = "2",
+                    Username = "bob",
+                    Password = "bob",
                     Claims =
                     {
-                        new Claim("role", "PayingUser"),
-
+                        new Claim(JwtClaimTypes.Name, "Bob Smith"),
                         new Claim(JwtClaimTypes.GivenName, "Bob"),
                         new Claim(JwtClaimTypes.FamilyName, "Smith"),
-                        new Claim("country", "be"),
+                        new Claim(JwtClaimTypes.Email, "BobSmith@email.com"),
+                        new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
+                        new Claim(JwtClaimTypes.WebSite, "http://bob.com"),
+                        new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address), IdentityServerConstants.ClaimValueTypes.Json)
                     }
                 }
             };

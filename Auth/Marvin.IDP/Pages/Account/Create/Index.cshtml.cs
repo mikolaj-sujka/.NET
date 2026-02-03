@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Marvin.IDP.Pages.Create;
+namespace IdentityServerHost.Pages.Create;
 
 [SecurityHeaders]
 [AllowAnonymous]

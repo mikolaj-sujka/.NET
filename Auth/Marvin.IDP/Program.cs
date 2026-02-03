@@ -1,5 +1,8 @@
-﻿using Marvin.IDP;
+using Marvin.IDP;
 using Serilog;
+using Marvin.IDP.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -19,6 +22,14 @@ try
     var app = builder
         .ConfigureServices()
         .ConfigurePipeline();
+
+    if (args.Contains("/seed"))
+    {
+        Log.Information("Seed database...");
+        SeedData.EnsureSeedData(app);
+        Log.Information("Done seeding database. Exiting.");
+        return;
+    }
     
     app.Run();
 }

@@ -1,4 +1,6 @@
 using Duende.IdentityServer;
+using Marvin.IDP.Areas.Identity.Data;
+using Marvin.IDP.Data;
 using Marvin.IDP.DbContexts;
 using Marvin.IDP.Entities;
 using Marvin.IDP.Services;
@@ -27,6 +29,17 @@ internal static class HostingExtensions
         // uncomment if you want to add a UI
         builder.Services.AddRazorPages();
 
+        var connectionString = builder.Configuration
+            .GetConnectionString("MarvinIDPContextConnection") 
+                               ?? throw new InvalidOperationException("Connection string 'MarvinIDPContextConnection' not found.");
+
+        builder.Services.AddDbContext<MarvinIDPContext>(options => 
+            options.UseSqlite(connectionString));
+
+        builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            .AddEntityFrameworkStores<MarvinIDPContext>()
+            .AddDefaultTokenProviders();
+
         builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
         builder.Services.AddDbContext<IdentityDbContext>(opt =>
@@ -44,7 +57,8 @@ internal static class HostingExtensions
             .AddInMemoryApiScopes(Config.ApiScopes)
             .AddInMemoryApiResources(Config.ApiResources)
             .AddInMemoryClients(Config.Clients)
-            .AddProfileService<LocalUserProfileService>();
+            .AddProfileService<LocalUserProfileService>()
+            .AddAspNetIdentity<ApplicationUser>();
             //.AddTestUsers(TestUsers.Users);
 
             builder.Services
@@ -88,7 +102,7 @@ internal static class HostingExtensions
 
         // uncomment if you want to add a UI
         app.UseAuthorization();
-        app.MapRazorPages().RequireAuthorization();
+        app.MapRazorPages();
 
         return app;
     }

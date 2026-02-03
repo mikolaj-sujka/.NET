@@ -3,7 +3,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace Marvin.IDP.Pages.Create;
+namespace IdentityServerHost.Pages.Create;
 
 public class InputModel
 {

@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using System.Security.Cryptography;
+using Marvin.IDP.Areas.Identity.Data;
 using Marvin.IDP.DbContexts;
 using Marvin.IDP.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -9,7 +10,8 @@ namespace Marvin.IDP.Services
 {
     public class LocalUserService(
         IdentityDbContext context,
-        IPasswordHasher<User> passwordHasher)
+        IPasswordHasher<User> passwordHasher,
+        UserManager<ApplicationUser> userManager)
         : ILocalUserService
     {
         private readonly IdentityDbContext _context = context ??
@@ -181,34 +183,20 @@ namespace Marvin.IDP.Services
             return user.Active;
         }
 
-        public async Task<bool> ValidateCredentialsAsync(string userName,
-          string password)
+        public async Task<bool> ValidateCredentialsAsync(string userName, string password)
         {
-            if (string.IsNullOrWhiteSpace(userName) ||
-                string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
             {
                 return false;
             }
 
-            var user = await GetUserByUserNameAsync(userName);
-
-            if (user == null)
+            var appUser = await userManager.FindByNameAsync(userName);
+            if (appUser == null)
             {
                 return false;
             }
 
-            if (!user.Active)
-            {
-                return false;
-            }
-
-            // Validate credentials
-            // return (user.Password == password);
-            var verificationResult =
-                _passwordHasher.VerifyHashedPassword(
-                    user, user.Password, password);
-            return (verificationResult == PasswordVerificationResult.Success);
-
+            return await userManager.CheckPasswordAsync(appUser, password);
         }
 
         public async Task<User> GetUserByUserNameAsync(string userName)
@@ -218,8 +206,35 @@ namespace Marvin.IDP.Services
                 throw new ArgumentNullException(nameof(userName));
             }
 
-            return await _context.Users
-                 .FirstOrDefaultAsync(u => u.UserName == userName);
+            // 1) Try local (custom) user store first
+            var localUser = await _context.Users
+                .FirstOrDefaultAsync(u => u.UserName == userName);
+
+            if (localUser != null)
+            {
+                return localUser;
+            }
+
+            // 2) If not found, try ASP.NET Core Identity (AspNetUsers)
+            var appUser = await userManager.FindByNameAsync(userName);
+            if (appUser == null)
+            {
+                return null;
+            }
+
+            // 3) Create corresponding local user (find-or-create)
+            localUser = new User
+            {
+                Active = true,
+                Subject = Guid.NewGuid().ToString(),
+                UserName = appUser.UserName,
+                Email = appUser.Email
+            };
+
+            _context.Users.Add(localUser);
+            await SaveChangesAsync();
+
+            return localUser;
         }
 
         public async Task<IEnumerable<UserClaim>> GetUserClaimsBySubjectAsync(string subject)

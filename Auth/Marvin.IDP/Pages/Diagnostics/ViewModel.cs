@@ -2,11 +2,12 @@
 // See LICENSE in the project root for license information.
 
 using System.Buffers.Text;
+using Duende.IdentityModel;
 using Microsoft.AspNetCore.Authentication;
 using System.Text;
 using System.Text.Json;
 
-namespace Marvin.IDP.Pages.Diagnostics;
+namespace IdentityServerHost.Pages.Diagnostics;
 
 public class ViewModel
 {
@@ -14,18 +15,35 @@ public class ViewModel
     {
         AuthenticateResult = result;
 
+        Clients = Enumerable.Empty<string>();
+
         if (result?.Properties?.Items.TryGetValue("client_list", out var encoded) == true)
         {
-            if (encoded != null)
+            if (!string.IsNullOrWhiteSpace(encoded))
             {
-                var encodedBytes = Encoding.UTF8.GetBytes(encoded);
-                var bytes = Base64Url.DecodeFromUtf8(encodedBytes);
-                var value = Encoding.UTF8.GetString(bytes);
-                Clients = JsonSerializer.Deserialize<string[]>(value) ?? Enumerable.Empty<string>();
-                return;
+                try
+                {
+                    var maxLen = Base64.GetMaxDecodedFromUtf8Length(encoded.Length);
+                    var buffer = new byte[maxLen];
+                    if (!Base64Url.TryDecodeFromChars(encoded, buffer, out var bytesWritten))
+                    {
+                        Clients = Enumerable.Empty<string>();
+                        return;
+                    }
+
+                    var value = Encoding.UTF8.GetString(buffer, 0, bytesWritten);
+                    Clients = JsonSerializer.Deserialize<string[]>(value) ?? Enumerable.Empty<string>();
+                }
+                catch (FormatException)
+                {
+                    Clients = Enumerable.Empty<string>();
+                }
+                catch (JsonException)
+                {
+                    Clients = Enumerable.Empty<string>();
+                }
             }
         }
-        Clients = Enumerable.Empty<string>();
     }
 
     public AuthenticateResult AuthenticateResult { get; }
