@@ -101,21 +101,22 @@ public class Index : PageModel
                 // validate the second factor 
                 // first, get the totp secret for this user 
                 var userSecret = await _localUserService.GetUserSecretAsync(user.Subject, "TOTP");
-                /*if (userSecret == null)
+                
+                if (userSecret == null)
                 {
                     ModelState.AddModelError("usersecret", "No second factor secret has been registered - please contact the helpdesk.");
                     await BuildModelAsync(Input.ReturnUrl);
                     return Page();
-                }*/
+                }
 
                 // validate the inputted totp 
-                /*var authenticator = new TwoStepsAuthenticator.TimeAuthenticator();
+                var authenticator = new TwoStepsAuthenticator.TimeAuthenticator();
                 if (!authenticator.CheckCode(userSecret.Secret, Input.Totp, user))
                 {
                     ModelState.AddModelError("totp", "TOTP is invalid.");
                     await BuildModelAsync(Input.ReturnUrl);
                     return Page();
-                }*/
+                }
 
                 await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Subject, user.UserName, clientId: context?.Client.ClientId));
                 Telemetry.Metrics.UserLogin(context?.Client.ClientId, IdentityServerConstants.LocalIdentityProvider);
