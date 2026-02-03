@@ -34,62 +34,66 @@ namespace Marvin.IDP.Pages.User.Registration
         {
             if (!ModelState.IsValid)
             {
+                // something went wrong, show form with error
                 BuildModel(Input.ReturnUrl);
                 return Page();
             }
-            var user = new Entities.User()
+
+            // create user & claims
+            var userToCreate = new Entities.User
             {
                 UserName = Input.Username,
-                Active = false,
                 Subject = Guid.NewGuid().ToString(),
-                Email = Input.Email
+                Email = Input.Email,
+                Active = true // activation is not implemented
             };
-
-            user.Claims.Add(new UserClaim()
+            userToCreate.Claims.Add(new Entities.UserClaim()
             {
                 Type = "country",
                 Value = Input.Country
             });
 
-            user.Claims.Add(new UserClaim()
+            userToCreate.Claims.Add(new Entities.UserClaim()
             {
                 Type = JwtClaimTypes.GivenName,
                 Value = Input.GivenName
             });
 
-            user.Claims.Add(new UserClaim()
+            userToCreate.Claims.Add(new Entities.UserClaim()
             {
                 Type = JwtClaimTypes.FamilyName,
                 Value = Input.FamilyName
             });
 
-            
-            localUserService.AddUser(user, Input.Password);
+            localUserService.AddUser(userToCreate,
+                Input.Password);
             await localUserService.SaveChangesAsync();
 
-            // create an activation link - we need an absolute URL for that
-            var activationLink = Url.PageLink("/User/Activation/Index",
-                values: new { securityCode = user.SecurityCode }); 
+            // create an activation link - we need an absolute URL, therefore
+            // we use Url.PageLink instead of Url.Page
+            var activationLink = Url.PageLink("/user/activation/index",
+                values: new { securityCode = userToCreate.SecurityCode });
 
             Console.WriteLine(activationLink);
-
-            // Issue authentication cookie
-            /*var isUser = new IdentityServerUser(user.Subject)
-            {
-                DisplayName = user.UserName
-            };
-            await HttpContext.SignInAsync(isUser);
-
-            // continue with the flow
-            if (identityServerInteractionService.IsValidReturnUrl(Input.ReturnUrl) ||
-                Url.IsLocalUrl(Input.ReturnUrl))
-            {
-                return Redirect(Input.ReturnUrl);
-            }
-
-            return Redirect("~/");*/
-
             return Redirect("~/User/ActivationCodeSent");
+
+            //// Issue authentication cookie (log the user in)
+            //var isUser = new IdentityServerUser(userToCreate.Subject)
+            //{
+            //    DisplayName = userToCreate.UserName
+            //};
+            //await HttpContext.SignInAsync(isUser);
+
+            //// continue with the flow     
+            //if (_interaction.IsValidReturnUrl(Input.ReturnUrl) 
+            //    || Url.IsLocalUrl(Input.ReturnUrl))
+            //{
+            //    return Redirect(Input.ReturnUrl);
+            //}
+
+            //return Redirect("~/");
+
+
         }
     }
 }

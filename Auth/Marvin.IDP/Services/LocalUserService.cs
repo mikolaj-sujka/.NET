@@ -7,11 +7,162 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Marvin.IDP.Services
 {
-    public class LocalUserService(IdentityDbContext context, IPasswordHasher<User> passwordHasher) 
+    public class LocalUserService(
+        IdentityDbContext context,
+        IPasswordHasher<User> passwordHasher)
         : ILocalUserService
     {
         private readonly IdentityDbContext _context = context ??
                                                       throw new ArgumentNullException(nameof(context));
+        private readonly IPasswordHasher<User> _passwordHasher = passwordHasher ??
+                                                                 throw new ArgumentNullException(nameof(passwordHasher));
+
+        public async Task<User> FindUserByExternalProviderAsync(
+            string provider, string providerIdentityKey)
+        {
+            if (string.IsNullOrWhiteSpace(provider))
+            {
+                throw new ArgumentNullException(nameof(provider));
+            }
+
+            if (string.IsNullOrWhiteSpace(providerIdentityKey))
+            {
+                throw new ArgumentNullException(nameof(providerIdentityKey));
+            }
+
+            var userLogin = await _context.UserLogins.Include(ul => ul.User)
+               .FirstOrDefaultAsync(ul => ul.Provider == provider
+               && ul.ProviderIdentityKey == providerIdentityKey);
+
+            return userLogin?.User;
+        }
+
+        public User AutoProvisionUser(string provider,
+            string providerIdentityKey,
+            IEnumerable<Claim> claims)
+        {
+            if (string.IsNullOrWhiteSpace(provider))
+            {
+                throw new ArgumentNullException(nameof(provider));
+            }
+
+            if (string.IsNullOrWhiteSpace(providerIdentityKey))
+            {
+                throw new ArgumentNullException(nameof(providerIdentityKey));
+            }
+
+            if (claims is null)
+            {
+                throw new ArgumentNullException(nameof(claims));
+            }
+
+            var user = new User()
+            {
+                Active = true,
+                Subject = Guid.NewGuid().ToString()
+            };
+            foreach (var claim in claims)
+            {
+                user.Claims.Add(new UserClaim()
+                {
+                    Type = claim.Type,
+                    Value = claim.Value
+                });
+            }
+            user.Logins.Add(new UserLogin()
+            {
+                Provider = provider,
+                ProviderIdentityKey = providerIdentityKey
+            });
+
+            _context.Users.Add(user);
+            return user;
+        }
+
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            if (email is null)
+            {
+                throw new ArgumentNullException(nameof(email));
+            }
+
+            return await _context.Users
+                .FirstOrDefaultAsync(u => u.Email == email);
+        }
+        public async Task AddExternalProviderToUser(
+           string subject,
+           string provider,
+           string providerIdentityKey)
+        {
+            if (string.IsNullOrWhiteSpace(subject))
+            {
+                throw new ArgumentNullException(nameof(subject));
+            }
+
+            if (string.IsNullOrWhiteSpace(provider))
+            {
+                throw new ArgumentNullException(nameof(provider));
+            }
+
+            if (string.IsNullOrWhiteSpace(providerIdentityKey))
+            {
+                throw new ArgumentNullException(nameof(providerIdentityKey));
+            }
+
+            var user = await GetUserBySubjectAsync(subject);
+            user.Logins.Add(new UserLogin()
+            {
+                Provider = provider,
+                ProviderIdentityKey = providerIdentityKey
+            });
+        }
+
+        public async Task<bool> AddUserSecret(string subject,
+            string name, string secret)
+        {
+            if (string.IsNullOrWhiteSpace(subject))
+            {
+                throw new ArgumentNullException(nameof(subject));
+            }
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            if (string.IsNullOrWhiteSpace(secret))
+            {
+                throw new ArgumentNullException(nameof(secret));
+            }
+
+            var user = await GetUserBySubjectAsync(subject);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.Secrets.Add(new UserSecret()
+            { Name = name, Secret = secret });
+            return true;
+        }
+
+        public async Task<UserSecret> GetUserSecretAsync(
+            string subject, string name)
+        {
+            if (string.IsNullOrWhiteSpace(subject))
+            {
+                throw new ArgumentNullException(nameof(subject));
+            }
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            return await _context.UserSecrets
+                .FirstOrDefaultAsync(u => u.User.Subject == subject && u.Name == name);
+        }
 
         public async Task<bool> IsUserActive(string subject)
         {
@@ -52,11 +203,13 @@ namespace Marvin.IDP.Services
             }
 
             // Validate credentials
-            //return (user.Password == password);
-            var verificationResult = passwordHasher.VerifyHashedPassword(user, user.Password, password);
-            return verificationResult == PasswordVerificationResult.Success;
+            // return (user.Password == password);
+            var verificationResult =
+                _passwordHasher.VerifyHashedPassword(
+                    user, user.Password, password);
+            return (verificationResult == PasswordVerificationResult.Success);
 
-        } 
+        }
 
         public async Task<User> GetUserByUserNameAsync(string userName)
         {
@@ -76,7 +229,8 @@ namespace Marvin.IDP.Services
                 throw new ArgumentNullException(nameof(subject));
             }
 
-            return await _context.UserClaims.Where(u => u.User.Subject == subject).ToListAsync();
+            return await _context.UserClaims.Where(u =>
+                u.User.Subject == subject).ToListAsync();
         }
 
         public async Task<User> GetUserBySubjectAsync(string subject)
@@ -86,7 +240,8 @@ namespace Marvin.IDP.Services
                 throw new ArgumentNullException(nameof(subject));
             }
 
-            return await _context.Users.FirstOrDefaultAsync(u => u.Subject == subject);
+            return await _context.Users.FirstOrDefaultAsync(u =>
+                u.Subject == subject);
         }
 
         public void AddUser(User userToAdd, string password)
@@ -108,109 +263,15 @@ namespace Marvin.IDP.Services
                 throw new Exception("Email must be unique");
             }
 
-            userToAdd.SecurityCode = Convert.ToBase64String(RandomNumberGenerator.GetBytes(128));
-
+            userToAdd.SecurityCode = Convert.ToBase64String(
+                RandomNumberGenerator.GetBytes(128));
             userToAdd.SecurityCodeExpirationDate = DateTime.UtcNow.AddHours(1);
 
-            // hash & salt the password here
-            userToAdd.Password = passwordHasher.HashPassword(userToAdd, password);
+            // hash & salt the password
+            userToAdd.Password =
+                _passwordHasher.HashPassword(userToAdd, password);
 
             _context.Users.Add(userToAdd);
-        }
-
-        public async Task<User> FindUserByExternalProviderAsync(string provider, string providerIdentityKey)
-        {
-            if (string.IsNullOrWhiteSpace(provider))
-            {
-                throw new ArgumentNullException(nameof(provider));
-            }
-
-            if (string.IsNullOrWhiteSpace(providerIdentityKey))
-            {
-                throw new ArgumentNullException(nameof(providerIdentityKey));
-            }
-            var userLogin = await _context.UserLogins
-                .Include(ul => ul.User)
-                .FirstOrDefaultAsync(ul => ul.Provider == provider &&
-                                           ul.ProviderIdentityKey == providerIdentityKey);
-            return userLogin?.User;
-        }
-
-        public User AutoProvisionUser(string provider, string providerIdentityKey, IEnumerable<Claim> claims)
-        {
-            if (string.IsNullOrWhiteSpace(provider))
-            {
-                throw new ArgumentNullException(nameof(provider));
-            }
-
-            if (string.IsNullOrWhiteSpace(providerIdentityKey))
-            {
-                throw new ArgumentNullException(nameof(providerIdentityKey));
-            }
-
-            if (claims == null)
-            {
-                throw new ArgumentNullException(nameof(claims));
-            }
-
-            // create a new user
-            var user = new User
-            {
-                Subject = Guid.NewGuid().ToString(),
-                Active = true
-            };
-
-            // add claims
-            foreach (var claim in claims)
-            {
-                user.Claims.Add(new UserClaim()
-                {
-                    Type = claim.Type,
-                    Value = claim.Value,
-                });
-            }
-
-            user.Logins.Add(new UserLogin()
-            {
-                Provider = provider,
-                ProviderIdentityKey = providerIdentityKey
-            });
-
-            _context.Users.Add(user);
-            return user;
-        }
-
-        public async Task AddExternalProviderToUser(
-            string subject,
-            string provider,
-            string providerIdentityKey)
-        {
-            if (string.IsNullOrWhiteSpace(subject))
-            {
-                throw new ArgumentNullException(nameof(subject));
-            }
-
-            if (string.IsNullOrWhiteSpace(provider))
-            {
-                throw new ArgumentNullException(nameof(provider));
-            }
-
-            if (string.IsNullOrWhiteSpace(providerIdentityKey))
-            {
-                throw new ArgumentNullException(nameof(providerIdentityKey));
-            }
-
-            var user = await GetUserBySubjectAsync(subject);
-            user.Logins.Add(new UserLogin()
-            {
-                Provider = provider,
-                ProviderIdentityKey = providerIdentityKey
-            });
-        }
-
-        public async Task<bool> SaveChangesAsync()
-        {
-            return (await _context.SaveChangesAsync() > 0);
         }
 
         public async Task<bool> ActivateUserAsync(string securityCode)
@@ -220,10 +281,10 @@ namespace Marvin.IDP.Services
                 throw new ArgumentNullException(nameof(securityCode));
             }
 
-            // find user by security code
-            var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.SecurityCode == securityCode &&
-                                           u.SecurityCodeExpirationDate > DateTime.UtcNow);
+            // find an user with this security code as an active security code.  
+            var user = await _context.Users.FirstOrDefaultAsync(u =>
+                u.SecurityCode == securityCode &&
+                u.SecurityCodeExpirationDate >= DateTime.UtcNow);
 
             if (user == null)
             {
@@ -235,45 +296,9 @@ namespace Marvin.IDP.Services
             return true;
         }
 
-        public async Task<bool> AddUserSecret(string subject,
-            string name, string secret)
+        public async Task<bool> SaveChangesAsync()
         {
-            if (string.IsNullOrWhiteSpace(subject))
-            {
-                throw new ArgumentNullException(nameof(subject));
-            }
-
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            if (string.IsNullOrWhiteSpace(secret))
-            {
-                throw new ArgumentNullException(nameof(secret));
-            }
-
-            var user = await GetUserBySubjectAsync(subject);
-
-            if (user == null)
-            {
-                return false;
-            }
-
-            //user.Secrets.Add(new UserSecret()
-              //  { Name = name, Secret = secret });
-            return true;
-        }
-
-        public async Task<User> GetUserByEmailAsync(string email)
-        {
-            if (email is null)
-            {
-                throw new ArgumentNullException(nameof(email));
-            }
-
-            return await _context.Users
-                .FirstOrDefaultAsync(u => u.Email == email);
+            return (await _context.SaveChangesAsync() > 0);
         }
     }
 }

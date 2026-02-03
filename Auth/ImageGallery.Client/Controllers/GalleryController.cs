@@ -10,12 +10,18 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 namespace ImageGallery.Client.Controllers;
 
 [Authorize]
-public class GalleryController(IHttpClientFactory httpClientFactory,
-    ILogger<GalleryController> logger) : Controller
+public class GalleryController : Controller
 {
-    private readonly IHttpClientFactory _httpClientFactory = httpClientFactory ??
+    private readonly IHttpClientFactory _httpClientFactory;
+    private readonly ILogger<GalleryController> _logger;
+
+    public GalleryController(IHttpClientFactory httpClientFactory,
+        ILogger<GalleryController> logger)
+    {
+        _httpClientFactory = httpClientFactory ??
             throw new ArgumentNullException(nameof(httpClientFactory));
-    private readonly ILogger<GalleryController> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+    }
 
     public async Task<IActionResult> Index()
     {
@@ -28,14 +34,14 @@ public class GalleryController(IHttpClientFactory httpClientFactory,
             "/api/images/");
 
         var response = await httpClient.SendAsync(
-            request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            request, HttpCompletionOption.ResponseHeadersRead);
 
         response.EnsureSuccessStatusCode();
 
         using (var responseStream = await response.Content.ReadAsStreamAsync())
         {
             var images = await JsonSerializer.DeserializeAsync<List<Image>>(responseStream);
-            return View(new GalleryIndexViewModel(images ?? []));
+            return View(new GalleryIndexViewModel(images ?? new List<Image>()));
         }
     }
 
@@ -49,13 +55,19 @@ public class GalleryController(IHttpClientFactory httpClientFactory,
             $"/api/images/{id}");
 
         var response = await httpClient.SendAsync(
-            request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            request, HttpCompletionOption.ResponseHeadersRead);
 
         response.EnsureSuccessStatusCode();
 
         using (var responseStream = await response.Content.ReadAsStreamAsync())
         {
-            var deserializedImage = await JsonSerializer.DeserializeAsync<Image>(responseStream) ?? throw new Exception("Deserialized image must not be null.");
+            var deserializedImage = await JsonSerializer.DeserializeAsync<Image>(responseStream);
+
+            if (deserializedImage == null)
+            {
+                throw new Exception("Deserialized image must not be null.");
+            }
+
             var editImageViewModel = new EditImageViewModel()
             {
                 Id = deserializedImage.Id,
@@ -66,7 +78,6 @@ public class GalleryController(IHttpClientFactory httpClientFactory,
         }
     }
 
-    [Authorize(Policy = "UserCanAddImage")]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> EditImage(EditImageViewModel editImageViewModel)
@@ -118,7 +129,8 @@ public class GalleryController(IHttpClientFactory httpClientFactory,
         return RedirectToAction("Index");
     }
 
-    [Authorize(Roles = "PayingUser")]
+    [Authorize(Policy = "UserCanAddImage")]
+    //[Authorize(Roles = "PayingUser")]
     public IActionResult AddImage()
     {
         return View();
@@ -126,8 +138,8 @@ public class GalleryController(IHttpClientFactory httpClientFactory,
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    //[Authorize(Roles = "PayingUser")]
     [Authorize(Policy = "UserCanAddImage")]
+    //[Authorize(Roles = "PayingUser")]
     public async Task<IActionResult> AddImage(AddImageViewModel addImageViewModel)
     {
         if (!ModelState.IsValid)
@@ -168,7 +180,7 @@ public class GalleryController(IHttpClientFactory httpClientFactory,
         };
 
         var response = await httpClient.SendAsync(
-            request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            request, HttpCompletionOption.ResponseHeadersRead);
 
         response.EnsureSuccessStatusCode();
 
@@ -178,23 +190,30 @@ public class GalleryController(IHttpClientFactory httpClientFactory,
     public async Task LogIdentityInformation()
     {
         // get the saved identity token
-        var identityToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.IdToken);
+        var identityToken = await HttpContext
+            .GetTokenAsync(OpenIdConnectParameterNames.IdToken);
 
-        var accessToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
+        // get the saved access token
+        var accessToken = await HttpContext
+            .GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
 
-        var refreshToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
+        // get the refresh token
+        var refreshToken = await HttpContext
+            .GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
 
         var userClaimsStringBuilder = new StringBuilder();
         foreach (var claim in User.Claims)
         {
-            userClaimsStringBuilder
-                .AppendLine($"Claim type: {claim.Type} - Claim value: {claim.Value}");
+            userClaimsStringBuilder.AppendLine(
+                $"Claim type: {claim.Type} - Claim value: {claim.Value}");
         }
 
-        // log token and claims
-        _logger.LogInformation("Identity token: {identityToken}", identityToken);
-        _logger.LogInformation("\nAccess token: {accessToken}", accessToken);
-        _logger.LogInformation("\nUser claims: {userClaims}", userClaimsStringBuilder);
-        _logger.LogInformation("\nRefresh token: {refreshToken}", refreshToken);
+        // log token & claims
+        _logger.LogInformation($"Identity token & user claims: " +
+            $"\n{identityToken} \n{userClaimsStringBuilder}");
+        _logger.LogInformation($"Access token: " +
+            $"\n{accessToken}");
+        _logger.LogInformation($"Refresh token: " +
+            $"\n{refreshToken}");
     }
 }
