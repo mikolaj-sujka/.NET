@@ -1,6 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11415.280 d18.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dometrain.EFCore.API", "Dometrain.EFCore.API\Dometrain.EFCore.API.csproj", "{2B791243-64DA-4FF0-8992-9FDD1A58C909}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dometrain.EFCore.Tests", "Dometrain.EFCore.Tests\Dometrain.EFCore.Tests.csproj", "{2A5D6128-B0FC-F77A-EA76-8B7C3DDC6709}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dometrain.EFCore.SimpleAPI", "Dometrain.EFCore.SimpleAPI\Dometrain.EFCore.SimpleAPI.csproj", "{84792C0B-B34D-1A69-1137-7418DFF05484}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +19,19 @@ Global
 		{2B791243-64DA-4FF0-8992-9FDD1A58C909}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B791243-64DA-4FF0-8992-9FDD1A58C909}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B791243-64DA-4FF0-8992-9FDD1A58C909}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A5D6128-B0FC-F77A-EA76-8B7C3DDC6709}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A5D6128-B0FC-F77A-EA76-8B7C3DDC6709}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A5D6128-B0FC-F77A-EA76-8B7C3DDC6709}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A5D6128-B0FC-F77A-EA76-8B7C3DDC6709}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84792C0B-B34D-1A69-1137-7418DFF05484}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84792C0B-B34D-1A69-1137-7418DFF05484}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84792C0B-B34D-1A69-1137-7418DFF05484}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84792C0B-B34D-1A69-1137-7418DFF05484}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B6A5111C-D695-4350-9C35-4318119D4341}
 	EndGlobalSection
 EndGlobal
