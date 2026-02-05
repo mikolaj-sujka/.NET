@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using Dometrain.EFCore.API.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,8 +22,13 @@ var app = builder.Build();
 // DIRTY HACK, we WILL come back to fix this
 var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<MoviesContext>();
-context.Database.EnsureDeleted();
-context.Database.EnsureCreated();
+// await context.Database.MigrateAsync(); // Apply any pending migrations at startup
+var pendingMigrations = await context.Database.GetPendingMigrationsAsync();
+
+if (pendingMigrations.Any()) 
+{
+    throw new Exception("There are pending migrations.");
+}
 
 
 // Configure the HTTP request pipeline.

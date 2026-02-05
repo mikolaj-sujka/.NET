@@ -47,39 +47,6 @@ namespace Dometrain.EFCore.API.Data.Configurations
                 .HasPrincipalKey(genre => genre.Id)
                 .HasForeignKey(m => m.MainGenreId); // FK in Movie table pointing to PK in Genre table
             // .HasForeignKey<Movie>(m => m.MainGenreId); alternative syntax
-
-            // Seed
-            builder.HasData(
-                new Movie
-                {
-                    Id = 1,
-                    Title = "The Shawshank Redemption",
-                    ReleaseDate = new DateTime(1994, 9, 22),
-                    Synopsis = "Two imprisoned",
-                    MainGenreId = 1,
-                    AgeRating = AgeRating.Adult
-                },
-                new Movie
-                {
-                    Id = 2,
-                    Title = "The Godfather",
-                    ReleaseDate = new DateTime(1972, 3, 24),
-                    Synopsis = "The aging patriarch",
-                    MainGenreId = 2,
-                    AgeRating = AgeRating.Mature
-                }
-                );
-
-            builder.OwnsOne(x => x.Director)
-                .HasData(new { MovieId = 1, FirstName = "Frank", LastName = "Darabont" });
-
-            builder.OwnsMany(x => x.Actors)
-                .HasData( 
-                    new { MovieId = 1, Id = 1, FirstName = "Tim", LastName = "Robbins"},
-                    new { MovieId = 1, Id = 2, FirstName = "Morgan", LastName = "Freeman"},
-                    new { MovieId = 2, Id = 3,FirstName = "Marlon", LastName = "Brando"},
-                    new { MovieId = 2, Id = 4,FirstName = "Al", LastName = "Pacino"}
-                );
         }
     }
 }

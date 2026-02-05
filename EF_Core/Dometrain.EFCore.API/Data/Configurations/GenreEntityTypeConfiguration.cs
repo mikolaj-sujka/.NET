@@ -19,25 +19,6 @@ namespace Dometrain.EFCore.API.Data.Configurations
             builder.Property(x => x.CreatedDate)
                 .HasColumnName("CreatedAt")
                 .HasValueGenerator<CreatedDateGenerator>();
-
-            // Seed
-            builder.HasData(
-                new Genre
-                {
-                    Id = 1,
-                    Name = "Drama"
-                },
-                new Genre
-                {
-                    Id = 2,
-                    Name = "Comedy"
-                },
-                new Genre
-                {
-                    Id = 3,
-                    Name = "Action"
-                });
-
         }
     }
 }
