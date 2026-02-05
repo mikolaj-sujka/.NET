@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dometrain.EFCore.API.Migrations
 {
     [DbContext(typeof(MoviesContext))]
-    [Migration("20231107170244_Migration2")]
-    partial class Migration2
+    [Migration("20260205193940_Add-Initial-Migratiom")]
+    partial class AddInitialMigratiom
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0-rc.2.23480.1")
+                .HasAnnotation("ProductVersion", "8.0.23")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -39,23 +39,25 @@ namespace Dometrain.EFCore.API.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genres", (string)null);
                 });
 
             modelBuilder.Entity("Dometrain.EFCore.API.Models.Movie", b =>
                 {
-                    b.Property<int>("Identifier")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Identifier"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AgeRating")
-                        .HasColumnType("int");
+                    b.Property<string>("AgeRating")
+                        .IsRequired()
+                        .HasColumnType("varchar(32)");
 
                     b.Property<int>("MainGenreId")
                         .HasColumnType("int");
@@ -73,7 +75,7 @@ namespace Dometrain.EFCore.API.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("varchar");
 
-                    b.HasKey("Identifier");
+                    b.HasKey("Id");
 
                     b.HasIndex("MainGenreId");
 
@@ -90,7 +92,7 @@ namespace Dometrain.EFCore.API.Migrations
 
                     b.OwnsMany("Dometrain.EFCore.API.Models.Person", "Actors", b1 =>
                         {
-                            b1.Property<int>("MovieIdentifier")
+                            b1.Property<int>("MovieId")
                                 .HasColumnType("int");
 
                             b1.Property<int>("Id")
@@ -105,17 +107,17 @@ namespace Dometrain.EFCore.API.Migrations
                             b1.Property<string>("LastName")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.HasKey("MovieIdentifier", "Id");
+                            b1.HasKey("MovieId", "Id");
 
-                            b1.ToTable("Pictures_Actors");
+                            b1.ToTable("Movies_Actors", (string)null);
 
                             b1.WithOwner()
-                                .HasForeignKey("MovieIdentifier");
+                                .HasForeignKey("MovieId");
                         });
 
                     b.OwnsOne("Dometrain.EFCore.API.Models.Person", "Director", b1 =>
                         {
-                            b1.Property<int>("MovieIdentifier")
+                            b1.Property<int>("MovieId")
                                 .HasColumnType("int");
 
                             b1.Property<string>("FirstName")
@@ -124,12 +126,12 @@ namespace Dometrain.EFCore.API.Migrations
                             b1.Property<string>("LastName")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.HasKey("MovieIdentifier");
+                            b1.HasKey("MovieId");
 
                             b1.ToTable("Pictures_Directors", (string)null);
 
                             b1.WithOwner()
-                                .HasForeignKey("MovieIdentifier");
+                                .HasForeignKey("MovieId");
                         });
 
                     b.Navigation("Actors");

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Dometrain.EFCore.API.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class AddInitialMigratiom : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,22 +26,22 @@ namespace Dometrain.EFCore.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Movies",
+                name: "Pictures",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false),
+                    Title = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
                     ReleaseDate = table.Column<string>(type: "char(8)", nullable: false),
-                    Plot = table.Column<string>(type: "text", nullable: true),
+                    Plot = table.Column<string>(type: "varchar(max)", nullable: true),
                     AgeRating = table.Column<string>(type: "varchar(32)", nullable: false),
                     MainGenreId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Movies", x => x.Id);
+                    table.PrimaryKey("PK_Pictures", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Movies_Genres_MainGenreId",
+                        name: "FK_Pictures_Genres_MainGenreId",
                         column: x => x.MainGenreId,
                         principalTable: "Genres",
                         principalColumn: "Id",
@@ -62,15 +62,15 @@ namespace Dometrain.EFCore.API.Migrations
                 {
                     table.PrimaryKey("PK_Movies_Actors", x => new { x.MovieId, x.Id });
                     table.ForeignKey(
-                        name: "FK_Movies_Actors_Movies_MovieId",
+                        name: "FK_Movies_Actors_Pictures_MovieId",
                         column: x => x.MovieId,
-                        principalTable: "Movies",
+                        principalTable: "Pictures",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Movies_Directors",
+                name: "Pictures_Directors",
                 columns: table => new
                 {
                     MovieId = table.Column<int>(type: "int", nullable: false),
@@ -79,18 +79,18 @@ namespace Dometrain.EFCore.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Movies_Directors", x => x.MovieId);
+                    table.PrimaryKey("PK_Pictures_Directors", x => x.MovieId);
                     table.ForeignKey(
-                        name: "FK_Movies_Directors_Movies_MovieId",
+                        name: "FK_Pictures_Directors_Pictures_MovieId",
                         column: x => x.MovieId,
-                        principalTable: "Movies",
+                        principalTable: "Pictures",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Movies_MainGenreId",
-                table: "Movies",
+                name: "IX_Pictures_MainGenreId",
+                table: "Pictures",
                 column: "MainGenreId");
         }
 
@@ -101,10 +101,10 @@ namespace Dometrain.EFCore.API.Migrations
                 name: "Movies_Actors");
 
             migrationBuilder.DropTable(
-                name: "Movies_Directors");
+                name: "Pictures_Directors");
 
             migrationBuilder.DropTable(
-                name: "Movies");
+                name: "Pictures");
 
             migrationBuilder.DropTable(
                 name: "Genres");

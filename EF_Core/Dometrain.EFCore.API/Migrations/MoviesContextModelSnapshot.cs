@@ -64,19 +64,19 @@ namespace Dometrain.EFCore.API.Migrations
                         .HasColumnType("char(8)");
 
                     b.Property<string>("Synopsis")
-                        .HasColumnType("text")
+                        .HasColumnType("varchar(max)")
                         .HasColumnName("Plot");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(200)
+                        .HasMaxLength(128)
                         .HasColumnType("varchar");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MainGenreId");
 
-                    b.ToTable("Movies", (string)null);
+                    b.ToTable("Pictures", (string)null);
                 });
 
             modelBuilder.Entity("Dometrain.EFCore.API.Models.Movie", b =>
@@ -125,7 +125,7 @@ namespace Dometrain.EFCore.API.Migrations
 
                             b1.HasKey("MovieId");
 
-                            b1.ToTable("Movies_Directors", (string)null);
+                            b1.ToTable("Pictures_Directors", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("MovieId");

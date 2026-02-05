@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using Dometrain.EFCore.API.Data;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,12 +11,20 @@ builder.Services.AddControllers().AddJsonOptions(opt =>
     opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
 
+builder.Host.UseSerilog((ctx, lc) => lc
+    .ReadFrom.Configuration(ctx.Configuration)
+);
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Add a DbContext here
-builder.Services.AddDbContext<MoviesContext>();
+builder.Services.AddDbContext<MoviesContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("MoviesDb"));
+    //.EnableSensitiveDataLogging(); // Enable detailed logging for debugging purposes - test environment only
+});
 
 var app = builder.Build();
 
