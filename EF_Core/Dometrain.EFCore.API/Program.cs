@@ -29,16 +29,17 @@ builder.Services.AddDbContext<MoviesContext>(opt =>
 var app = builder.Build();
 
 // DIRTY HACK, we WILL come back to fix this
-var scope = app.Services.CreateScope();
-var context = scope.ServiceProvider.GetRequiredService<MoviesContext>();
-// await context.Database.MigrateAsync(); // Apply any pending migrations at startup
-var pendingMigrations = await context.Database.GetPendingMigrationsAsync();
-
-if (pendingMigrations.Any()) 
+using (var scope = app.Services.CreateScope())
 {
-    throw new Exception("There are pending migrations.");
-}
+    var context = scope.ServiceProvider.GetRequiredService<MoviesContext>();
+    // await context.Database.MigrateAsync(); // Apply any pending migrations at startup
+    var pendingMigrations = await context.Database.GetPendingMigrationsAsync();
 
+    if (pendingMigrations.Any())
+    {
+        throw new Exception("There are pending migrations.");
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
