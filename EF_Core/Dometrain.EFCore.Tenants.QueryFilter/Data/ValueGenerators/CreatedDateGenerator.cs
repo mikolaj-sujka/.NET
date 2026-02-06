@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 
-namespace Dometrain.EFCore.API.Data.ValueGenerators;
+namespace Dometrain.EFCore.Tenants.QueryFilter.Data.ValueGenerators;
 
 public class CreatedDateGenerator : ValueGenerator<DateTime>
 {

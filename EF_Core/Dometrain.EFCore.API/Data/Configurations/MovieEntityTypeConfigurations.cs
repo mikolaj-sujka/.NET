@@ -12,7 +12,7 @@ namespace Dometrain.EFCore.API.Data.Configurations
             builder.ToTable("Movies")
                 .HasQueryFilter(m => m.ReleaseDate >= new DateTime(2000, 01, 01));
 
-            builder.HasKey(m => m.Id);
+            builder.HasKey(m => m.Identifier);
 
             builder.Property(m => m.Title)
                 .HasColumnType("varchar")
