@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11415.280 d18.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dometrain.EFCore.API", "Dometrain.EFCore.API\Dometrain.EFCore.API.csproj", "{2B791243-64DA-4FF0-8992-9FDD1A58C909}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dometrain.EFCore.Tests", "Dometrain.EFCore.Tests\Dometrain.EFCore.Tests.csproj", "{F79698E5-74CB-44B4-A123-D42D6F215092}"
@@ -9,6 +12,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dometrain.EFCore.Tenants.QueryFilter", "Dometrain.EFCore.Tenants.QueryFilter\Dometrain.EFCore.Tenants.QueryFilter.csproj", "{39CA4B59-3C5A-4935-B243-6E3D6A2393D2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dometrain.EFCore.Tenants.Databases", "Dometrain.EFCore.Tenants.Databases\Dometrain.EFCore.Tenants.Databases.csproj", "{5022453B-7CFF-4627-AFF5-D737A8C253E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F8F4BC99-EC39-4462-ACC2-DE6E005061C2}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +44,8 @@ Global
 		{5022453B-7CFF-4627-AFF5-D737A8C253E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5022453B-7CFF-4627-AFF5-D737A8C253E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5022453B-7CFF-4627-AFF5-D737A8C253E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
