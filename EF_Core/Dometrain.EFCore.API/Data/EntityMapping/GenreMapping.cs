@@ -12,5 +12,12 @@ public class GenreMapping : IEntityTypeConfiguration<Genre>
         builder.Property<DateTime>("CreatedDate")
             .HasColumnName("CreatedAt")
             .HasValueGenerator<CreatedDateGenerator>();
+
+        builder.Property(g => g.Name)
+            .HasMaxLength(256)
+            .HasColumnType("varchar");
+
+        // unique constraint -> can be target of a foreign key, but not the primary key
+        builder.HasAlternateKey(x => x.Name);
     }
 }

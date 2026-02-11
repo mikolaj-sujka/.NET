@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Dometrain.EFCore.API.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialSchema : Migration
+    public partial class InheritenceStarted : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,7 +35,11 @@ namespace Dometrain.EFCore.API.Migrations
                     ReleaseDate = table.Column<string>(type: "char(8)", nullable: false),
                     Plot = table.Column<string>(type: "varchar(max)", nullable: true),
                     AgeRating = table.Column<int>(type: "int", nullable: false),
-                    MainGenreId = table.Column<int>(type: "int", nullable: false)
+                    InternetRating = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MainGenreId = table.Column<int>(type: "int", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false),
+                    GrossRevenue = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    ChannelFirstAiredOn = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -48,46 +52,6 @@ namespace Dometrain.EFCore.API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Pictures_Actors",
-                columns: table => new
-                {
-                    MovieIdentifier = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pictures_Actors", x => new { x.MovieIdentifier, x.Id });
-                    table.ForeignKey(
-                        name: "FK_Pictures_Actors_Pictures_MovieIdentifier",
-                        column: x => x.MovieIdentifier,
-                        principalTable: "Pictures",
-                        principalColumn: "Identifier",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Pictures_Directors",
-                columns: table => new
-                {
-                    MovieIdentifier = table.Column<int>(type: "int", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pictures_Directors", x => x.MovieIdentifier);
-                    table.ForeignKey(
-                        name: "FK_Pictures_Directors_Pictures_MovieIdentifier",
-                        column: x => x.MovieIdentifier,
-                        principalTable: "Pictures",
-                        principalColumn: "Identifier",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Pictures_MainGenreId",
                 table: "Pictures",
@@ -97,12 +61,6 @@ namespace Dometrain.EFCore.API.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Pictures_Actors");
-
-            migrationBuilder.DropTable(
-                name: "Pictures_Directors");
-
             migrationBuilder.DropTable(
                 name: "Pictures");
 

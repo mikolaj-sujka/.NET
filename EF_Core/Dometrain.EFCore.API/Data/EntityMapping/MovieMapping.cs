@@ -28,17 +28,42 @@ public class MovieMapping : IEntityTypeConfiguration<Movie>
             .HasColumnType("varchar(max)")
             .HasColumnName("Plot");
 
+        builder.Property(movie => movie.MainGenreName)
+            .HasMaxLength(256)
+            .HasColumnType("varchar");
+
+        // use alternate key instead of primary key for the relationship between Movie and Genre, since Genre.Name is unique and more meaningful than Genre.Id
         builder
             .HasOne(movie => movie.Genre)
             .WithMany(genre => genre.Movies)
-            .HasPrincipalKey(genre => genre.Id)
-            .HasForeignKey(movie => movie.MainGenreId);
+            .HasPrincipalKey(genre => genre.Name)
+            .HasForeignKey(movie => movie.MainGenreName);
 
-        builder
+        /*builder
+            .HasOne(movie => movie.Genre)
+            .WithMany(genre => genre.Movies)
+            .HasPrincipalKey(genre => genre.Id)
+            .HasForeignKey(movie => movie.MainGenreId);*/
+
+        /*builder
             .OwnsOne(movie => movie.Director)
             .ToTable("Pictures_Directors"); 
         
         builder
-            .OwnsMany(movie => movie.Actors);
+            .OwnsMany(movie => movie.Actors);*/
+    }
+}
+
+public class CinemaMovieMapping : IEntityTypeConfiguration<CinemaMovie>
+{
+    public void Configure(EntityTypeBuilder<CinemaMovie> builder)
+    {
+    }
+}
+
+public class TelevisionMovieMapping : IEntityTypeConfiguration<TelevisionMovie>
+{
+    public void Configure(EntityTypeBuilder<TelevisionMovie> builder)
+    {
     }
 }

@@ -34,18 +34,18 @@ namespace Dometrain.EFCore.API.Data.Configurations
                 .IsRequired();
 
             // Owned entity type configuration - Include is not needed when querying Movie
-            builder.OwnsOne(m => m.Director) // Owned entity type configuration for Person as Director 
-                .ToTable("Movies_Directors"); // Mapping owned type to separate table
+            //builder.OwnsOne(m => m.Director) // Owned entity type configuration for Person as Director
+            //   .ToTable("Movies_Directors"); // Mapping owned type to separate table
 
-            builder.OwnsMany(x => x.Actors)
+            /*builder.OwnsMany(x => x.Actors)
                 .ToTable("Movies_Actors") // Mapping owned type to separate table
                 .WithOwner()
-                .HasForeignKey("MovieId"); // FK in Movies_Actors table pointing to PK in Movies table
+                .HasForeignKey("MovieId"); */// FK in Movies_Actors table pointing to PK in Movies table
 
-            builder.HasOne(m => m.Genre)
+            /*builder.HasOne(m => m.Genre)
                 .WithMany(genre => genre.Movies)
                 .HasPrincipalKey(genre => genre.Id)
-                .HasForeignKey(m => m.MainGenreId); // FK in Movie table pointing to PK in Genre table
+                .HasForeignKey(m => m.MainGenreId);*/ // FK in Movie table pointing to PK in Genre table
             // .HasForeignKey<Movie>(m => m.MainGenreId); alternative syntax
         }
     }
