@@ -30,11 +30,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Add the DbContext
+// Note: We are using Scoped for the DbContext, which is the recommended lifetime for EF Core contexts in web applications.
+// The Singleton lifetime is not suitable for DbContext as it can lead to issues with concurrency and memory leaks.
+// Using Scoped Lifetime means that a new instance of MoviesContext will be created for each HTTP request, which is ideal for handling database operations in a web application.
 builder.Services.AddDbContext<MoviesContext>(optionsBuilder =>
     {
         var connectionString = builder.Configuration.GetConnectionString("MoviesContext");
         optionsBuilder
-            .UseSqlServer(connectionString);
+            .UseSqlServer(connectionString, sqlBuilder => sqlBuilder.MaxBatchSize(50)) // Configure SQL Server provider with a maximum batch size of 50 for efficient bulk operations
+            .LogTo(Console.WriteLine);
     },
     ServiceLifetime.Scoped,
     ServiceLifetime.Singleton);

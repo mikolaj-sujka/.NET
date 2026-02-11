@@ -21,15 +21,24 @@ public class MoviesController : Controller
     {
         return Ok(await _context.Movies.ToListAsync());
     }
-    
+
+    // Compiled queries are pre-compiled and cached by EF Core, which can improve performance for frequently executed queries.
+    private static Func<MoviesContext, AgeRating, IEnumerable<MovieTitle>> CreateCompiledQuery =>
+        EF.CompileQuery((MoviesContext ctx, AgeRating ar) =>
+            ctx.Movies
+                .Where(movie => movie.AgeRating <= ar)
+                .Select(movie => new MovieTitle { Id = movie.Identifier, Title = movie.Title }));
+
     [HttpGet("until-age/{ageRating}")]
     [ProducesResponseType(typeof(List<MovieTitle>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAllUntilAge([FromRoute] AgeRating ageRating)
     {
-        var filteredTitles = await _context.Movies
+        var filteredTitles = CreateCompiledQuery(_context, ageRating).ToList();
+
+        /*var filteredTitles = await _context.Movies
             .Where(movie => movie.AgeRating <= ageRating)
             .Select(movie => new MovieTitle { Id = movie.Identifier, Title = movie.Title})
-            .ToListAsync();
+            .ToListAsync();*/
 
         return Ok(filteredTitles);
     }

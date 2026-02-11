@@ -20,6 +20,9 @@ public class MovieMapping : IEntityTypeConfiguration<Movie>
             .HasMaxLength(128)
             .IsRequired();
 
+        builder.HasIndex(movie => movie.AgeRating)
+            .IsDescending();
+
         // use alternate key instead of primary key for the relationship between Movie and Genre, since Movie.Title + Movie.ReleaseDate is unique and more meaningful than Movie.Identifier
         builder
             .HasAlternateKey(movie => new { movie.Title, movie.ReleaseDate }); // using anonymous type to define composite alternate key
