@@ -14,6 +14,7 @@ public class MoviesContext : DbContext
     public DbSet<Genre> Genres => Set<Genre>();
     public DbSet<ExternalInformation> ExternalInformations => Set<ExternalInformation>();
     public DbSet<Actor> Actors => Set<Actor>();
+    // public DbSet<GenreName> GenreNames => Set<GenreName>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -24,5 +25,9 @@ public class MoviesContext : DbContext
 
         modelBuilder.ApplyConfiguration(new CinemaMovieMapping());
         modelBuilder.ApplyConfiguration(new TelevisionMovieMapping());
+
+        /*modelBuilder.Entity<GenreName>()
+            .HasNoKey()
+            .ToSqlQuery($"SELECT Name FROM dbo.Genres");*/
     }
 }

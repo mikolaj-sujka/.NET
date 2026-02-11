@@ -75,4 +75,22 @@ public class GenresController : Controller
         
         return success ? Ok() : NotFound();
     }
+
+    [HttpGet("from-query")]
+    [ProducesResponseType(typeof(IEnumerable<Genre>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetFromQuery()
+    {
+        var genres = await _repository.GetAllFromQuery();
+        
+        return Ok(genres);
+    }
+
+    [HttpGet("names")]
+    [ProducesResponseType(typeof(IEnumerable<GenreName>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetGenreNames()
+    {
+        var genreNames = await _repository.GetAllGenreNames();
+        
+        return Ok(genreNames);
+    }
 }
