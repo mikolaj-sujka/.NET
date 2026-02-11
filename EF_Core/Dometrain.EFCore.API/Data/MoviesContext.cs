@@ -1,4 +1,5 @@
 using Dometrain.EFCore.API.Data.EntityMapping;
+using Dometrain.EFCore.API.Data.Interceptors;
 using Dometrain.EFCore.API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,5 +30,11 @@ public class MoviesContext : DbContext
         /*modelBuilder.Entity<GenreName>()
             .HasNoKey()
             .ToSqlQuery($"SELECT Name FROM dbo.Genres");*/
+    }
+
+    // OnConfiguring is method that is called when the context is being configured. It is used to configure the context options, such as the database provider, connection string, and other settings. In this case, we are adding an interceptor to the context options. The interceptor will be called whenever the SaveChanges method is called on the context. This allows us to perform additional actions before or after the changes are saved to the database.
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.AddInterceptors(new SaveChangesInterceptor());
     }
 }

@@ -19,5 +19,13 @@ public class GenreMapping : IEntityTypeConfiguration<Genre>
 
         // unique constraint -> can be target of a foreign key, but not the primary key
         builder.HasAlternateKey(x => x.Name);
+
+        builder
+            .Property<bool>("Deleted")
+            .HasDefaultValue(false);
+
+        builder // global query filter -> applied to all queries, but not to raw SQL queries
+            .HasQueryFilter(g => EF.Property<bool>(g, "Deleted") == false)
+            .HasAlternateKey(g => g.Name);
     }
 }
