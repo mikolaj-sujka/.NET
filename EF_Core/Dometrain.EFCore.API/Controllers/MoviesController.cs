@@ -6,20 +6,24 @@ namespace Dometrain.EFCore.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class MoviesController : Controller
+public class MoviesController(MoviesContext context) : Controller
 {
-    private readonly MoviesContext _context;
-
-    public MoviesController(MoviesContext context)
-    {
-        _context = context;
-    }
-    
     [HttpGet]
     [ProducesResponseType(typeof(List<Movie>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
     {
-        return Ok(await _context.Movies.ToListAsync());
+        var movies = await context.Movies
+            .AsNoTracking() // Improves performance for read-only queries by disabling change tracking, which is not needed when just retrieving data - less objects to track in memory.
+            .Include(x => x.Actors) // Eager loading of related entities (Actors) to avoid lazy loading issues.
+            .ToListAsync();
+
+        foreach (var movie in movies.OfType<TelevisionMovie>())
+        {
+            //var actors = movie.Actors; // Accessing Actors to trigger lazy loading for TelevisionMovie instances.
+            // await context.Entry(movie).Reference(m => m.Genre).LoadAsync(); // Explicitly load Genre for TelevisionMovie instances.
+        }
+
+        return Ok(movies);
     }
 
     // Compiled queries are pre-compiled and cached by EF Core, which can improve performance for frequently executed queries.
@@ -33,7 +37,7 @@ public class MoviesController : Controller
     [ProducesResponseType(typeof(List<MovieTitle>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAllUntilAge([FromRoute] AgeRating ageRating)
     {
-        var filteredTitles = CreateCompiledQuery(_context, ageRating).ToList();
+        var filteredTitles = CreateCompiledQuery(context, ageRating).ToList();
 
         /*var filteredTitles = await _context.Movies
             .Where(movie => movie.AgeRating <= ageRating)
@@ -55,7 +59,7 @@ public class MoviesController : Controller
         // Serves match from memory if already fetched, otherwise queries DB.
         //var movie = await _context.Movies.FindAsync(id);
         
-        var movie = await _context.Movies
+        var movie = await context.Movies
             .Include(movie => movie.Genre)
             .SingleOrDefaultAsync(m => m.Identifier == id);
         
@@ -68,7 +72,7 @@ public class MoviesController : Controller
     [ProducesResponseType(typeof(List<MovieTitle>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAllByYear([FromRoute] int year)
     {
-        var filteredTitles = await _context.Movies
+        var filteredTitles = await context.Movies
             .Where(movie => movie.ReleaseDate.Year == year)
             .Select(movie => new MovieTitle { Id = movie.Identifier, Title = movie.Title})
             .ToListAsync();
@@ -80,11 +84,11 @@ public class MoviesController : Controller
     [ProducesResponseType(typeof(Movie), StatusCodes.Status201Created)]
     public async Task<IActionResult> Create([FromBody] Movie movie)
     {
-        await _context.Movies.AddAsync(movie);
+        await context.Movies.AddAsync(movie);
         
         // movie has no ID
         
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
         
         // movie has an ID
 
@@ -96,7 +100,7 @@ public class MoviesController : Controller
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] Movie movie)
     {
-        var existingMovie = await _context.Movies.FindAsync(id);
+        var existingMovie = await context.Movies.FindAsync(id);
 
         if (existingMovie is null)
             return NotFound();
@@ -105,7 +109,7 @@ public class MoviesController : Controller
         existingMovie.ReleaseDate = movie.ReleaseDate;
         existingMovie.Synopsis = movie.Synopsis;
 
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
 
         return Ok(existingMovie);
     }
@@ -115,16 +119,16 @@ public class MoviesController : Controller
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Remove([FromRoute] int id)
     {
-        var existingMovie = await _context.Movies.FindAsync(id);
+        var existingMovie = await context.Movies.FindAsync(id);
 
         if (existingMovie is null)
             return NotFound();
 
-        _context.Movies.Remove(existingMovie);
+        context.Movies.Remove(existingMovie);
         // _context.Remove(existingMovie);
         // _context.Movies.Remove( new Movie { Id = id });
 
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
 
         return Ok();
     }

@@ -38,7 +38,13 @@ builder.Services.AddDbContext<MoviesContext>(optionsBuilder =>
         var connectionString = builder.Configuration.GetConnectionString("MoviesContext");
         optionsBuilder
             .UseSqlServer(connectionString, sqlBuilder => sqlBuilder.MaxBatchSize(50)) // Configure SQL Server provider with a maximum batch size of 50 for efficient bulk operations
-            .LogTo(Console.WriteLine);
+            //.UseLazyLoadingProxies() // Enable lazy loading of related entities, allowing navigation properties to be loaded on demand when accessed. Be cautious with this in high-traffic applications, as it can lead to N+1 query issues if not used carefully.
+            .EnableDetailedErrors()
+            .EnableSensitiveDataLogging() // Only enable in development or when necessary, as it can log sensitive information - avoid in production environments.
+            .LogTo(
+                Console.WriteLine,
+                [DbLoggerCategory.Database.Command.Name],
+                LogLevel.Information);
     },
     ServiceLifetime.Scoped,
     ServiceLifetime.Singleton);

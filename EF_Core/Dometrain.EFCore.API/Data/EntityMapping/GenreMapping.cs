@@ -20,6 +20,10 @@ public class GenreMapping : IEntityTypeConfiguration<Genre>
         // unique constraint -> can be target of a foreign key, but not the primary key
         builder.HasAlternateKey(x => x.Name);
 
+        builder.Property(g => g.ConcurrencyToken)
+            .IsRowVersion() // concurrency token -> used for optimistic concurrency control, automatically updated by the database on each update
+            .HasColumnType("rowversion");
+
         builder
             .Property<bool>("Deleted")
             .HasDefaultValue(false);

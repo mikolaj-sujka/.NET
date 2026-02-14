@@ -18,9 +18,9 @@ public abstract class Movie
 
     public required string MainGenreName { get; set; }
 
-    public ExternalInformation? ExternalInformation { get; set; }
+    public virtual ExternalInformation? ExternalInformation { get; set; } // Virtual for lazy loading, nullable to allow movies without external information.
 
-    public List<Actor> Actors { get; set; } = new();
+    public virtual List<Actor> Actors { get; set; } = new(); // Virtual enables for lazy loading, initialized to avoid null reference issues.
 }
 
 public class CinemaMovie : Movie
