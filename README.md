@@ -9,3 +9,7 @@ Repozytorium Github, w którym zawarte wszystkie najważniejsze fundamenty nauki
 - Auth with OpenID Connect and OAuth2 & using Microsoft Entra ID integration
 - Entity Framework Core
 
+# Microsoft exams
+Repozytorium Github, zawiera również notatki pod egzaminy:
+- DP - 900
+
