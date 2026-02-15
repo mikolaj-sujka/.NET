@@ -206,3 +206,23 @@ There are three main (relational) dataase workloads:
 > - Data architect
 > - Application developer
 > - Software engineer
+
+---
+<br>
+
+# 5. Questions
+
+1. A CSV file sitting in a Blob Storage account is an example of what type of data?
+    - Bach Data 
+    >- **Explanation**: When data is "at rest", it is considered batch data. This inscludes data in a file or database. Blob Storage containers would be batch data.
+
+<br>
+
+2. In the context of a relational database, what is the "schema"?
+    - The structure of the database including table names, column names, data types, indexes and other database structure definitions.
+
+<br>
+
+3. What type of analytics answers the question "what happened", such as sales report for yesterday?
+    - Descriptive (pl: opisowy np. o danych)
+    > - **Explanation:** Descriptive Analytics is entirely based on data in the database, and tells you the current state of you business, Sales, orders, inventory, visits etc.
