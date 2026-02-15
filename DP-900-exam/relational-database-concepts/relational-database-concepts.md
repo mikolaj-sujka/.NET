@@ -128,3 +128,89 @@ If you store order items with a composite key `(OrderId, ProductId)`:
 **Example**
 - ❌ `Employees(EmployeeId, DepartmentId, DepartmentName)` → `DepartmentName` depends on `DepartmentId`, not directly on `EmployeeId`
 - ✅ `Employees(EmployeeId, DepartmentId)` + `Departments(DepartmentId, DepartmentName)`
+
+--- 
+
+<br>
+
+## 3. SQL Statements
+
+### Data Definition Language (DDL)
+- The data management SQL command around database structures:
+CREATE, ALTER, DROP, TRUNCATE, COMMENT, RENAME.
+
+### Data Manipulation Language (DML)
+- The SQL commands around data manipulation: SELECT, INSERT, UPDATE, DELETE, LOCK TABLE.
+
+### Data Control Language (DCL)
+- Granting rights and permissions to others: GRANT and REVOKE.
+
+---
+
+<br>
+
+## 4. Creating database objects (View, Stored Procedure, Index)
+
+> Examples below are written in SQL Server / Azure SQL style.
+
+### 👓 Create a VIEW
+A view is a saved `SELECT` statement.
+
+```sql
+CREATE VIEW dbo.vwEmployeeDepartments
+AS
+SELECT
+    e.EmployeeId,
+    e.EmployeeName,
+    d.DepartmentName
+FROM dbo.Employees e
+JOIN dbo.Departments d
+    ON d.DepartmentId = e.DepartmentId;
+GO
+```
+
+Query it like a table:
+
+```sql
+SELECT *
+FROM dbo.vwEmployeeDepartments
+WHERE DepartmentName = 'Sales';
+```
+
+### ⚙️ Create a STORED PROCEDURE
+A stored procedure is a stored program that can accept parameters.
+
+```sql
+CREATE PROCEDURE dbo.uspGetEmployeesByDepartment
+    @DepartmentId INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT
+        EmployeeId,
+        EmployeeName,
+        DepartmentId
+    FROM dbo.Employees
+    WHERE DepartmentId = @DepartmentId
+    ORDER BY EmployeeName;
+END;
+GO
+```
+
+Execute it:
+
+```sql
+EXEC dbo.uspGetEmployeesByDepartment @DepartmentId = 10;
+```
+
+### 🗂️ Create an INDEX
+Indexes speed up queries filtering/joining on a column.
+
+```sql
+CREATE INDEX IX_Employees_DepartmentId
+ON dbo.Employees (DepartmentId);
+GO
+```
+
+> Tip: Indexes help reads, but too many indexes can slow down writes (`INSERT`/`UPDATE`/`DELETE`).
