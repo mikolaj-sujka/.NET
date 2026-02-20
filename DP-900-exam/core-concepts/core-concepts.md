@@ -6,7 +6,7 @@
 - Semi-structured Data
 
 ## *Structured Data*
-- has all the same shape
+- has all the same shape, fixed schema
 - organized in rows and columns
 - rows represent one entity
 - columns represent attribute of entity
@@ -42,7 +42,10 @@ Common text-based markup/serializtion languages:
 # 2. Options for data storage
 
 ### 💡 Common data file formats
-- CSV, JSON, XML, Parquet / Avro / ORC.
+- CSV, JSON, XML, **Parquet** (columnar data format) / **Avro** (row-based format. Each record contains a header that describes the structure of the data in the record. This header is stored as JSON. The data is stored as binary information) / **ORC** (optimized row columnar format - organizes into columns rather than rows).
+
+### Binary Large Object (BLOB)
+- All files are stored as binardy data (1's and 0's). Common types of data stored as binary include images, video, audio and application-specific documents.
 
 ### 💡 Types of Databases 
 ```text
@@ -57,7 +60,7 @@ Common text-based markup/serializtion languages:
 📊 Non-Relational Databases (NoSQL) for Semi-Structured or Unstructured
   → Key - Value Stores (very fast, great for caching). Example: Azure Table Storage or Redis.
   → Document Databases (store JSON-like documents). Example: Azure Cosmos DB.
-  → Column - Family Stores (optimzed for analytics). Example: Apache Cassandra.
+  → Column - Family Stores (optimzed for analytics) - store tabular data comprising rows and columns, each column family holds a set of columns that are logically related together. Example: Apache Cassandra.
   → Graph Databases (focuses on relationships - nodes and edges). Example: Neo4j or Cosmos DB's Gremlin API.
 ```
 
@@ -87,6 +90,7 @@ There are three main (relational) dataase workloads:
 - **Flexibility**: Existing rows can be updated
 - **Access**: Data can be retrieved by SQL queries
 - **Performance**: Optimized for general use (using indexes)
+- Support so-called **ACID** semantics: Atomicity, Consistency, Isolation and Durability.
 
 ### 🔧 Key Traits of OLTP
 
@@ -128,6 +132,10 @@ There are three main (relational) dataase workloads:
 - **SQL Server with Columnstore indexes**
 - **Azure Analysis Services**
 - **SQL Server Analysis Services**
+
+The specific details for an analytical processing system can vary between solutions, but a common architecture for enterprise-scale analytics looks like this:
+
+![Opis alternatywny](images/olap-flow.png)
 
 ## 📊 Data Warehousing
 
@@ -210,7 +218,40 @@ There are three main (relational) dataase workloads:
 ---
 <br>
 
-# 5. Questions
+# 5. Data Services
+
+## Azure SQL
+Azure SQL is the collective name for a family of relational database solutions based on Microsoft SQL Server database engine. Specific Azure SQL services include:
+- **Azure SQL Database** -  a fully managed platform-as-a-service (PaaS) database hosted in Azure.
+- **Azure SQL Managed Instance**
+- **Azure SQL VM**
+
+## Open-source databases in Azure
+- **Azure Database for MySQL**
+- **Azure Database for MariaDB** (MariaDB offers compatibility with Oracle Database)
+- **Azure Database for PostgreSQL** -  a hybrid relational-object database. You can store data in relational tables, but a PostgreSQL database also enables you to store custom data types, with their own non-relational properties.
+
+## Azure Cosmos DB
+- Azure Cosmos DB is a global-scale non-relational (NoSQL) database system that supports multiple application programming interfaces (APIs), enabling you to store and manage data as JSON documents, key-value pairs, column-families, and graphs.
+
+## Azure Storage
+Azure Storage is a core Azure service that enables you to store data in:
+- Blob Containers
+- File shares
+- Tables
+
+## Azure Data Factory
+- Azure Data Factory is an Azure service that enables you to define and schedule data pipelines to transfer and transform data. You can integrate your pipelines with other Azure services, enabling you to ingest data from cloud data stores, process the data using cloud-based compute, and persist the results in another data store.
+
+- Azure Data Factory is used by data engineers to build extract, transform, and load (ETL) solutions that populate analytical data stores with data from transactional systems across the organization.
+
+## Microsoft Fabric
+- Microsoft Fabric is a unified Software-as-a-Service (SaaS) analytics platform based on an open and governed lakehouse.
+
+## Azure Databricks
+- Azure Databricks is an Azure-integrated version of the popular Databricks platform, which combines the Apache Spark data processing platform with SQL database semantics and an integrated management interface to enable large-scale data analytics.
+
+# 6. Questions
 
 1. A CSV file sitting in a Blob Storage account is an example of what type of data?
     - Bach Data 
@@ -226,3 +267,24 @@ There are three main (relational) dataase workloads:
 3. What type of analytics answers the question "what happened", such as sales report for yesterday?
     - Descriptive (pl: opisowy np. o danych)
     > - **Explanation:** Descriptive Analytics is entirely based on data in the database, and tells you the current state of you business, Sales, orders, inventory, visits etc.
+
+<br>
+
+4. In the context of enterprise-wide data governance, what specific feature does Microsoft Purview offer to help ensure data integrity? 
+    - Data lineage tracking across multiple sources and systems.
+
+<br>
+
+5. Which Azure service should a database administrator choose to implement a highly flexible and configurable SQL Server environment with full management responsibility?
+    - Azure SQL VM
+    > - **Explanation:** Highly flexible and configurable and full management responsibility -> IaaS model. Azure SQL Database and Azure SQL Managed Instance are PaaS models.
+
+<br>
+
+6. An organization needs to comply with data protection regulations across multiple regions. How can Microsoft Purview facilitate this compliance?
+    - By enabling data classification and monitoring for sensitive data.
+
+<br>
+
+7. Your organization has deployed multiple data systems across different regions. How can Microsoft Purview assist in maintaining trustworthy data for analysis and reporting?
+    - By providing a centralized data catalog for discovering and understanding data assets.
