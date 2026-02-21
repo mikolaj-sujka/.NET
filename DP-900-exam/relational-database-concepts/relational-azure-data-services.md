@@ -87,3 +87,26 @@ A complete application delivered as a service; you only use/configure the app.
 | Runtime / middleware | You | Provider | Provider |
 | OS | You | Provider | Provider |
 | Servers / storage / networking | Provider | Provider | Provider |
+
+## 4. Questions
+1. Your company is developing an IoT application that requires processing streaming time-series data. Which Azure SQL service is optimized for this scenario?
+    - Azure SQL Edge
+    > - **Explanation:** Azure SQL Edge is optimized for IoT and edge scenarios, including streaming and time-series data processing. It provides built-in capabilities for handling telemetry and real-time analytics close to the data source.
+
+<br>
+
+2. A business requires high availability and enterprise-level security for a MySQL database hosted on Azure. Which service should they select?
+    - Azure Database for MySQL
+    > - **Explanation:** Azure Database for MySQL is a fully managed service specifically designed for MySQL workloads with built-in high availability and enterprise-grade security features. It provides automated backups, encryption, and scalability while reducing administrative overhead.
+
+<br>
+
+3. An organization is looking for a fully managed open-source database solution with high availability and enterprise-level security for their web applications. Which Azure service should they consider?
+    - Azure Database for MySQL
+    > - **Explanation:** Azure Database for MySQL is a fully managed open-source database service that provides built-in high availability and enterprise-grade security. It reduces operational overhead while supporting scalable and secure web applications.
+
+<br>
+
+4. Your organization wants to migrate its on-premises SQL Server database to Azure. The database has complex queries and requires full administrative rights over the DBMS and operating system. Which Azure SQL service would best meet these requirements?
+    - SQL Server on Azure Virtual Machines
+    > - **Explanation:** SQL Server on Azure Virtual Machines provides full administrative control over both the SQL Server instance and the underlying operating system. It is ideal for lift-and-shift migrations that require maximum configurability and compatibility with on-premises environments.
