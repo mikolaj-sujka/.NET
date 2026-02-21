@@ -102,6 +102,12 @@ erDiagram
 
 ### 📚 Normal Forms (1NF / 2NF / 3NF) — quick guide
 
+Simple definition for practical purposes is:
+1. Separate each entity into its own table.
+2. Separate each discrete attribute into its own column.
+3. Uniquely identify each entity instance (row) using a primary key.
+4. Use foreign key columns to link related entities.
+
 > These rules help you design tables that avoid redundancy and anomalies.
 
 #### 1NF — First Normal Form
@@ -154,7 +160,7 @@ CREATE, ALTER, DROP, TRUNCATE, COMMENT, RENAME.
 > Examples below are written in SQL Server / Azure SQL style.
 
 ### 👓 Create a VIEW
-A view is a saved `SELECT` statement.
+A view is a saved `SELECT` statement. A view is a virtual table based on the results of a SELECT query. You can think of a view as a window on specified rows in one or more underlying tables.
 
 ```sql
 CREATE VIEW dbo.vwEmployeeDepartments
@@ -178,7 +184,7 @@ WHERE DepartmentName = 'Sales';
 ```
 
 ### ⚙️ Create a STORED PROCEDURE
-A stored procedure is a stored program that can accept parameters.
+A stored procedure is a stored program that can accept parameters. A stored procedure defines SQL statements that can be run on command. Stored procedures are used to encapsulate programmatic logic in a database for actions that applications need to perform when working with data.
 
 ```sql
 CREATE PROCEDURE dbo.uspGetEmployeesByDepartment
@@ -207,6 +213,8 @@ EXEC dbo.uspGetEmployeesByDepartment @DepartmentId = 10;
 ### 🗂️ Create an INDEX
 Indexes speed up queries filtering/joining on a column.
 
+> An index helps you search for data in a table. Think of an index over a table like an index at the back of a book. A book index contains a sorted set of references, with the pages on which each reference occurs. When you want to find a reference to an item in the book, you look it up through the index. You can use the page numbers in the index to go directly to the correct pages in the book. Without an index, you might have to read through the entire book to find the references you're looking for.
+
 ```sql
 CREATE INDEX IX_Employees_DepartmentId
 ON dbo.Employees (DepartmentId);
@@ -214,3 +222,17 @@ GO
 ```
 
 > Tip: Indexes help reads, but too many indexes can slow down writes (`INSERT`/`UPDATE`/`DELETE`).
+
+> However, indexes aren't free. An index consumes storage space, and each time you insert, update, or delete data in a table, the indexes for that table must be maintained. This additional work can slow down insert, update, and delete operations.
+
+## 5. Questions
+
+1.  A company needs to ensure that a frequently run complex query executes quickly without modifying the underlying tables. Which database object would be the most appropriate solution?
+    - VIEW
+    > - **Explanation:** A view is the most appropriate solution because it allows a complex query to be saved and reused without modifying the underlying tables. It simplifies execution and improves maintainability while preserving the original table structure.
+
+<br>
+
+2. A database frequently experiences slow query performance due to large table scans. What database object can be implemented to mitigate this issue effectively?
+    - Index
+    > - **Explanation:** An index improves query performance by allowing the database engine to quickly locate specific rows without scanning the entire table. It reduces full table scans by enabling efficient data retrieval through indexed access paths.
