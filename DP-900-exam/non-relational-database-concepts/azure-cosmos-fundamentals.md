@@ -26,3 +26,21 @@ Cosmos DB is a foundational Azure service, used by Microsoft for mission-critica
 ---
 
 **Summary:** Cosmos DB is ideal for applications needing global scale, high performance, flexible data models, and minimal database management.
+
+# Questions
+1. Which Azure Cosmos DB API is best suited for applications requiring single-millisecond latencies for reads and writes?
+    - Azure Cosmos DB for NoSQL
+
+    > - **Explanation:** Azure Cosmos DB for NoSQL is optimized for low-latency, high-throughput workloads and is the core native API of Cosmos DB, delivering single-digit millisecond reads and writes at global scale. It provides automatic indexing, elastic scalability, and turnkey multi-region replication, making it ideal for performance-critical applications.
+
+<br>
+
+2. Which use case is least aligned with the features of Azure Cosmos DB?
+    - Complex transactional processing requiring strict ACID compliance.
+    > - **Explanation:** Azure Cosmos DB is optimized for globally distributed, horizontally scalable, low-latency workloads such as retail catalogs and gaming applications. While it provides transactional guarantees within a logical partition, it is not designed for complex, cross-entity, strictly ACID-compliant transactional processing typical of traditional relational database systems.
+
+<br>
+
+3. Your organization needs to store data in a graph structure for complex relationship modeling. Which Azure Cosmos DB API is most appropriate?
+    - Azure Cosmos DB for Apache Gremlin
+    > - **Explanation:** Azure Cosmos DB for Apache Gremlin is specifically designed for graph data models, enabling storage and traversal of highly connected data using vertices and edges. It supports complex relationship queries and graph traversal patterns, making it ideal for scenarios such as social networks, fraud detection, and recommendation engines.
