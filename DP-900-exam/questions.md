@@ -146,3 +146,161 @@ Which service allows you to perform near real-time analytics on the operational 
 25. Which service allows you to aggregate data over a specific time window before the data is written to a data lake?
     - Azure Stream Analytics
     > - **Explanation:** Stream Analytics allows you to aggregate data from a specific period before it is written to a data lake. Event Hubs is used as a source or a sink for stream processing. Azure SQL Database is used to persist processed results in a database table for querying and analysis.
+
+<br>
+
+26. What is the difference between a clustered and unclustered index in SQL Server?
+    - A clustered index sort and store the data rows based on their key values. Nonclustered indexes have a structure separate from the data rows.
+    > - **Explanation:** In SQL Server, a clustered index defines the physical order of data in the table (the data rows are the index). A nonclustered index is a separate B-tree structure that contains key values and pointers to the actual data rows.
+
+<br>
+
+27. Which Azure data service is best used for moving data from one source to another destination, with the ability to transform the data (process it) along the way?
+- Azure Data Factory
+> - **Explanation:** Azure Data Factory is a cloud-based data integration service designed to orchestrate, move, and transform data between various sources and destinations. It supports ETL/ELT pipelines, enabling data processing during transit using mapping data flows or integration with compute services such as Azure Synapse and Spark.
+
+<br>
+
+28. What is the minimum number of Request Units per second (RU/s) that you can allocate to a Cosmos DB database or container?
+    - 400 RU/s
+    > - **Explanation:** The minimum throughput you can provision for an Azure Cosmos DB database or container in provisioned throughput mode is 400 Request Units per second (RU/s). This represents the baseline dedicated throughput allocation for predictable performance and guaranteed capacity.
+
+<br>
+
+29. When deploying an Azure Storage account, and you choose Zone Redundant Storage (ZRS), how many copies of your data does Azure keep?
+    - 3
+    > - **Explanation:** With Zone Redundant Storage (ZRS), Azure synchronously replicates your data across three availability zones within the same region. This ensures high availability and resilience against zone-level failures while maintaining data consistency.
+
+<br>
+
+30. What is the advantage of using Transaction Optimized storage for Azure File Storage?
+    - Around 25%–33% of the cost of Hot storage per read-write operation, but twice as expensive per GB for storage. This can save you money for heavily accessed files without using the Premium access tier.
+    > - **Explanation:** Transaction Optimized storage in Azure Files is designed for workloads with frequent transactions. It offers lower per-operation costs compared to Hot tier access pricing, while storage per GB is more expensive—making it cost-effective for file shares with many read/write operations but without the need for Premium performance.
+
+<br>
+
+31. How many databases can you create in a single Cosmos DB account?
+    - 100
+    > - **Explanation:** In Azure Cosmos DB, you can create up to 100 databases per account by default. This is a quota limit that can typically be increased by submitting a support request, depending on workload requirements and subscription limits.
+
+<br>
+
+32. What type of file system does Azure Data Lake Storage Gen2 use?
+    - Hadoop Distributed File System (HDFS)
+    > - **Explanation:** The Azure Data Lake uses a driver compatible with the Hadoop File System (HDFS). It is designed to be highly fault-tolerant, provide high throughput access, and is suitable for applications that have large data sets. It runs on top of the underlying disk file system. FAT32 has serious limitations for large data, and NTFS has certainly improved that with some tradeoffs.
+
+<br>
+
+33. You are developing a Power BI report for users to view on their desktop workstations. The report needs to show detailed data, and allow the user to customize the filters and modify the column to sort on. Additionally, users should be able to drill-through the report to other reports if they wish to see the data in another way. What type of Power BI report should you create?
+    - Interactive Reports
+    > - **Explanation:** Interactive Reports in Power BI allow users to interact with the data by customizing filters, sorting columns, and drilling through to other reports for further analysis. This type of report is ideal for users who want to explore and analyze data in a dynamic and interactive way.
+
+<br>
+
+34. You have a SQL Database Server named SQLDB, and two SQL Databases named DB1 and DB2. SQLDB has a server-level firewall that allows IP addresses in the range 123.123.123.0-123.123.123.255 and denies all other traffic. DB1 has a database level firewall rule that allows IPs in the range 123.123.123.0-123.123.124.255. When a client using the IP address 123.123.124.25 attempts to access DB1, are they successful?
+    - Yes, the connection will succeed
+    > - **Explanation:** You can have both server- and database-level firewall IP rules, and they exist independently. An IP can exist in a database rule and not a server rule, and the user would have access to the specific database and not all databases on the server. In this case, the client trying to access the database is allowed by a database-level IP rule. 
+
+<br>
+
+35. Which of the following techniques is an example of Least Privileged Access?
+    - Just-In-Time (JIT) access
+    > - **Explanation:** Just-In-Time (JIT) access is an example of Least Privileged Access because it provides users with temporary access only when needed for a specific task or time period. This minimizes the risk of unauthorized access and reduces the attack surface by limiting access to the bare minimum required for the task at hand.
+
+<br>
+
+36. Which of the follwing is a consequnce of having a foreign key relationship between two relational data tables?
+    - An INSERT statement will fail if the value of the foreign key column, other than NULL, doesn't exist in the other table.
+    > - **Explanation:** This is correct because a foreign key constraint ensures referential integrity between two tables. If an INSERT statement tries to add a value to the foreign key column that does not exist in the referenced table, the operation will fail to maintain data consistency.
+
+<br>
+
+37. What method of provisioning a non-relational database involves writing a script, which is a set of commands that you can run from any operating system prompt such as Linux, macOS or Windows?
+    - Command-line interface (CLI) provisioning
+    > - **Explanation:** You can use command-line scripts using Powershell or CLI to make changes to Azure. For instance, you can list all of the Virtual Machines in a region, add a new VM, delete a VM, or make other changes to your resources - all from the command line. You can provision Cosmos DB from the command line as well.
+
+<br>
+
+38. What do you get when you use Cool access tier for Azure Blob Storage?
+    - Less expensive per GB to store the file, and more expensive to access the file
+
+<br>
+
+39. Which of the following activities would be considered part of Azure Data Factory's Control Flow?
+    - If Condition
+
+<br>
+
+40. You need a non-relational data store that supports key-value storage. This needs to be the most cost-effective way for storing data in Azure as you are expecting a large volume of data that needs to be sorted, processed and cleaned up before being migrated into another long-term data format. Which non-relational data store do you recommend?
+    - Azure Table Storage
+    > - **Explanation:** Azure Table Storage is a highly cost-effective, scalable NoSQL key-value store designed for large volumes of structured, non-relational data. It is well-suited for transient or staging datasets that require sorting, processing, and cleanup before migration to a long-term storage solution, offering low storage and transaction costs compared to fully managed database services like Cosmos DB.
+
+41. What type of non-relational data revolves around storing and retriving large binary files or blobs, such as images, videos, text files and audio files?
+    - Object (Blob) storage/data
+    > - **Explanation:** This type of non-relational data storage is designed for handling large unstructured binary objects (BLOBs) such as images, videos, audio files, and text documents. In Azure, this is implemented using Azure Blob Storage, which is optimized for scalable, durable storage of massive amounts of unstructured data.
+
+<br>
+
+42. A customer just purchased a service from your company, and a new data row was added to table SALES to indicate this event as soon as it happened. What type of database is this?
+    - OLTP
+    > - **Explanation:** OLTP (Online Transaction Processing) databases are designed for real-time transaction processing. They are optimized for inserting, updating, and deleting small amounts of data quickly and efficiently, making them suitable for scenarios where data needs to be added or modified as soon as events occur, such as in the case of a new customer purchase.
+
+<br>
+
+43. Which of the following metrics affect how much an Azure Redis Cache instance costs?
+    - Region, pricing tier, hours
+
+<br>
+
+44. Which of the following methods is commonly used to secure data in transit?
+    - Site-to-site VPN
+    > - **Explanation:** Site-to-site VPN is commonly used to secure data in transit by creating a secure encrypted connection between two networks. This ensures that data transferred between the networks is protected from unauthorized access or interception
+
+<br>
+
+45. What should you create first for an integration process that copies data from Microsoft Excel files to Parquet files by using Azure Data Factory?
+    - a linked service
+    > - **Explanation:** A linked service must be created first. Pipelines use existing linked services to load and process data. Datasets are the input and output, and activities can be defined as the data flow.
+
+<br>
+
+46. Which service allows you to perform on-demand analysis of large volumes of data from text logs, websites and IoT devices by using a common querying language for all the data sources?
+    - Azure Data Explorer
+    > - **Explanation:** Data Explorer is used for the analysis of large amounts of text log data, websites, and IoT devices and uses a common querying language. Data Lake Storage Gen2 is a data source, Azure Stream Analytics is used to define streaming jobs, apply a perpetual query, and write the results to an output. Azure Cosmos DB stores data.
+
+<br>
+
+47. Which two visuals in Microsoft Power BI allow you to visually compare numeric values for discrete categories? Each correct answer presents a complete solution.
+    - a bar chart, a column chart
+    > - **Explanation:** Bar charts and column charts allow you to compare numeric values for discrete values. A card is used to track a single number or value. A matrix makes it easier to view data across multiple dimensions.
+
+<br>
+
+48. Which SQL clause can be used to copy all the rows from one table to a new table?
+    - Select Into
+    > - **Explanation:** SELECT - INTO does an insert into a table. SELECT – OVER determines the partitioning and ordering of the rowset before a windowing function is applied. INSERT – VALUES inserts values into a single row. SELECT – HAVING filters data.
+
+<br>
+
+49. You have a complex query that selects data from multiple tables.
+Which three database objects should allow you to reuse the query definition? Each correct answer presents a complete solution.
+Select all answers that apply.
+    - A view, stored procedure, a function.
+    > - **Explanation:** A view, a function, and a stored procedure allow you to reuse the query definition for a complex query that selects data from multiple tables.
+
+<br>
+
+50. You need to recommend a solution that meets the following requirements:
+Encapsulates a business logic that can rename the products in a database
+Adds entries to tables
+What should you include in the recommendation?
+    - a stored procedure
+    > - **Explanation:** A stored procedure can encapsulate any type of business logic that can be reused in the application. A stored procedure can modify existing data as well as add new entries to tables. A stored procedure can be run from an application as well as from the server.
+An inline function cannot be used to complete the task because it cannot modify nor create objects. It can be used to query a database. A view cannot be used to complete the task because it cannot modify nor create objects. It can be used to query a database. A table-valued function cannot be used to complete the task because it cannot modify or create objects. It can be used to query a database.
+
+<br>
+
+51. You need to process many JSON files every minute, while keeping the data from the files accessible by using native queries.
+Which Azure Cosmos DB API should you use?
+    - NoSQL
+    > - **Explanation:** SQL is the native API in Cosmos DB. It manages data in the JSON format. The Cassandra API uses a column-family storage structure. The Table API is used to work with data in key/value tables. The Gremlin API is used with data in a graph structure.
