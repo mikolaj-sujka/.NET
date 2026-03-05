@@ -1,3 +1,8 @@
+# EF Core Transactions
+**Transactions** allow several database operations to be processed in an **atomic** manner. If the transaction is committed, all of the operations are successfully applied to the database. If the transaction is rolled back, none of the operations are applied to the database.
+
+## Default transaction behaviour
+By default, if the database provider supports transactions, all changes in a single call to SaveChanges are applied in a transaction. If any of the changes fail, then the transaction is rolled back and none of the changes are applied to the database. This means that SaveChanges is guaranteed to either completely succeed, or leave the database unmodified if an error occurs.
 
 # C# Ambient Transactions: What They Are and Why They Matter
 
