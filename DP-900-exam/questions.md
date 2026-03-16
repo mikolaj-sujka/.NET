@@ -304,3 +304,5 @@ An inline function cannot be used to complete the task because it cannot modify 
 Which Azure Cosmos DB API should you use?
     - NoSQL
     > - **Explanation:** SQL is the native API in Cosmos DB. It manages data in the JSON format. The Cassandra API uses a column-family storage structure. The Table API is used to work with data in key/value tables. The Gremlin API is used with data in a graph structure.
+
+52.
