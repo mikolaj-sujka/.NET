@@ -197,6 +197,93 @@
   - wysyla powiadomienie, ze proces zakonczyl sie poprawnie
 - **Zapamietaj:** pipeline nie musi sam wykonywac calej analizy. Czesto tylko **orkiestruje** kolejne kroki i wywoluje inne uslugi.
 
+## Azure Data Factory
+
+- **Co to jest?** Chmurowa usluga Azure do integracji danych i budowania pipeline'ow.
+- **Do czego sluzy?** Do przenoszenia, orkiestracji i czesciowej transformacji danych pomiedzy roznymi systemami.
+- **Jak myslec na egzaminie?**
+  - Data Factory = **data integration + orchestration**
+  - bardzo czesto jest poprawna odpowiedzia, gdy pytanie dotyczy **pipeline**, **copy data**, **schedule**, **ETL/ELT**
+  - sama usluga czesto nie wykonuje ciezkich obliczen jak Spark, tylko uruchamia i koordynuje kroki
+- **Co potrafi?**
+  - laczyc sie z wieloma zrodlami danych
+  - kopiowac dane z miejsca do miejsca
+  - uruchamiac pipeline'y wedlug harmonogramu albo zdarzenia
+  - wywolywac inne uslugi, np. Databricks albo Synapse
+  - wykonywac transformacje przez Mapping Data Flows albo przez integracje z innymi narzedziami
+- **Typowe zastosowania:**
+  - kopiowanie danych z lokalnej bazy do Azure Data Lake
+  - nocne ladowanie danych do hurtowni
+  - automatyczne uruchamianie krokow ETL / ELT
+  - laczenie wielu zrodel w jeden przeplyw danych
+- **Przyklad 1:**
+  - Data Factory pobiera dane z on-prem SQL Server
+  - kopiuje je do Azure Data Lake Storage Gen2
+  - uruchamia Databricks do oczyszczenia danych
+  - zapisuje wynik do Azure Synapse
+- **Przyklad 2:**
+  - codziennie o 2:00 w nocy pipeline w Data Factory startuje automatycznie
+  - pobiera dane z CRM i ERP
+  - laczy je i laduje do hurtowni danych
+  - rano Power BI ma juz swieze dane
+- **Jak odroznic od innych uslug:**
+  - **Azure Data Factory**: integruje dane i orkiestruje pipeline'y
+  - **Azure Databricks**: przetwarza dane przy pomocy Spark
+  - **Azure Synapse Analytics**: platforma analityczna do SQL, Spark i hurtowni danych
+  - **Azure Stream Analytics**: przetwarza dane strumieniowe na biezaco
+  - **Azure IoT Hub**: zbiera dane z urzadzen IoT
+- **Prosty sposob zapamietania:**
+  - jesli pytanie brzmi "jak **przeniesc** dane?"
+  - albo "jak **zautomatyzowac pipeline**?"
+  - albo "jak **uruchamiac procesy wedlug harmonogramu**?"
+  - to bardzo czesto chodzi o **Azure Data Factory**
+
+## Azure Cosmos DB
+
+- **Co to jest?** Globalnie dystrybuowana, nierelacyjna baza danych Azure.
+- **Do czego sluzy?** Do przechowywania danych, ktore musza byc bardzo szybko odczytywane i zapisywane przy duzej skali.
+- **Jak myslec na egzaminie?**
+  - Cosmos DB = **NoSQL / high scale / low latency**
+  - dobrze nadaje sie do aplikacji internetowych, mobilnych i systemow z duza liczba operacji
+  - nie jest klasyczna relacyjna baza danych jak Azure SQL Database
+- **Najwazniejsze cechy:**
+  - bardzo szybki odczyt i zapis
+  - globalna replikacja
+  - elastyczny model danych
+  - obsluga wielu API
+  - skalowanie throughput przez **RU/s**
+- **Jakie API warto znac pod DP-900?**
+  - **SQL API**: dokumenty JSON
+  - **MongoDB API**: zgodnosc z MongoDB
+  - **Cassandra API**: model column-family
+  - **Gremlin API**: dane grafowe
+  - **Table API**: key/value
+- **Typowe zastosowania:**
+  - aplikacja webowa z bardzo duza liczba uzytkownikow
+  - katalog produktow zapisany jako dokumenty JSON
+  - dane globalnie dostepne z wielu regionow
+  - graf relacji, np. znajomosci albo polaczenia miedzy obiektami
+- **Przyklad 1:**
+  - sklep internetowy trzyma katalog produktow w JSON
+  - aplikacja musi szybko odczytywac dane produktow dla uzytkownikow z wielu krajow
+  - Cosmos DB dobrze pasuje, bo zapewnia niski czas odpowiedzi i globalna replikacje
+- **Przyklad 2:**
+  - aplikacja mobilna zapisuje profile uzytkownikow i ich preferencje
+  - struktura danych moze sie zmieniac
+  - Cosmos DB pasuje lepiej niz sztywna relacyjna tabela
+- **Jak odroznic od innych uslug:**
+  - **Azure Cosmos DB**: nierelacyjna baza danych do szybkich operacji i duzej skali
+  - **Azure SQL Database**: relacyjna baza danych z tabelami, kluczami i SQL
+  - **Data Lake**: magazyn plikow, a nie baza do szybkich operacji aplikacyjnych
+  - **Azure Data Explorer**: analiza logow i telemetrii, a nie glowna baza operacyjna aplikacji
+- **Na co uwazac na egzaminie?**
+  - jesli pytanie dotyczy **JSON**, **NoSQL**, **global distribution**, **low latency**, **high throughput**, to czesto chodzi o **Cosmos DB**
+  - jesli pytanie dotyczy **graph database**, poprawna odpowiedz moze byc **Cosmos DB for Gremlin**
+  - jesli pytanie dotyczy **column-family**, poprawna odpowiedz moze byc **Cosmos DB for Apache Cassandra**
+- **Prosty sposob zapamietania:**
+  - **relacyjne dane i klasyczne SQL** -> **Azure SQL Database**
+  - **elastyczne dane NoSQL i duza skala** -> **Azure Cosmos DB**
+
 ## Szybkie rozroznienie do DP-900
 
 - **Apache Spark**: silnik do przetwarzania danych
@@ -208,6 +295,8 @@
 - **Azure IoT Hub**: laczenie i obsluga urzadzen IoT oraz odbior telemetrii
 - **ETL / ELT**: wzorzec przenoszenia i transformacji danych
 - **Data Pipelines**: automatyczny przeplyw danych i orkiestracja krokow
+- **Azure Data Factory**: integracja danych, kopiowanie danych i orkiestracja pipeline'ow
+- **Azure Cosmos DB**: nierelacyjna baza danych NoSQL o duzej skali i niskich opoznieniach
 
 ## Prosty sposob zapamietania
 
@@ -220,3 +309,5 @@
 - **Czym podlaczasz urzadzenia i zbierasz z nich telemetrie?** -> **IoT Hub**
 - **Czym automatyzujesz przeplyw danych miedzy uslugami?** -> **Data Pipelines**
 - **Jak nazywa sie proces pobrania, zmiany i zaladowania danych?** -> **ETL / ELT**
+- **Czym glownie kopiujesz dane i uruchamiasz pipeline'y?** -> **Data Factory**
+- **Jaka usluge wybierasz do NoSQL, JSON i globalnej skali?** -> **Cosmos DB**
