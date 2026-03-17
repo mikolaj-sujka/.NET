@@ -136,6 +136,67 @@
   - **Data Explorer** analizuje duze ilosci telemetrii i logow
 - **Zapamietaj:** jesli w pytaniu kluczowe sa slowa **devices**, **telemetry ingestion**, **cloud-to-device**, **device-to-cloud**, to czesto chodzi o **Azure IoT Hub**.
 
+## ETL i ELT
+
+- **ETL** = **Extract, Transform, Load**
+- **ELT** = **Extract, Load, Transform**
+- **Co to znaczy?**
+  - **Extract**: pobranie danych ze zrodla
+  - **Transform**: oczyszczenie, polaczenie, zmiana formatu albo obliczenia na danych
+  - **Load**: zapisanie danych do miejsca docelowego
+- **Roznica:**
+  - **ETL**: najpierw zmieniasz dane, potem ladujesz je do celu
+  - **ELT**: najpierw ladujesz surowe dane, potem przetwarzasz je juz w systemie docelowym
+- **Jak myslec na egzaminie?**
+  - jesli pytanie dotyczy przenoszenia i transformacji danych miedzy systemami, mysz o **ETL / ELT**
+  - w Azure czesto pojawia sie tu **Azure Data Factory** albo **Synapse Pipelines**
+  - Spark i Databricks czesto realizuja czesc transformacji
+- **Przyklad ETL:**
+  - sklep ma dane sprzedazy w lokalnej bazie SQL
+  - proces pobiera dane co noc
+  - usuwa bledne rekordy i liczy nowe kolumny
+  - na koncu zapisuje gotowe dane do hurtowni danych
+- **Przyklad ELT:**
+  - firma wrzuca surowe pliki CSV do Data Lake
+  - potem Synapse albo Databricks przetwarza te dane juz w chmurze
+  - wynik trafia do tabel analitycznych albo raportow
+- **Latwy skrot:**
+  - **ETL** = transformacja **przed** zaladowaniem
+  - **ELT** = transformacja **po** zaladowaniu
+
+## Data Pipelines
+
+- **Co to jest?** Uporzadkowany proces, ktory przenosi i przetwarza dane od zrodla do celu.
+- **Do czego sluzy?** Do automatyzacji pracy na danych, zeby wszystko dzialo sie samo i w odpowiedniej kolejnosci.
+- **Jak myslec na egzaminie?**
+  - data pipeline = **przeplyw danych krok po kroku**
+  - pipeline moze kopiowac dane, uruchamiac transformacje, czekac na zdarzenie i zapisywac wynik
+  - w Azure pipeline'y sa mocno kojarzone z **Azure Data Factory** i **Azure Synapse**
+- **Co moze zawierac pipeline?**
+  - pobranie danych z bazy lub plikow
+  - kopiowanie danych do Data Lake
+  - uruchomienie transformacji
+  - zapisanie wyniku do hurtowni danych
+  - uruchomienie raportu albo kolejnego procesu
+- **Przyklad dzialania pipeline'u 1: dane sprzedazowe**
+  - dane sa pobierane z systemu sklepowego
+  - pipeline kopiuje je do Azure Data Lake
+  - Databricks czysci dane i laczy je z danymi o produktach
+  - wynik trafia do Azure Synapse
+  - Power BI pokazuje raport sprzedazy
+- **Przyklad dzialania pipeline'u 2: dane z IoT**
+  - urzadzenia wysylaja telemetrie do IoT Hub
+  - Stream Analytics liczy srednie i wykrywa alerty
+  - dane sa zapisywane do Data Lake lub Data Explorer
+  - raport albo dashboard pokazuje dane prawie w czasie rzeczywistym
+- **Przyklad dzialania pipeline'u 3: nocne ladowanie danych**
+  - codziennie o 1:00 pipeline startuje automatycznie
+  - pobiera dane z kilku baz danych
+  - wykonuje transformacje
+  - laduje wynik do hurtowni
+  - wysyla powiadomienie, ze proces zakonczyl sie poprawnie
+- **Zapamietaj:** pipeline nie musi sam wykonywac calej analizy. Czesto tylko **orkiestruje** kolejne kroki i wywoluje inne uslugi.
+
 ## Szybkie rozroznienie do DP-900
 
 - **Apache Spark**: silnik do przetwarzania danych
@@ -145,6 +206,8 @@
 - **Azure Data Explorer**: analiza logow, telemetrii i danych czasowych
 - **Azure Stream Analytics**: przetwarzanie danych strumieniowych w czasie rzeczywistym
 - **Azure IoT Hub**: laczenie i obsluga urzadzen IoT oraz odbior telemetrii
+- **ETL / ELT**: wzorzec przenoszenia i transformacji danych
+- **Data Pipelines**: automatyczny przeplyw danych i orkiestracja krokow
 
 ## Prosty sposob zapamietania
 
@@ -155,3 +218,5 @@
 - **Czym analizujesz logi i dane czasowe?** -> **Data Explorer**
 - **Czym liczysz zdarzenia na biezaco w oknach czasowych?** -> **Stream Analytics**
 - **Czym podlaczasz urzadzenia i zbierasz z nich telemetrie?** -> **IoT Hub**
+- **Czym automatyzujesz przeplyw danych miedzy uslugami?** -> **Data Pipelines**
+- **Jak nazywa sie proces pobrania, zmiany i zaladowania danych?** -> **ETL / ELT**
