@@ -116,6 +116,26 @@
 - **Przyklad:** Czujniki temperatury wysylaja dane co sekunde. Azure Stream Analytics moze policzyc srednia temperature z ostatnich 5 minut i zapisac wynik do Power BI albo Azure Data Lake.
 - **Zapamietaj:** jesli pytanie brzmi jak **real-time**, **stream**, **windowing**, **event processing**, to czesto chodzi o **Azure Stream Analytics**.
 
+## Azure IoT Hub
+
+- **Co to jest?** Usluga Azure do bezpiecznego laczenia, zarzadzania i komunikacji z urzadzeniami IoT.
+- **Do czego sluzy?** Do zbierania danych z urzadzen oraz wysylania polecen do tych urzadzen.
+- **Jak myslec na egzaminie?**
+  - IoT Hub = **device connectivity**
+  - sluzy do komunikacji miedzy chmura a urzadzeniami
+  - sam w sobie nie sluzy glownie do zaawansowanej analizy danych
+- **Typowe zastosowania:**
+  - odbieranie telemetrii z czujnikow
+  - zarzadzanie wieloma urzadzeniami IoT
+  - wysylanie komend z chmury do urzadzen
+  - przekazywanie danych dalej do Stream Analytics, Data Lake albo Data Explorer
+- **Przyklad:** Tysiace licznikow energii wysyla dane do Azure IoT Hub. Potem te dane trafiaja do Azure Stream Analytics, gdzie liczone sa srednie i alerty.
+- **Jak odroznic od innych uslug:**
+  - **IoT Hub** zbiera dane z urzadzen i obsluguje komunikacje
+  - **Stream Analytics** przetwarza naplywajace zdarzenia
+  - **Data Explorer** analizuje duze ilosci telemetrii i logow
+- **Zapamietaj:** jesli w pytaniu kluczowe sa slowa **devices**, **telemetry ingestion**, **cloud-to-device**, **device-to-cloud**, to czesto chodzi o **Azure IoT Hub**.
+
 ## Szybkie rozroznienie do DP-900
 
 - **Apache Spark**: silnik do przetwarzania danych
@@ -124,6 +144,7 @@
 - **Data Lake**: magazyn plikow dla duzych zbiorow danych
 - **Azure Data Explorer**: analiza logow, telemetrii i danych czasowych
 - **Azure Stream Analytics**: przetwarzanie danych strumieniowych w czasie rzeczywistym
+- **Azure IoT Hub**: laczenie i obsluga urzadzen IoT oraz odbior telemetrii
 
 ## Prosty sposob zapamietania
 
@@ -133,3 +154,4 @@
 - **Gdzie laczysz SQL, analityke i big data w jednym miejscu?** -> **Synapse**
 - **Czym analizujesz logi i dane czasowe?** -> **Data Explorer**
 - **Czym liczysz zdarzenia na biezaco w oknach czasowych?** -> **Stream Analytics**
+- **Czym podlaczasz urzadzenia i zbierasz z nich telemetrie?** -> **IoT Hub**
