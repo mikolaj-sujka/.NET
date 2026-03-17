@@ -324,3 +324,41 @@ Which Azure Cosmos DB API should you use?
 56. Which Azure SQL Database feature ensures that users can see only their own rows when multiple customers share the same tables?
     - row-level security (RLS)
     > - **Explanation:** Azure SQL Database supports RLS, which restricts access to rows in a table based on a user’s identity or execution context. This enables multiple customers to share the same tables, while ensuring that each customer can see only their own data. Dynamic data masking hides sensitive values but does not prevent access to rows, Always Encrypted protects data at rest and in use but does not filter query results, and TDE protects data at rest only. Therefore, RLS is the correct feature.
+
+57. Which type of Azure Storage is used to store large amounts of files to be shared with virtual machines by using SMB?
+    - Azure Files
+    > - **Explanation:** Azure Files is used to share files by using NFS and SMB. Data Lake Storage Gen2 is used for storing huge amounts of data to be processed, not to be shared among virtual machines. Page blobs are used for VHDs. Table storage is used for two dimensional tables.
+
+58. Which three actions can you perform directly from an Azure Databricks notebook? Each correct answer presents a complete solution.
+    - Create a database.
+    > - **Explanation:** Databricks notebooks are interactive development environments that enable users to execute code and SQL statements directly against the data in a lakehouse. From within a notebook, you can run queries to explore and analyze data, create tables, such as Delta tables, to persist structured data, and create databases in the metastore by running SQL commands. These actions represent core, in-notebook capabilities that support large-scale analytics workloads. In contrast, creating an additional notebook is a workspace management task performed through the Databricks UI, not from within a running notebook. In addition, creating a schema is intentionally excluded at the DP-900 level to avoid unnecessary conceptual overlap with databases, which are the primary organizational construct emphasized for foundational learners.
+
+59. You need to ingest, transform, and visualize data from a continuously generated data source. The solution must minimize latency and administrative effort.
+Which type of data processing should you use?
+    - stream
+    > - **Explanation:** Stream processing supports continuously generated data by processing events as they occur, which enables low-latency ingestion, transformation, and visualization while requiring less operational management than interval-based approaches. Batch processing introduces delays because data is collected and processed at scheduled times, and microbatching still processes data in small intervals rather than immediately. Although the term “real-time” is commonly used to describe low-latency scenarios, it is not a formal data processing model; stream processing is the appropriate classification for this type of workload.
+
+60. What should you create in a data model to allow users to drill up and drill down in a report?
+    - a hierarchy
+    > - **Explanation:** A hierarchy enables drill up and drill down in a dimension. A dimension enables navigation, but hierarchy is used to drill up and down in a dimension. Fact tables have values. Cubes are not created in Microsoft PowerBI.
+
+61. Which type of Microsoft Fabric data store supports large-scale analytical workloads?
+    - a data warehouse
+    > - **Explanation:** Fabric provides multiple types of data stores that are optimized for different types of workloads. A data warehouse is specifically designed to support large-scale analytical workloads, offering optimized storage and query performance for complex, high-concurrency analytical queries over structured data. In contrast, a SQL database is intended for transactional or operational scenarios, a lakehouse combines data lake storage with analytical processing but is positioned as a flexible analytics option rather than the primary enterprise analytical store at the fundamentals level, and a eventhouse is optimized for real-time streaming and event data. Therefore, the data warehouse is the most appropriate analytical data store to support large-scale analytics.
+
+62. You need to share a report that you created in Microsoft Power BI Desktop with other users.
+What should you do first?
+    - Publish the report to the Power BI service.
+    > - **Explanation:** To share data models and reports created in Power BI Desktop, they are first published to the Power BI service.
+
+63. Which SQL operation is used to combine the content of two tables based on a shared column?
+    - JOIN
+    > - **Explanation:** JOIN is used to combine data from two tables based on a shared key. HAVING is used to filter content from a GROUP BY command. UNION displays the content of two sets of columns from two tables but is not based on a shared key. INTERSECT shows only values that exist in both tables.
+
+64. Which Azure Blob Storage feature prevents blobs from being modified or deleted for a specified retention period?
+    - an immutable blob
+    > - **Explanation:** Blob Storage supports immutable blobs, which use time-based retention policies to prevent data from being modified or deleted for a specified period. This is commonly used in compliance and data protection scenarios, where data integrity must be preserved. Legal holds prevent deletion but do not enforce time-based immutability, while soft delete and point-in-time restore enable recovery after deletion or modification rather than preventing those actions. Therefore, immutable blobs provide the strongest protection against modification or deletion.
+
+65. Which type of database can be used for semi-structured data that will be processed by an Apache Spark pool in Azure Synapse Analytics?
+    - column-family
+    > - **Explanation:** Column-family databases are used to store unstructured, tabular data comprising rows and columns. Azure Synapse Analytics Spark pools do not directly support graph or relational databases.
