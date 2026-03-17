@@ -284,6 +284,39 @@
   - **relacyjne dane i klasyczne SQL** -> **Azure SQL Database**
   - **elastyczne dane NoSQL i duza skala** -> **Azure Cosmos DB**
 
+## Azure HDInsight
+
+- **Co to jest?** Chmurowa usluga Azure do uruchamiania popularnych frameworkow open-source do big data.
+- **Do czego sluzy?** Do pracy z technologiami takimi jak Hadoop, Spark, Hive, HBase i Kafka w modelu zarzadzanym przez Azure.
+- **Jak myslec na egzaminie?**
+  - HDInsight = **open-source big data clusters**
+  - czesto pojawia sie, gdy pytanie wprost wspomina **Hadoop** albo ekosystem Hadoop
+  - jest bardziej "klastrowe" i infrastrukturalne niz Databricks czy Data Factory
+- **Typowe zastosowania:**
+  - przetwarzanie danych przy pomocy Hadoop
+  - uruchamianie Spark w klastrze
+  - analiza duzych zbiorow przez Hive
+  - obsluga rozproszonych workloadow big data
+- **Przyklad 1:**
+  - firma ma rozwiazanie oparte o Hadoop
+  - chce przeniesc je do Azure bez porzucania znanych narzedzi
+  - HDInsight jest naturalnym wyborem
+- **Przyklad 2:**
+  - zespol pracuje na Spark i Hive
+  - potrzebuje klastra do przetwarzania duzych zbiorow danych z Data Lake
+  - HDInsight moze zapewnic takie srodowisko
+- **Jak odroznic od innych uslug:**
+  - **Azure HDInsight**: zarzadzane klastry dla Hadoop, Spark, Hive, Kafka
+  - **Azure Databricks**: wygodniejsza platforma Spark z notebookami i naciskiem na data engineering / data science
+  - **Azure Data Factory**: orkiestracja i pipeline'y, a nie klaster obliczeniowy
+  - **Azure Synapse Analytics**: szersza platforma analityczna z SQL, Spark i integracja danych
+- **Na co uwazac na egzaminie?**
+  - jesli pytanie brzmi "co sluzy do przetwarzania duzych ilosci danych przy uzyciu **Apache Hadoop**?" -> bardzo czesto **Azure HDInsight**
+  - jesli pytanie mocno akcentuje **Spark notebooks** i wygodna analityke w Azure -> czesto **Azure Databricks**
+- **Prosty sposob zapamietania:**
+  - **Hadoop / Hive / HBase / Kafka cluster** -> **HDInsight**
+  - **Spark notebooks i transformacje danych** -> **Databricks**
+
 ## Szybkie rozroznienie do DP-900
 
 - **Apache Spark**: silnik do przetwarzania danych
@@ -297,6 +330,7 @@
 - **Data Pipelines**: automatyczny przeplyw danych i orkiestracja krokow
 - **Azure Data Factory**: integracja danych, kopiowanie danych i orkiestracja pipeline'ow
 - **Azure Cosmos DB**: nierelacyjna baza danych NoSQL o duzej skali i niskich opoznieniach
+- **Azure HDInsight**: zarzadzane klastry open-source do Hadoop, Spark, Hive i Kafka
 
 ## Prosty sposob zapamietania
 
@@ -311,3 +345,17 @@
 - **Jak nazywa sie proces pobrania, zmiany i zaladowania danych?** -> **ETL / ELT**
 - **Czym glownie kopiujesz dane i uruchamiasz pipeline'y?** -> **Data Factory**
 - **Jaka usluge wybierasz do NoSQL, JSON i globalnej skali?** -> **Cosmos DB**
+- **Czego uzyjesz, gdy pytanie wprost mowi o Hadoop?** -> **HDInsight**
+
+## Pytania pomocnicze do zapamietania
+
+- **Czy pytanie dotyczy przechowywania plikow?** -> mysli o **Data Lake**
+- **Czy pytanie dotyczy samego przetwarzania danych?** -> mysli o **Spark**
+- **Czy pytanie dotyczy notebookow Spark i transformacji danych?** -> mysli o **Databricks**
+- **Czy pytanie dotyczy SQL, hurtowni danych i szerokiej analityki?** -> mysli o **Synapse**
+- **Czy pytanie dotyczy kopiowania danych i orkiestracji pipeline'ow?** -> mysli o **Data Factory**
+- **Czy pytanie dotyczy danych strumieniowych i okien czasowych?** -> mysli o **Stream Analytics**
+- **Czy pytanie dotyczy urzadzen IoT i telemetrii z urzadzen?** -> mysli o **IoT Hub**
+- **Czy pytanie dotyczy logow, telemetrii i danych time-series?** -> mysli o **Data Explorer**
+- **Czy pytanie dotyczy NoSQL, JSON i bardzo szybkich odczytow / zapisow?** -> mysli o **Cosmos DB**
+- **Czy pytanie wprost mowi o Hadoop, Hive albo HBase?** -> mysli o **HDInsight**
