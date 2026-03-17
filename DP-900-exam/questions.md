@@ -305,4 +305,22 @@ Which Azure Cosmos DB API should you use?
     - NoSQL
     > - **Explanation:** SQL is the native API in Cosmos DB. It manages data in the JSON format. The Cassandra API uses a column-family storage structure. The Table API is used to work with data in key/value tables. The Gremlin API is used with data in a graph structure.
 
-52.
+52. Which service can you use to perpetually retrieve data from a Kafka queue, process the data, and write the data to Azure Data Lake?
+    - Azure Stream Analytics
+    > - **Explanation:** Stream Analytics can handle stream processing from Kafka to Data Lake. Azure Synapse Analytics does not process streaming data. Azure Cosmos DB does not handle data streaming. Data Factory does not handle streams.
+
+53. Which SQL clause can be used to copy all the rows from one table to a new table?
+    - SELECT - INTO
+    > - **Explanation:** SELECT - INTO does an insert into a table. SELECT – OVER determines the partitioning and ordering of the rowset before a windowing function is applied. INSERT – VALUES inserts values into a single row. SELECT – HAVING filters data.
+
+54. Which data service allows you to use every feature of Microsoft SQL Server in the cloud?
+    - SQL Server on an Azure Virtual Machines running Windows
+    > - **Explanation:** SQL Server on an Azure Virtual Machines running Windows is the only option that supports all the SQL Server features in the cloud. Azure SQL Database, SQL Managed Instance, and SQL Server on an Azure Virtual Machines running Linux do not support all the SQL Server features.
+
+55. Which open-source database has built-in support for temporal data?
+    - MariaDB
+    > - **Explanation:** MariaDB has built-in support for temporal data. It enables applications to query data as the data appeared in previous points in time.
+
+56. Which Azure SQL Database feature ensures that users can see only their own rows when multiple customers share the same tables?
+    - row-level security (RLS)
+    > - **Explanation:** Azure SQL Database supports RLS, which restricts access to rows in a table based on a user’s identity or execution context. This enables multiple customers to share the same tables, while ensuring that each customer can see only their own data. Dynamic data masking hides sensitive values but does not prevent access to rows, Always Encrypted protects data at rest and in use but does not filter query results, and TDE protects data at rest only. Therefore, RLS is the correct feature.
