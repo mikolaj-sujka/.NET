@@ -100,6 +100,22 @@
 - **Przyklad:** Tysiace czujnikow wysyla pomiary co sekunde. Azure Data Explorer pozwala szybko sprawdzic, ktore urzadzenia zaczely dzialac nietypowo.
 - **Zapamietaj:** jesli pytanie brzmi jak **duzo logow, telemetry, time-series, szybka analiza**, bardzo czesto chodzi o **Azure Data Explorer**.
 
+## Azure Stream Analytics
+
+- **Co to jest?** Usluga Azure do przetwarzania danych strumieniowych w czasie rzeczywistym lub prawie rzeczywistym.
+- **Do czego sluzy?** Do analizowania danych, ktore naplywaja bez przerwy, np. z czujnikow, aplikacji albo zdarzen systemowych.
+- **Jak myslec na egzaminie?**
+  - Stream Analytics = **stream processing**
+  - dziala na danych "w ruchu", a nie dopiero po zapisaniu calego zbioru
+  - umozliwia filtrowanie, agregacje i liczenie w oknach czasowych
+- **Typowe zastosowania:**
+  - analiza danych z IoT
+  - liczenie zdarzen w przedzialach czasu
+  - wykrywanie anomalii w strumieniu danych
+  - przekazywanie wynikow do Data Lake, Power BI albo bazy danych
+- **Przyklad:** Czujniki temperatury wysylaja dane co sekunde. Azure Stream Analytics moze policzyc srednia temperature z ostatnich 5 minut i zapisac wynik do Power BI albo Azure Data Lake.
+- **Zapamietaj:** jesli pytanie brzmi jak **real-time**, **stream**, **windowing**, **event processing**, to czesto chodzi o **Azure Stream Analytics**.
+
 ## Szybkie rozroznienie do DP-900
 
 - **Apache Spark**: silnik do przetwarzania danych
@@ -107,6 +123,7 @@
 - **Azure Synapse Analytics**: szeroka platforma analityczna z SQL, Spark i pipeline'ami
 - **Data Lake**: magazyn plikow dla duzych zbiorow danych
 - **Azure Data Explorer**: analiza logow, telemetrii i danych czasowych
+- **Azure Stream Analytics**: przetwarzanie danych strumieniowych w czasie rzeczywistym
 
 ## Prosty sposob zapamietania
 
@@ -115,3 +132,4 @@
 - **Gdzie wygodnie robisz Spark w Azure?** -> **Databricks**
 - **Gdzie laczysz SQL, analityke i big data w jednym miejscu?** -> **Synapse**
 - **Czym analizujesz logi i dane czasowe?** -> **Data Explorer**
+- **Czym liczysz zdarzenia na biezaco w oknach czasowych?** -> **Stream Analytics**
