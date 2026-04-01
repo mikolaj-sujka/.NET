@@ -12,4 +12,5 @@ Repozytorium Github, w którym zawarte wszystkie najważniejsze fundamenty nauki
 # Microsoft exams
 Repozytorium Github, zawiera również notatki pod egzaminy:
 - DP - 900
+- AZ - 204
 
