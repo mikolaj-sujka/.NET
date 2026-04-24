@@ -3,9 +3,6 @@
 string databaseName = "myDatabase"; // Name of the database to create or use
 string containerName = "myContainer"; // Name of the container to create or use
 
-string cosmosDbAccountUrl = "";
-string accountKey = "";
-
 if (string.IsNullOrEmpty(cosmosDbAccountUrl) || string.IsNullOrEmpty(accountKey))
 {
     Console.WriteLine("Please set the DOCUMENT_ENDPOINT and ACCOUNT_KEY environment variables.");
