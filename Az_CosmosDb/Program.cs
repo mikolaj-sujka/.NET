@@ -3,8 +3,8 @@
 string databaseName = "myDatabase"; // Name of the database to create or use
 string containerName = "myContainer"; // Name of the container to create or use
 
-string cosmosDbAccountUrl = "https://cosmosexercise23943.documents.azure.com:443/";
-string accountKey = "flr7pG76sT8L4lvjjeeLSSkJRfwmIvfBqvcp2dIi3Ri2C4OMyno2jo4nH8kzTfJt5kgWPuyvsw5wACDb5grufA==";
+string cosmosDbAccountUrl = "";
+string accountKey = "";
 
 if (string.IsNullOrEmpty(cosmosDbAccountUrl) || string.IsNullOrEmpty(accountKey))
 {
