@@ -378,6 +378,56 @@ Answer: Zmiany konfiguracji aplikacji i mountów zwykle restartują aplikację.
 
 ---
 
+Question: Które z poniższych kategorii planów App Service zapewniają maksymalne możliwości skalowania w poziomie?
+
+- [ ] Dedykowane obliczenia.
+- [x] Izolowana.
+- [ ] Współużytkowane zasoby obliczeniowe.
+
+Answer: Kategoria Isolated daje największe możliwości scale out, bo działa w dedykowanym App Service Environment.
+
+---
+
+Question: Które z następujących funkcji sieciowych usługi App Service mogą służyć do kontrolowania ruchu wychodzącego w sieci?
+
+- [ ] Adres przypisany do aplikacji.
+- [x] Połączenia hybrydowe.
+- [ ] Punkty końcowe usługi.
+
+Answer: Hybrid Connections dotyczą ruchu wychodzącego z App Service do wskazanych zasobów, np. on-premises. App-assigned address, service endpoints i private endpoints są kojarzone głównie z kontrolą ruchu przychodzącego.
+
+---
+
+Question: Jaki jest cel funkcji środowiska Azure App Service Environment?
+
+- [ ] Zapewnia udostępnioną infrastrukturę do uruchamiania aplikacji usługi App Service.
+- [ ] Umożliwia wdrażanie i uruchamianie konteneryzowanych aplikacji internetowych w systemach Windows i Linux.
+- [x] Zapewnia w pełni izolowane i dedykowane środowisko do uruchamiania aplikacji usługi App Service z ulepszonymi zabezpieczeniami na dużą skalę.
+
+Answer: App Service Environment zapewnia izolowane, dedykowane środowisko dla App Service, używane przy wymaganiach dużej skali, izolacji sieciowej i wyższych wymaganiach bezpieczeństwa.
+
+---
+
+Question: Co określa zestaw zasobów obliczeniowych dla aplikacji internetowej do uruchomienia w usłudze Azure App Service?
+
+- [ ] Region geograficzny, w którym jest wdrażana aplikacja.
+- [ ] Warstwa cenowa aplikacji.
+- [x] Plan usługi App Service.
+
+Answer: App Service Plan definiuje zasoby compute, na których działa aplikacja, w tym region, tier, rozmiar i liczbę instancji.
+
+---
+
+Question: Jaki jest cel korzystania z miejsc wdrożenia w usłudze Azure App Service?
+
+- [x] Aby wdrożyć aplikację w środowisku przejściowym, a następnie zamienić miejsca przejściowe i produkcyjne, eliminując przestój.
+- [ ] Aby zwiększyć pojemność magazynu aplikacji.
+- [ ] Aby dodać do dziewięciu kontenerów pomocniczych dla każdej niestandardowej aplikacji kontenera z obsługą sidecar.
+
+Answer: Deployment slots pozwalają wdrożyć aplikację do staging, rozgrzać i sprawdzić wersję, a potem wykonać swap z produkcją bez przestoju.
+
+---
+
 ## Źródła
 
 - Microsoft Learn - Azure App Service: https://learn.microsoft.com/en-us/azure/app-service/

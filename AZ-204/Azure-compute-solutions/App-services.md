@@ -14,7 +14,7 @@ Najważniejsze pojęcia:
 
 ### App Service Plan
 
-App Service Plan to zestaw zasobów compute dla App Service. Można myśleć o nim jak o "hostingu" dla jednej albo wielu aplikacji. To plan decyduje, na jakich workerach działa aplikacja, ile ma dostępnych instancji, w jakim regionie jest uruchomiona i jakie funkcje są dostępne.
+W ramach usługi App Service aplikacja zawsze działa w planie usługi App Service. App Service Plan to zestaw zasobów compute dla App Service. Można myśleć o nim jak o "hostingu" dla jednej albo wielu aplikacji. To plan decyduje, na jakich workerach działa aplikacja, ile ma dostępnych instancji, w jakim regionie jest uruchomiona i jakie funkcje są dostępne.
 
 Co jest przypisane do App Service Plan:
 
@@ -983,7 +983,227 @@ Ważne na egzamin:
 - Chcesz ograniczyć ruch przychodzący: Access restrictions albo Private Endpoint.
 - Chcesz dostęp wychodzący do zasobów w VNet: VNet Integration.
 
-## 13. Źródła
+## 13. App Service Authentication z Microsoft Entra ID
+
+App Service moze obsluzyc logowanie przez Microsoft Entra ID na poziomie platformy. Ten mechanizm jest czesto nazywany **Easy Auth**.
+
+Najwazniejszy endpoint logowania:
+
+```text
+https://<app-name>.azurewebsites.net/.auth/login/aad
+```
+
+Po zalogowaniu App Service dodaje do requestu naglowki z informacjami o uzytkowniku, np.:
+
+```text
+X-MS-CLIENT-PRINCIPAL
+X-MS-CLIENT-PRINCIPAL-ID
+X-MS-CLIENT-PRINCIPAL-NAME
+X-MS-CLIENT-PRINCIPAL-IDP
+```
+
+Aplikacja nie musi sama wykonywac redirectu do Entra ID. Platforma robi to przed wejsciem requestu do kodu.
+
+Wazny wybor konfiguracyjny:
+
+- Jesli ustawisz **Require authentication**, to App Service bedzie chronil cala aplikacje, lacznie z `/health`.
+- Jesli `/health` ma zostac publiczne dla Health Check, ustaw **Allow unauthenticated requests** i sprawdzaj Easy Auth w kodzie tylko dla wybranych endpointow.
+
+### Redirect URI w App Registration
+
+Dla App Service dodaj w Microsoft Entra ID App Registration redirect URI:
+
+```text
+https://<app-name>.azurewebsites.net/.auth/login/aad/callback
+```
+
+Dla lokalnego developmentu Easy Auth nie dziala automatycznie, bo jest funkcja platformy App Service. Lokalnie mozna testowac logike aplikacji mockujac naglowki albo uzyc normalnego JWT Bearer auth w kodzie.
+
+### Przykladowy kod odczytu uzytkownika z Easy Auth
+
+```csharp
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+public sealed record AppServiceAuthenticatedUser(
+    string? Id,
+    string? Name,
+    string? IdentityProvider,
+    IReadOnlyDictionary<string, string[]> Claims);
+
+public sealed class AppServiceClientPrincipal
+{
+    [JsonPropertyName("auth_typ")]
+    public string? AuthenticationType { get; init; }
+
+    [JsonPropertyName("name_typ")]
+    public string? NameClaimType { get; init; }
+
+    [JsonPropertyName("role_typ")]
+    public string? RoleClaimType { get; init; }
+
+    [JsonPropertyName("claims")]
+    public List<AppServiceClientPrincipalClaim> Claims { get; init; } = [];
+}
+
+public sealed class AppServiceClientPrincipalClaim
+{
+    [JsonPropertyName("typ")]
+    public string Type { get; init; } = string.Empty;
+
+    [JsonPropertyName("val")]
+    public string Value { get; init; } = string.Empty;
+}
+
+public static class AppServiceAuthenticationExtensions
+{
+    public static AppServiceAuthenticatedUser? GetAppServiceUser(this HttpContext context)
+    {
+        var principalHeader = context.Request.Headers["X-MS-CLIENT-PRINCIPAL"].FirstOrDefault();
+
+        if (string.IsNullOrWhiteSpace(principalHeader))
+        {
+            return null;
+        }
+
+        var json = Encoding.UTF8.GetString(Convert.FromBase64String(principalHeader));
+        var principal = JsonSerializer.Deserialize<AppServiceClientPrincipal>(json);
+
+        if (principal is null)
+        {
+            return null;
+        }
+
+        var claims = principal.Claims
+            .GroupBy(x => x.Type)
+            .ToDictionary(
+                x => x.Key,
+                x => x.Select(c => c.Value).ToArray());
+
+        return new AppServiceAuthenticatedUser(
+            Id: context.Request.Headers["X-MS-CLIENT-PRINCIPAL-ID"].FirstOrDefault(),
+            Name: context.Request.Headers["X-MS-CLIENT-PRINCIPAL-NAME"].FirstOrDefault(),
+            IdentityProvider: context.Request.Headers["X-MS-CLIENT-PRINCIPAL-IDP"].FirstOrDefault(),
+            Claims: claims);
+    }
+}
+```
+
+### Endpoint `/me`
+
+Ten endpoint pokazuje, czy App Service przekazal zalogowanego uzytkownika do aplikacji.
+
+```csharp
+app.MapGet("/me", (HttpContext context) =>
+{
+    var user = context.GetAppServiceUser();
+
+    return user is null
+        ? Results.Unauthorized()
+        : Results.Ok(user);
+});
+```
+
+### Ochrona wybranych endpointow
+
+Mozesz zrobic prosty helper, ktory sprawdza, czy request zawiera uzytkownika z Easy Auth.
+
+```csharp
+static IResult RequireAppServiceUser(HttpContext context, out AppServiceAuthenticatedUser? user)
+{
+    user = context.GetAppServiceUser();
+
+    return user is null
+        ? Results.Unauthorized()
+        : Results.Empty;
+}
+```
+
+Przyklad z chronionym endpointem:
+
+```csharp
+app.MapGet("/secure-orders", async (
+    HttpContext context,
+    OrdersDbContext db,
+    CancellationToken ct) =>
+{
+    var authResult = RequireAppServiceUser(context, out var user);
+
+    if (user is null)
+    {
+        return authResult;
+    }
+
+    var orders = await db.Orders
+        .AsNoTracking()
+        .OrderByDescending(x => x.CreatedAt)
+        .ToListAsync(ct);
+
+    return Results.Ok(new
+    {
+        requestedBy = user.Name,
+        orders
+    });
+});
+```
+
+### Konfiguracja w Azure Portal
+
+1. Wejdz w App Service.
+2. Otworz **Authentication**.
+3. Wybierz **Add identity provider**.
+4. Wybierz **Microsoft**.
+5. Uzyj istniejacej App Registration albo utworz nowa.
+6. Dodaj redirect URI:
+
+```text
+https://<app-name>.azurewebsites.net/.auth/login/aad/callback
+```
+
+7. Dla aplikacji z publicznym `/health` wybierz **Allow unauthenticated requests**.
+8. Dla aplikacji w pelni chronionej wybierz **Require authentication**.
+
+### Testowanie
+
+Wejdz w przegladarce na:
+
+```text
+https://<app-name>.azurewebsites.net/.auth/login/aad?post_login_redirect_uri=/me
+```
+
+Po zalogowaniu powinienes zostac przekierowany na:
+
+```text
+https://<app-name>.azurewebsites.net/me
+```
+
+I zobaczyc dane uzytkownika oraz claims przekazane przez App Service.
+
+Wylogowanie:
+
+```text
+https://<app-name>.azurewebsites.net/.auth/logout?post_logout_redirect_uri=/
+```
+
+Test endpointow:
+
+```text
+https://<app-name>.azurewebsites.net/health
+https://<app-name>.azurewebsites.net/me
+https://<app-name>.azurewebsites.net/secure-orders
+```
+
+Na egzaminie kojarz:
+
+- `/.auth/login/aad` uruchamia logowanie Microsoft Entra ID w App Service Authentication.
+- `/.auth/login/aad/callback` musi byc redirect URI w App Registration.
+- Easy Auth moze chronic cala aplikacje bez kodu autoryzacji w aplikacji.
+- Kod moze odczytywac zalogowanego uzytkownika z naglowkow `X-MS-CLIENT-PRINCIPAL*`.
+- Dla publicznego `/health` uwazaj na tryb **Require authentication**, bo moze zablokowac health checki.
+- Managed identity sluzy aplikacji do dostepu do Azure resources, np. Key Vault albo Storage. Logowanie uzytkownika do aplikacji przez Entra ID to osobny mechanizm.
+
+## 14. Źródła
 
 - Microsoft Learn - Azure App Service overview: https://learn.microsoft.com/en-us/azure/app-service/
 - Microsoft Learn - Azure App Service plans: https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans
