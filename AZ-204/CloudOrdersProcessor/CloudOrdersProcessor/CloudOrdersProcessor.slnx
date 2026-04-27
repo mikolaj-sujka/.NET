@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="CloudOrdersProcessor.Api/CloudOrdersProcessor.Api.csproj" />
+  <Project Path="CloudOrdersProcessor.Application/CloudOrdersProcessor.Application.csproj" />
+  <Project Path="CloudOrdersProcessor.Common/CloudOrdersProcessor.Common.csproj" />
+  <Project Path="CloudOrdersProcessor.Functions/CloudOrdersProcessor.Functions.csproj" />
+  <Project Path="CloudOrdersProcessor.Infrastructure/CloudOrdersProcessor.Infrastructure.csproj" />
+</Solution>
