@@ -202,6 +202,26 @@ Answer: Managed identities, custom domains i CORS są zwykle slot-specific. WebJ
 
 ---
 
+Question: Domyślnie żądania do produkcyjnego URL aplikacji, np. `http://<app_name>.azurewebsites.net`, są kierowane do production slot. Możesz automatycznie kierować część ruchu do innego slotu. Jaka jest domyślna reguła routingu dla nowych deployment slots?
+
+- [x] 0%
+- [ ] 10%
+- [ ] 20%
+
+Answer: Nowy deployment slot domyślnie ma 0% ruchu produkcyjnego. Ruch trafi do niego dopiero po ustawieniu procentu w traffic routing albo przez wymuszenie `x-ms-routing-name`.
+
+---
+
+Question: Niektóre elementy konfiguracji podążają za zawartością podczas swap, a inne pozostają przypięte do slotu. Które z poniższych ustawień są zamieniane?
+
+- [ ] Publishing endpoints.
+- [x] WebJobs content.
+- [ ] WebJob schedulers.
+
+Answer: WebJobs content jest zwykle swapped razem z aplikacją. Publishing endpoints i WebJob schedulers pozostają przypięte do slotu.
+
+---
+
 Question: Co robi parametr `x-ms-routing-name=staging`?
 
 - [x] Kieruje request do slotu `staging`.
@@ -276,6 +296,26 @@ Question: Co oznacza scale up?
 - [ ] Dodanie CNAME.
 
 Answer: Scale up/down to pionowa zmiana planu. Scale out/in to liczba instancji.
+
+---
+
+Question: Które z tych stwierdzeń najlepiej opisuje skalowanie automatyczne?
+
+- [ ] Skalowanie automatyczne wymaga od administratora aktywnego monitorowania obciążenia w systemie.
+- [x] Skalowanie automatyczne to rozwiązanie do zwiększania/zmniejszania skali.
+- [ ] Skalowanie w górę/w dół zapewnia lepszą dostępność niż skalowanie automatyczne.
+
+Answer: Autoscale automatycznie zwiększa lub zmniejsza liczbę instancji według reguł metryk albo harmonogramu. Nie wymaga ręcznego monitorowania obciążenia, a scale up/down oznacza pionową zmianę rozmiaru/tier planu.
+
+---
+
+Question: Który z tych scenariuszy jest odpowiednim kandydatem do skalowania automatycznego?
+
+- [x] Liczba użytkowników wymagających dostępu do aplikacji różni się w zależności od regularnego harmonogramu.
+- [ ] System doświadcza nagłego napływu żądań, który zatrzymuje jego działanie.
+- [ ] Twoja organizacja prowadzi promocję i oczekuje zwiększonego ruchu do swojej witryny internetowej w ciągu najbliższych kilku tygodni.
+
+Answer: Najlepszym kandydatem jest obciążenie zmieniające się według regularnego, przewidywalnego harmonogramu. Nagły ruch, który już zatrzymał system, wymaga też odpornej architektury i wcześniejszej konfiguracji. Długotrwały, planowany wzrost ruchu można obsłużyć ręczną zmianą skali albo osobnym harmonogramem, ale w tym pytaniu najlepsza odpowiedź to regularny wzorzec.
 
 ---
 

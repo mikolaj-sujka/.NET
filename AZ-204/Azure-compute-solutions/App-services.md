@@ -784,6 +784,18 @@ Reguły skalowania oparte o metryki albo harmonogram, np.:
 - Data in/out,
 - schedule, np. godziny pracy.
 
+Autoscale to rozwiązanie do automatycznego zwiększania i zmniejszania liczby instancji bez aktywnego monitorowania obciążenia przez administratora. Najlepiej pasuje do obciążeń, które zmieniają się według znanego wzorca albo dają się opisać metrykami.
+
+Typowe dobre scenariusze:
+
+- liczba użytkowników zmienia się według regularnego harmonogramu, np. godziny pracy,
+- aplikacja ma przewidywalne piki ruchu i można wcześniej ustawić profil harmonogramu,
+- obciążenie rośnie lub maleje stopniowo i można reagować na metryki, np. CPU albo HTTP queue length.
+
+Słabszy scenariusz:
+
+- nagły napływ ruchu, który już zatrzymał system; autoscale może dodać instancje, ale nie zastępuje projektowania pod odporność, limitów, kolejek, cache i wcześniejszego ustawienia sensownych min/max.
+
 Typowy przykład:
 
 - scale out, gdy CPU > 70% przez 10 minut,
@@ -937,6 +949,7 @@ Ważne:
 
 - `self` oznacza production slot.
 - Nowy slot zaczyna od 0% ruchu.
+- Domyślna reguła routingu dla nowego deployment slot to 0%, więc cały ruch z produkcyjnego URL nadal idzie do production slot, dopóki ręcznie nie ustawisz procentu dla innego slotu.
 - Traffic splitting jest przydatny do testów canary.
 
 ### Warm-up przed swap
