@@ -607,18 +607,134 @@ Answer: Run from package uruchamia Function App z paczki zip.
 
 ---
 
+Question: HTTP-triggered function może wykonywać pracę dłuższą niż praktyczny limit około 230 sekund. Jaki wzorzec jest najlepszy dla długiego procesu wywoływanego przez HTTP?
+
+- [x] Durable Functions async HTTP APIs pattern.
+- [ ] Zwiększenie timeout HTTP requestu do 24 godzin.
+- [ ] Timer trigger zamiast odpowiedzi HTTP.
+- [ ] Wpisanie connection stringa w route template.
+
+Answer: Długi proces HTTP powinien użyć wzorca async HTTP API, np. Durable Functions zwraca status endpoint i pozwala klientowi odpytywać stan.
+
+---
+
+Question: Który wzorzec Durable Functions pasuje do wykonania kilku kroków jeden po drugim, gdzie wynik jednego kroku jest wejściem do kolejnego?
+
+- [x] Function chaining.
+- [ ] Fan-out/fan-in.
+- [ ] Monitor.
+- [ ] Human interaction.
+
+Answer: Function chaining opisuje sekwencyjne uruchamianie funkcji w określonej kolejności.
+
+---
+
+Question: Który wzorzec Durable Functions pasuje do równoległego uruchomienia wielu zadań i zebrania wyników na końcu?
+
+- [ ] Function chaining.
+- [x] Fan-out/fan-in.
+- [ ] Singleton.
+- [ ] Timer trigger only.
+
+Answer: Fan-out/fan-in uruchamia wiele aktywności równolegle, a potem agreguje ich wyniki.
+
+---
+
+Question: Chcesz cyklicznie sprawdzać stan zewnętrznego procesu aż do spełnienia warunku, bez ręcznego zarządzania timerami i stanem. Który wzorzec Durable Functions pasuje?
+
+- [ ] Fan-out/fan-in.
+- [ ] Human interaction.
+- [x] Monitor.
+- [ ] Queue poison message.
+
+Answer: Monitor pattern służy do okresowego sprawdzania stanu procesu i kontynuowania orchestration zgodnie z harmonogramem.
+
+---
+
+Question: Który plan Azure Functions nie obsługuje obecnie deployment slots?
+
+- [ ] Premium.
+- [ ] Dedicated/App Service Plan.
+- [x] Flex Consumption.
+- [ ] Elastic Premium.
+
+Answer: Flex Consumption nie obsługuje deployment slots. Slots są dostępne w innych planach, z limitami zależnymi od planu.
+
+---
+
+Question: Co może się stać z aktualnie wykonywanymi funkcjami podczas slot swap w Azure Functions?
+
+- [x] Mogą zostać zakończone i ponownie skierowane według nowych slotów przy kolejnych triggerach.
+- [ ] Swap nigdy nie wpływa na trwające wykonania.
+- [ ] Wszystkie execution logs są usuwane.
+- [ ] Function App automatycznie zmienia region.
+
+Answer: Slot swap jest operacją hostingu i może zakończyć aktualne wykonania. Dlatego krytyczne funkcje powinny być idempotentne i odporne na retry.
+
+---
+
+Question: Która strategia retry w Azure Functions zwiększa odstęp między kolejnymi próbami aż do maksymalnego interwału?
+
+- [ ] Fixed delay.
+- [x] Exponential backoff.
+- [ ] HTTP 302 redirect.
+- [ ] ARR Affinity.
+
+Answer: Exponential backoff zwiększa opóźnienie między próbami. Fixed delay używa stałego odstępu.
+
+---
+
+Question: Które trigger types typowo wspierają retry policies konfigurowane w Azure Functions?
+
+- [x] Timer, Kafka, Event Hubs i Cosmos DB.
+- [ ] HTTP trigger zawsze.
+- [ ] SendGrid output binding.
+- [ ] CNAME DNS record.
+
+Answer: Retry policies są wspierane przez wybrane triggery, m.in. Timer, Event Hubs i Cosmos DB. HTTP trigger nie jest typowym scenariuszem takiej polityki retry runtime.
+
+---
+
+Question: Event Hubs trigger ma przekazywać do funkcji batch zdarzeń zamiast pojedynczego eventu. Która konfiguracja jest właściwa?
+
+- [x] `cardinality: many`.
+- [ ] `authLevel: admin`.
+- [ ] `WEBSITES_PORT`.
+- [ ] `x-ms-routing-name`.
+
+Answer: Dla Event Hubs binding `cardinality: many` przekazuje batch zdarzeń. `one` przekazuje pojedynczy event.
+
+---
+
+Question: Chcesz, aby dwie niezależne Function Apps czytały ten sam Event Hub bez blokowania sobie postępu. Co skonfigurujesz?
+
+- [x] Osobne consumer groups.
+- [ ] Ten sam host ID i ten sam consumer group.
+- [ ] Jeden wspólny function key.
+- [ ] Ten sam deployment slot.
+
+Answer: Consumer group reprezentuje niezależny widok strumienia. Osobne aplikacje powinny używać osobnych consumer groups, jeśli mają niezależnie przetwarzać te same events.
+
+---
+
 ## Źródła
 
 - Microsoft Learn - Azure Functions overview: https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview
 - Microsoft Learn - Triggers and bindings: https://learn.microsoft.com/en-us/azure/azure-functions/functions-triggers-bindings
 - Microsoft Learn - Hosting options: https://learn.microsoft.com/en-us/azure/azure-functions/functions-scale
+- Microsoft Learn - Durable Functions application patterns: https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview
+- Microsoft Learn - Durable Functions async HTTP APIs pattern: https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview#async-http
+- Microsoft Learn - Azure Functions deployment slots: https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots
+- Microsoft Learn - Azure Functions error handling and retries: https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-error-pages
 - Microsoft Learn - HTTP trigger: https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-http-webhook-trigger
 - Microsoft Learn - Timer trigger: https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-timer
 - Microsoft Learn - Queue trigger: https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-queue-trigger
 - Microsoft Learn - Blob trigger: https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-blob-trigger
 - Microsoft Learn - Cosmos DB trigger: https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-cosmosdb-v2-trigger
 - Microsoft Learn - Event Grid trigger: https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-event-grid-trigger
+- Microsoft Learn - Event Hubs trigger: https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-event-hubs-trigger
 - Microsoft Learn - Service Bus trigger: https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-service-bus-trigger
 - GitHub - arvigeus/AZ-204 Learning Path/Functions.md: https://github.com/arvigeus/AZ-204/blob/master/Learning%20Path/Functions.md
 - GitHub - arvigeus/AZ-204 Questions/Functions.md: https://github.com/arvigeus/AZ-204/blob/master/Questions/Functions.md
-- Reddit / AzureCertification discussions about AZ-204 hands-on and scenario question style: https://www.reddit.com/r/AzureCertification/
+- Reddit / AzureCertification - AZ-204 App Service, Functions and App Insights topics reported by learners: https://www.reddit.com/r/AzureCertification/comments/1j9oyuo
+- Reddit / AzureCertification - Durable Functions and hands-on reports: https://www.reddit.com/r/AzureCertification/comments/1saucyr/just_passed_az204/

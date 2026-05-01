@@ -468,6 +468,94 @@ Answer: Deployment slots pozwalają wdrożyć aplikację do staging, rozgrzać i
 
 ---
 
+Question: W którym miejscu konfiguracji App Service wybierzesz stack aplikacji, wersję języka albo SDK, np. .NET, Java, Node.js lub Python?
+
+- [ ] Deployment Center.
+- [x] General settings.
+- [ ] TLS/SSL settings.
+- [ ] Scale out.
+
+Answer: Runtime stack, wersje języka/SDK, platforma 32/64-bit, Always On i podobne opcje konfiguruje się w General settings.
+
+---
+
+Question: Tworzysz REST API w App Service i chcesz, aby nieautoryzowane żądania dostawały `401 Unauthorized`, a nie redirect do strony logowania. Jaką akcję ustawisz w App Service Authentication?
+
+- [x] Return HTTP 401 Unauthorized.
+- [ ] Redirect to login page.
+- [ ] Allow unauthenticated requests i brak kontroli w kodzie.
+- [ ] Wyłącz HTTPS Only.
+
+Answer: Dla API zwykle wybiera się zwracanie `401`, bo klient API oczekuje kodu błędu, a nie przekierowania do interaktywnego logowania.
+
+---
+
+Question: Web App ma publiczny endpoint `/health`, ale reszta aplikacji ma używać Easy Auth i nagłówków `X-MS-CLIENT-PRINCIPAL`. Co jest sensowną konfiguracją?
+
+- [x] Allow unauthenticated requests i sprawdzanie autoryzacji w kodzie dla chronionych endpointów.
+- [ ] Require authentication dla całej aplikacji bez wyjątków.
+- [ ] Wyłączyć managed identity.
+- [ ] Zmienić App Service Plan na Free.
+
+Answer: Jeśli cały ruch wymaga auth na poziomie platformy, publiczny `/health` może zostać zablokowany. Dla mieszanych endpointów często dopuszcza się unauthenticated requests i egzekwuje auth w kodzie tam, gdzie trzeba.
+
+---
+
+Question: Chcesz użyć App Service Backup dla Web App. Który tier jest minimalnie wymagany?
+
+- [ ] Free.
+- [ ] Shared.
+- [x] Basic.
+- [ ] Consumption.
+
+Answer: Backup/restore App Service wymaga co najmniej Basic tier. Free i Shared nie obsługują tej funkcji.
+
+---
+
+Question: Co jest wymagane do skonfigurowania niestandardowego backupu App Service?
+
+- [x] Storage account i SAS URL do kontenera.
+- [ ] Tylko Application Insights connection string.
+- [ ] Wyłącznie managed identity zamiast SAS.
+- [ ] CNAME record.
+
+Answer: App Service backup zapisuje kopie do kontenera Azure Storage i używa SAS URL. W tym scenariuszu dokumentacja wskazuje SAS, a nie managed identity.
+
+---
+
+Question: Chcesz przywrócić backup App Service i ograniczyć ryzyko dla produkcji. Jaki bezpieczny flow wybierzesz?
+
+- [x] Przywrócić backup do deployment slotu, sprawdzić aplikację, a potem wykonać swap.
+- [ ] Przywrócić backup od razu na produkcję bez testu.
+- [ ] Zmienić tylko CORS.
+- [ ] Użyć ARR Affinity.
+
+Answer: Restore do slotu pozwala zweryfikować aplikację przed przełączeniem ruchu. To bezpieczniejszy wariant niż restore bezpośrednio na production.
+
+---
+
+Question: Chcesz, aby backup App Service objął bazę danych połączoną z aplikacją. Co musi być skonfigurowane?
+
+- [x] Connection string do wspieranej bazy danych w konfiguracji App Service.
+- [ ] Tylko custom domain.
+- [ ] Tylko Always On.
+- [ ] Tylko Health Check endpoint.
+
+Answer: Backup może obejmować wspierane bazy danych, jeśli connection string jest skonfigurowany w App Service. Sam kod aplikacji albo custom domain nie wystarczy.
+
+---
+
+Question: Masz ciągły WebJob działający w App Service. Co pomaga utrzymać aplikację załadowaną i WebJob uruchomiony?
+
+- [x] Always On.
+- [ ] HTTPS Only.
+- [ ] CNAME.
+- [ ] App Service Managed Certificate.
+
+Answer: Always On utrzymuje aplikację załadowaną i jest ważne dla ciągłych WebJobs. Wymaga odpowiedniego tier, np. Basic lub wyższego.
+
+---
+
 ## Źródła
 
 - Microsoft Learn - Azure App Service: https://learn.microsoft.com/en-us/azure/app-service/
@@ -475,8 +563,13 @@ Answer: Deployment slots pozwalają wdrożyć aplikację do staging, rozgrzać i
 - Microsoft Learn - TLS/SSL in App Service: https://learn.microsoft.com/en-us/azure/app-service/overview-tls
 - Microsoft Learn - Custom domains: https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain
 - Microsoft Learn - Deployment slots: https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots
+- Microsoft Learn - App Service Authentication and Authorization: https://learn.microsoft.com/en-us/azure/app-service/overview-authentication-authorization
+- Microsoft Learn - Back up and restore App Service apps: https://learn.microsoft.com/en-us/azure/app-service/manage-backup
+- Microsoft Learn - WebJobs in App Service: https://learn.microsoft.com/en-us/azure/app-service/webjobs-create
 - Microsoft Learn - Diagnostics logging: https://learn.microsoft.com/en-us/azure/app-service/troubleshoot-diagnostic-logs
 - Microsoft Learn - GitHub Actions deployment: https://learn.microsoft.com/en-us/azure/app-service/deploy-github-actions
 - Microsoft Learn - Autoscale settings and flapping: https://learn.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-understanding-settings
 - GitHub - arvigeus/AZ-204 Questions/App Service.md: https://github.com/arvigeus/AZ-204/blob/master/Questions/App%20Service.md
-- Reddit / AzureCertification discussions about AZ-204 question style and hands-on focus: https://www.reddit.com/r/AzureCertification/
+- Reddit / AzureCertification - AZ-204 App Service, Functions and App Insights topics reported by learners: https://www.reddit.com/r/AzureCertification/comments/1j9oyuo
+- Reddit / AzureCertification - AZ-204 question style and broad topic reports: https://www.reddit.com/r/AzureCertification/comments/1j42s5c
+- Microsoft Q&A - AZ-204 App Service knowledge check discussion: https://learn.microsoft.com/en-us/answers/questions/2102540/az-204-practice-assessment
