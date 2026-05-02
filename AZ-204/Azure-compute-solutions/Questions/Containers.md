@@ -449,6 +449,16 @@ Answer: Environment jest regionalną i network/observability granicą dla apps.
 
 ---
 
+Question: Wdrażasz interfejs API do przetwarzania dokumentów AI, który musi uzyskiwać dostęp do prywatnego punktu końcowego i udostępniać dzienniki oraz ustawienia sieci w wielu aplikacjach kontenerowych. Który zasób usługi Azure Container Apps zapewnia wspólną granicę?
+
+- [x] Środowisko usługi Container Apps.
+- [ ] Poprawka usługi Container Apps.
+- [ ] Replika.
+
+Answer: Container Apps environment jest wspólną granicą dla sieci, regionu i observability/logging wielu aplikacji kontenerowych.
+
+---
+
 Question: Które wymagania uzasadniają wiele Container Apps environments?
 
 - [x] Różne virtual networks.
@@ -490,6 +500,16 @@ Question: Czym jest revision w Azure Container Apps?
 - [ ] Storage account.
 
 Answer: Revision jest niezmiennym snapshotem konfiguracji revision-scope.
+
+---
+
+Question: Wdrażasz nowy obraz do produkcyjnej aplikacji kontenerowej. Które podejście zapewnia najlepszą możliwość śledzenia i zmniejsza ryzyko wdrożenia nieprawidłowego artefaktu?
+
+- [x] Odwołuj się do obrazu według skrótu, np. `myregistry.azurecr.io/app@sha256:<digest>`, podczas aktualizowania aplikacji kontenerowej.
+- [ ] Odwołuj się do obrazu za pomocą tagu `latest`, aby upewnić się, że platforma zawsze pobiera najnowszą kompilację.
+- [ ] Odtwórz obraz lokalnie w każdym środowisku, aby zapewnić, że obraz odpowiada środowisku.
+
+Answer: Digest jest immutable i jednoznacznie wskazuje artefakt. Tag `latest` jest mutowalny, więc utrudnia audyt i może wskazać inny image niż oczekiwany.
 
 ---
 
@@ -625,6 +645,26 @@ Answer: Do pull z ACR wystarczy identity + `AcrPull` + registry configuration.
 
 ---
 
+Question: Potrzebujesz spójnego, kontrolowanego przez źródło wdrożenia dla aplikacji kontenera, aby konfiguracja była przeglądana jak kod. Które podejście najlepiej obsługuje ten cel?
+
+- [x] Używaj `az containerapp create --yaml` oraz `az containerapp update --yaml` z plikiem YAML przechowywanym w kontroli źródła.
+- [ ] Użyj `az containerapp update --set-env-vars` dla wszystkich zmian bez obsługi pliku konfiguracji.
+- [ ] Polegaj na znacznikach obrazów i wdrażaj ponownie z użyciem `az containerapp update --image`, aby zastosować konfigurację dostosowaną do konkretnego środowiska.
+
+Answer: YAML w repozytorium pozwala przeglądać konfigurację jak kod i utrzymywać powtarzalne wdrożenia.
+
+---
+
+Question: Aplikacja kontenera potrzebuje klucza interfejsu API dla dostawcy osadzania. Nie chcesz przechowywać wartości w pliku YAML. Którego wzorca należy użyć?
+
+- [x] Przechowuj sekret w tajnych zasobach aplikacji kontenerowych i odwołuj się do niego za pomocą zmiennej środowiskowej.
+- [ ] Dodaj klucz interfejsu API jako zwykły tekst w pliku YAML w obszarze `env`.
+- [ ] Bake the API key into the container image.
+
+Answer: Sekrety Container Apps trzymają wartość poza zwykłą konfiguracją, a aplikacja może używać ich przez env var z `secretref`.
+
+---
+
 Question: Czym jest Dapr sidecar w Container Apps?
 
 - [x] Sidecar expose'ujący Dapr APIs przez HTTP/gRPC.
@@ -645,6 +685,56 @@ Question: Które Dapr building blocks są typowe?
 - [ ] Dockerfile parsing.
 
 Answer: Dapr daje application building blocks przez sidecar APIs.
+
+---
+
+Question: Zaktualizowano aplikację kontenera i chcesz potwierdzić, że nowa konfiguracja jest uruchomiona w środowisku produkcyjnym. Które polecenie pomaga zobaczyć zmianę wersji utworzoną przez usługę Container Apps?
+
+- [x] `az containerapp revision list`
+- [ ] `az containerapp registry list`
+- [ ] `az containerapp secret list`
+
+Answer: `az containerapp revision list` pokazuje revisions aplikacji, czyli wersje konfiguracji utworzone przez Container Apps.
+
+---
+
+Question: Rozpoczyna się nowa rewizja, ale nie powinna odbierać ruchu podczas prowadzenia analizy. Która akcja usuwa poprawkę z ruchu bez jego usuwania?
+
+- [x] Uruchom `az containerapp revision deactivate` dla poprawki.
+- [ ] Uruchom `az containerapp revision delete` dla poprawki.
+- [ ] Uruchom `az containerapp stop` dla aplikacji kontenera.
+
+Answer: `revision deactivate` dezaktywuje revision i usuwa ją z aktywnego ruchu bez kasowania całej aplikacji ani zatrzymywania wszystkich revisions.
+
+---
+
+Question: Sprawdzanie gotowości wersji kończy się niepowodzeniem natychmiast po wdrożeniu. Który problem jest najczęstszą główną przyczyną, którą należy najpierw zweryfikować?
+
+- [x] Sonda gotowości kieruje się na nieprawidłowy port lub ścieżkę serwera HTTP kontenera.
+- [ ] Obraz kontenera jest za mały, aby uwzględnić wszystkie wymagane biblioteki.
+- [ ] Środowisko aplikacji kontenera nie może kierować ruchu do publicznego Internetu.
+
+Answer: Przy natychmiastowych failure readiness probe najpierw sprawdź target port, path i to, czy aplikacja faktycznie nasłuchuje tam, gdzie wskazuje konfiguracja.
+
+---
+
+Question: Podejrzewasz, że tylko jedna wersja ma wyjątek czasu wykonywania po aktualizacji. Jaki jest najbardziej skuteczny pierwszy krok w celu potwierdzenia problemu?
+
+- [x] Przesyłanie strumieniowe dzienników aplikacji kontenera i filtrowanie według wersji podczas odtwarzania żądania.
+- [ ] Usuń starsze poprawki, aby zmniejszyć szum w danych wyjściowych rozwiązywania problemów.
+- [ ] Zwiększ przydział CPU i pamięci przed zbadaniem.
+
+Answer: Log streaming z filtrem revision pozwala szybko potwierdzić, czy wyjątek występuje tylko w konkretnej revision, bez usuwania innych wersji.
+
+---
+
+Question: Nie można uruchomić aplikacji kontenera po zaktualizowaniu obrazu. Potrzebujesz szybkiej opinii, aby zdiagnozować problem. Które polecenie jest najlepszym pierwszym krokiem?
+
+- [x] `az containerapp logs show`
+- [ ] `az containerapp revision list`
+- [ ] `az containerapp replica list`
+
+Answer: `az containerapp logs show` daje najszybszy wgląd w błędy startu, wyjątki aplikacji i komunikaty runtime po aktualizacji obrazu.
 
 ---
 
@@ -689,6 +779,16 @@ Question: Co jest wymagane dla zone redundancy w Container Apps environment?
 - [ ] Dockerfile bez `EXPOSE`.
 
 Answer: Zone redundancy wymaga odpowiedniej konfiguracji environment/network i wsparcia regionu.
+
+---
+
+Question: Interfejs API sztucznej inteligencji doświadcza wysokiej latencji, a komunikaty dziennika wskazują na dławienie procesora podczas wzmożonego ruchu. Która zmiana najbardziej bezpośrednio dotyczy ograniczania przepustowości?
+
+- [x] Zwiększ alokację CPU na replikę, a następnie ponownie oceń reguły skalowania na podstawie przepustowości.
+- [ ] Dezaktywuj najnowszą wersję, aby zmniejszyć obciążenie systemu.
+- [ ] Przełącz odwołanie do obrazu ze skrótu na tag.
+
+Answer: Jeśli logi wskazują throttling CPU, najbardziej bezpośrednią zmianą jest zwiększenie CPU per replica, a potem dopasowanie autoscalingu do rzeczywistej przepustowości.
 
 ---
 
