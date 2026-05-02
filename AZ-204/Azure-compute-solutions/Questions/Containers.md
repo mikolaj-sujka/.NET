@@ -546,6 +546,16 @@ Answer: Multiple revision mode pozwala na canary/blue-green style traffic distri
 
 ---
 
+Question: Zespół wdraża nową wersję aplikacji kontenera i chce wysłać 10% ruchu do nowej wersji na potrzeby weryfikacji przed pełnym wdrożeniem. Co muszą skonfigurować?
+
+- [x] Włącz tryb wielu wersji i skonfiguruj podział ruchu z wykorzystaniem wag dla wersji.
+- [ ] Używanie trybu pojedynczej poprawki z wdrożeniem bez przestojów.
+- [ ] Konfigurowanie reguły skalowania cron w celu planowania zmian ruchu.
+
+Answer: Canary deployment w Container Apps wymaga multiple revision mode i traffic splitting, np. 90% do starej revision i 10% do nowej.
+
+---
+
 Question: Co daje revision label?
 
 - [x] Stable URL kierujący do konkretnej revision.
@@ -590,6 +600,26 @@ Answer: CPU/memory scaling potrzebuje aktywnej repliki.
 
 ---
 
+Question: Deweloper chce skonfigurować aplikację kontenerową, która przetwarza wiadomości z kolejki usługi Azure Service Bus i skaluje liczbę replik do zera, gdy nie ma żadnych wiadomości. Która konfiguracja skalowania spełnia to wymaganie?
+
+- [ ] Ustaw `--min-replicas 0` z regułą skalowania HTTP.
+- [ ] Ustaw `--min-replicas 0` za pomocą reguły skalowania CPU.
+- [x] Ustaw `--min-replicas 0` za pomocą reguły skalowania Azure Service Bus.
+
+Answer: Worker przetwarzający Service Bus queue powinien używać event-driven custom/KEDA scale rule dla Azure Service Bus. CPU scaling nie skaluje do zera, a HTTP rule dotyczy ruchu HTTP.
+
+---
+
+Question: Zespół deweloperów chce mieć pewność, że aplikacja kontenerowa ma pięć replik gotowych przed porannym wzrostem ruchu o 8:00, jednocześnie umożliwiając skalowanie do zera w nocy. Które podejście skalowania spełnia to wymaganie?
+
+- [x] Konfigurowanie reguły skalowania cron w połączeniu z regułą skalowania HTTP.
+- [ ] Ustaw minimalną liczbę replik na pięć z regułą skalowania HTTP.
+- [ ] Konfigurowanie reguły skali procesora z niskim progiem wykorzystania.
+
+Answer: Cron scale rule może zaplanować minimalną liczbę replik na określony czas, a HTTP rule nadal obsługuje skalowanie na podstawie ruchu. Stałe `minReplicas=5` nie pozwoli skalować do zera w nocy.
+
+---
+
 Question: Container App ma ingress disabled, `minReplicas=0` i brak custom scale rule. Co może się stać?
 
 - [x] App może skalować do zera i nie wystartować na event.
@@ -609,6 +639,16 @@ Question: Chcesz skalować Container App po liczbie wiadomości w Service Bus qu
 - [ ] HTTP scale rule.
 
 Answer: Aktualne Microsoft Learn wskazuje, że scale rules dla Azure resources mogą używać managed identity; gdy możliwe, unikaj sekretów.
+
+---
+
+Question: Która metoda uwierzytelniania jest zalecana w przypadku obciążeń produkcyjnych podczas konfigurowania reguł skalowania KEDA dla usług platformy Azure?
+
+- [ ] Parametry połączenia przechowywane jako sekrety aplikacji kontenerowej.
+- [x] Tożsamość zarządzana za pomocą polecenia `--scale-rule-identity`.
+- [ ] Dostęp anonimowy bez uwierzytelniania.
+
+Answer: Dla Azure resource scalers w produkcji preferuj managed identity, np. `--scale-rule-identity`, zamiast connection stringów w sekretach, jeśli dany scaler to wspiera.
 
 ---
 
